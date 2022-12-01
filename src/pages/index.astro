@@ -1,0 +1,30 @@
+---
+import 'styles/base.sass';
+import 'styles/home/index.sass';
+import 'src/scripts/pages/homePage';
+
+import PageLayot from 'layouts/page.astro';
+
+const PageSettings = {
+	id: 'home-page',
+	locale: 'en',
+	title: 'Home Page',
+	description: 'First astro page',
+	canonical: '/',
+	image: '',
+}
+---
+
+<PageLayot {...PageSettings}>
+	<main id="home">
+		<h1>{PageSettings.title}</h1>
+		<ul>
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/about">About</a>
+			</li>
+		</ul>
+	</main>
+</PageLayot>

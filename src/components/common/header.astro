@@ -1,0 +1,41 @@
+---
+    // const Sitemap = require('sitemap');
+    // get the page directly to hook it into webpack dev build process
+    // const page = Sitemap.getPage(Page);
+
+    const { strings, Locale } = Astro.props;
+    // const Locale = page.output.locale;
+    // const BaseUrl = page.output.href;
+    // const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang, true);
+
+    // here are all options for the language dropdown
+    // const allLocales = [
+    //     {
+    //         language: 'en',
+    //         img:'🇬🇧',
+    //         url: getLocaleHref('en'),
+    //     },
+    //     {
+    //         language: 'ja',
+    //         img:'🇯🇵',
+    //         url: getLocaleHref('ja'),
+    //     },
+    //     {
+    //         language: 'ko',
+    //         img:'🇰🇷',
+    //         url: getLocaleHref('ko'),
+    //     },
+    // ];
+
+    // choosing the selected one and filtering the list
+    // const [locale] = allLocales.splice(allLocales.findIndex(l => l.language == page.output.locale), 1);
+
+    const hideheader = false; // ????????
+    const removeheader = false; // ???????
+---
+
+<header id="header" class="header" style={(typeof hideheader !== 'undefined' && hideheader) ? 'visibility: hidden' : null}>
+    {(typeof removeheader === 'undefined' || !removeheader) &&(
+        <!-- header markup here -->
+    )}
+</header>

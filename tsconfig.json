@@ -1,0 +1,32 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictBindCallApply": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "outDir": "./dist/",
+    "baseUrl": ".",
+    "paths": {
+      "styles/*": ["src/styles/*"],
+      "layouts/*": ["src/layouts/*"],
+      "pages/*": ["src/pages/*"],
+      "app/*": ["src/scripts/*"],
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "references": []
+}

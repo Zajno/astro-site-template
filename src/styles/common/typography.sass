@@ -1,0 +1,160 @@
+@import './variables'
+
+@mixin typography($color, $font-family, $font-size, $font-weight, $letter-spacing:0, $line-height: normal)
+    color: $color
+    font-family: $font-family
+    font-size: $font-size
+    font-weight: $font-weight
+    letter-spacing: $letter-spacing
+    line-height: $line-height
+
+@mixin mixed-lbl($args...)
+    @include typography($args...)
+
+// title h1
+@mixin title-h1
+    @include mixed-lbl(var(--color-white), var(--sub-font), var(--font-size-h1), var(--font-weight-7), var(--letter-spacing-h1), var(--line-height-h1))
+
+// title h2
+@mixin title-h2
+    @include mixed-lbl(var(--color-white), var(--sub-font), var(--font-size-h2), var(--font-weight-7), var(--letter-spacing-h2), var(--line-height-h1))
+
+// title h3
+@mixin title-h3
+    @include mixed-lbl(var(--color-white), var(--main-font), var(--font-size-h3), var(--font-weight-3), var(--letter-spacing-h3), var(--line-height-h3))
+
+// title h4
+@mixin title-h4
+    @include mixed-lbl(var(--color-submarine), var(--main-font), var(--font-size-h4), var(--font-weight-3), var(--letter-spacing-h4), var(--line-height-h4))
+
+// label1
+@mixin label-1
+    @include mixed-lbl(var(--color-white), var(--main-font), var(--font-size-label1), var(--font-weight-3), var(--letter-spacing-label1), var(--line-height-label))
+
+// label2
+@mixin label-2
+    @include mixed-lbl(var(--color-mona-lisa), var(--main-font), var(--font-size-label2), var(--font-weight-3), var(--letter-spacing-label3), var(--line-height-label))
+
+// label3
+@mixin label-3
+    @include mixed-lbl(var(--color-white), var(--main-font), var(--font-size-label3), var(--font-weight-3), var(--letter-spacing-label3), var(--line-height-label))
+
+@mixin desc-1
+    @include mixed-lbl(var(--color-feldgrau), var(--main-font), var(--font-size-desc1), var(--font-weight-3), var(--letter-spacing-desc1), var(--line-height-desc1))
+
+@mixin desc-2
+    @include mixed-lbl(var(--color-feldgrau), var(--main-font), var(--font-size-desc2), var(--font-weight-3), var(--letter-spacing-desc2), var(--line-height-desc2))
+
+@mixin desc-3
+    @include mixed-lbl(var(--color-feldgrau), var(--main-font), var(--font-size-desc3), var(--font-weight-3), var(--letter-spacing-desc3), var(--line-height-desc3))
+
+@mixin quote-1
+    @include mixed-lbl(var(--color-submarine), var(--main-font), var(--font-size-quote1), var(--font-weight-3), var(--letter-spacing-quote1), var(--line-height-quote1))
+
+@mixin link-text
+    @include mixed-lbl(var(--color-mineral-green), var(--main-font), var(--font-size-link), var(--font-weight-3), var(--letter-spacing-1), var(--line-height-label))
+
+// title for noScript mode
+@mixin title-no-script
+    @include mixed-lbl(var(--color-title-no-script), var(--font-no-script), var(--font-size-title-ns), var(--font-weight-5), var(--letter-spacing-title-ns), var(--line-height-title-ns))
+
+// subtitle for noScript mode
+@mixin subtitle-no-script
+    @include mixed-lbl(var(--color-subtitle-no-script), var(--font-no-script), var(--font-size-subtitle-ns), var(--font-weight-4), var(--letter-spacing-subtitle-ns), var(--line-height-subtitle-ns))
+
+// desc for noScript mode
+@mixin desc-no-script
+    @include mixed-lbl(var(--color-desc-no-script), var(--font-no-script), var(--font-size-desc-ns), var(--font-weight-4), var(--letter-spacing-desc-ns), var(--line-height-desc-ns))
+
+// title for 404 page
+@mixin title-page-404
+    @include mixed-lbl(var(--color-title-page-404), var(--font-page-404), var(--font-size-title-404), var(--font-weight-5), var(--letter-spacing-title-404), var(--line-height-title-404))
+
+// subtitle for 404 page
+@mixin subtitle-page-404
+    @include mixed-lbl(var(--color-subtitle-page-404), var(--font-page-404), var(--font-size-subtitle-404), var(--font-weight-4), var(--letter-spacing-subtitle-404), var(--line-height-subtitle-404))
+
+// label for 404 page
+@mixin label-page-404
+    @include mixed-lbl(var(--color-title-page-404), var(--font-page-404), var(--font-size-label-404), var(--font-weight-5), var(--letter-spacing-label-404), var(--line-height-label-404))
+
+
+html, body, div, span, button,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, small, strong, ul, li, form, label,
+article, footer, header, nav, section
+    &.center-text
+        text-align: center
+
+    &.left-text
+        text-align: left
+
+    &.right-text
+        text-align: right
+
+    &.cap-text
+        text-transform: capitalize
+
+    &.up-text
+        text-transform: uppercase
+
+    &.low-text
+        text-transform: lowercase
+
+    &.title
+        @include title-h1
+
+    &.title-h2
+        @include title-h2
+
+    &.title-h3
+        @include title-h3
+
+    &.title-h4
+        @include title-h4
+
+    &.label-1
+        @include label-1
+
+    &.label-2
+        @include label-2
+
+    &.label-3
+        @include label-3
+
+    &.desc-1
+        @include desc-1
+
+    &.desc-2
+        @include desc-2
+
+    &.desc-3
+        @include desc-3
+
+    &.quote-1
+        @include quote-1
+
+    &.link-text
+        @include link-text
+
+    &.title-no-script
+        @include title-no-script
+
+    &.subtitle-no-script
+        @include subtitle-no-script
+
+    &.desc-no-script
+        @include desc-no-script
+
+    &.title-page-404
+        @include title-page-404
+
+    &.subtitle-page-404
+        @include subtitle-page-404
+
+    &.label-page-404
+        @include label-page-404
+    &::selection
+        color: var(--color-mona-lisa)
+        background: none
+        text-shadow: none
