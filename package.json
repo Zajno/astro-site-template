@@ -1,16 +1,21 @@
 {
-  "name": "@example/minimal",
-  "type": "module",
+  "name": "@zajno/static-astro-site-template",
   "version": "0.0.1",
+  "description": "Static website astro template by Zajno",
   "private": true,
+  "author": "Zajno <hello@zajno.com> (https://zajno.com)",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
+    "build:prod": "astro build --define-process-env-node-env production",
+    "build:release:staging": "yarn && (cross-env APP_ENV=staging yarn build:prod)",
+    "build:release:production": "yarn && (cross-env APP_ENV=production yarn build:prod)",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "emulate": "firebase emulators:start --only hosting"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^1.0.0",
     "@zajno/common": "^2.0.5",
     "@zajno/common-web": "^1.0.0",
     "astro": "^1.6.11",
@@ -21,7 +26,12 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.10",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@zajno/eslint-config": "^2.2.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
+    "eslint": "^8.29.0",
+    "eslint-plugin-astro": "^0.21.0",
     "git-rev-sync": "^3.0.2",
     "sass": "^1.56.1",
     "typescript": "^4.9.3"

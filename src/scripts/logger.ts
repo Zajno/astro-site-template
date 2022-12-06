@@ -1,7 +1,7 @@
 import logger, { setMode, createLogger, ILogger } from '@zajno/common/logger';
-import { EnableLogger } from './env';
+import { AppConfig } from 'app/utils/config';
 
-setMode(EnableLogger ? 'console' : false);
+setMode(AppConfig.EnableLogger ? 'console' : false);
 
 export default logger;
 

@@ -14,15 +14,15 @@ export type EnvironmentConfig = {
 
 const Configs: Partial<Record<Environments, EnvironmentConfig>> = {
     development: {
-        Hostname: 'http://localhost:5173',
+        Hostname: 'http://localhost:8080',
         EnableLogger: true,
     },
     staging: {
-        Hostname: 'https://five-years.web.app/',
+        Hostname: 'https://zajno-dev.web.app/',
         EnableLogger: true,
     },
     production: {
-        Hostname: 'https://five-years.web.app/',
+        Hostname: 'https://zajno.com/',
         EnableLogger: false,
     },
 };

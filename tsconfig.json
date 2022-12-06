@@ -7,12 +7,8 @@
     "strictBindCallApply": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "importHelpers": true,
     "skipLibCheck": true,
-    "target": "ES2020",
-    "module": "ES2020",
-    "moduleResolution": "node",
     "outDir": "./dist/",
     "baseUrl": ".",
     "paths": {
@@ -22,6 +18,8 @@
       "app/*": ["src/scripts/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
+      "sitemap/*": ["src/sitemap/*"],
+      "copyright/*": ["src/sitemap/copyright/*"],
     }
   },
   "exclude": [
