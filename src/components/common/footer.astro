@@ -1,14 +1,15 @@
 ---
-    // const Sitemap = require('sitemap');
-    // get the page directly to hook it into webpack dev build process
-    // const page = Sitemap.getPage(Page);
+    import { FooterCopyright, Locales } from "sitemap/copyright";
 
-    // const Strings = page.common.footer;
-    // const BaseUrl = page.output.href;
-    const { strings } = Astro.props;
+    type Props = {
+        locale: Locales
+    }
+
+    const { locale } = Astro.props;
+
+    const Strings = FooterCopyright[locale];
+
     const year = new Date().getFullYear();
-    // todo
-    // import copyright 
 ---
 
 <footer class="footer">

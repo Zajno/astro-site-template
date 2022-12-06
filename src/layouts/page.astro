@@ -90,22 +90,23 @@ const canonical = `${__HOSTNAME__}${href}`;
 		}
 		{pageAlts && <link rel="alternate" hreflang="x-default" href={pageAlts.default} />}
 
-		{disableScripts && <WindowAppReady/>}
+		{(disableScripts !== 'force') && <WindowAppReady />}
 
 	</head>
-	<Header/>
+	<Header locale={locale}/>
 
-	<body class={bodyClass}>
+	<body class={`${bodyClass}`}>
 		<slot />
 
 		{disableScripts !== 'force' &&
-			<CssVarsTest/>
-			<NotSupported criticalChecks={[ "supportsCssVars" ]}/>
+			<CssVarsTest />
+			<NotSupported criticalChecks={[ "supportsCssVars" ]} />
 		}
 	</body>
 
-	<Footer/>
+	<Footer locale={locale}/>
 
-	<MobileMenu/>
+	<MobileMenu locale={locale}/>
 
+	<script type="module" src="./src/scripts/polyfills.ts"></script>
 </html>

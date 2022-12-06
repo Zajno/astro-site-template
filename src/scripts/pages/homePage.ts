@@ -12,6 +12,7 @@ export default class HomePage extends CommonPage {
 
     async setupPageAsync() {
         await super.setupPageAsync();
+        console.log('start homepage ///!??!?');
     }
 
     get sectionTypes() {

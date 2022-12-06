@@ -1,12 +1,16 @@
 ---
     import 'styles/common/header.scss';
-    // const Sitemap = require('sitemap');
-    // get the page directly to hook it into webpack dev build process
-    // const page = Sitemap.getPage(Page);
 
-    const { strings, Locale } = Astro.props;
-    // const Locale = page.output.locale;
-    // const BaseUrl = page.output.href;
+    import { HeaderCopyright, Locales } from 'sitemap/copyright';
+
+    type Props = {
+        locale: Locales
+    }
+
+    const { locale } = Astro.props;
+
+    const COPY = HeaderCopyright[locale];
+
     // const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang, true);
 
     // here are all options for the language dropdown
@@ -37,14 +41,15 @@
 
 <header id="header" class="header" style={(typeof hideheader !== 'undefined' && hideheader) ? 'visibility: hidden' : null}>
     {(typeof removeheader === 'undefined' || !removeheader) &&(
-        <!-- header markup here -->
+        <ul>
+            {
+                COPY.links.map(link => (
+                        <li>
+                            <a href={link.href}>{link.title}</a>
+                        </li>
+                    )
+                )
+            }
+        </ul>
     )}
-    <ul>
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/about">About</a>
-        </li>
-    </ul>
 </header>

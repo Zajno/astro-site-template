@@ -60,10 +60,6 @@ export const NoScript: SitePage = {
 
 export const NoScriptId = NoScript.id;
 
-// export const Dependencies: PageDependency[] = [
-//     { name: 'polyfills', import: './app/scripts/polyfills', critical: true },
-// ];
-
 const pages: SitePage[] = [
     HomePage,
     AboutPage,
