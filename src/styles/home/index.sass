@@ -4,7 +4,24 @@
 // etc.
 
 #home
-    padding: gem(10)
+    position: relative
+    width: 100vw
+    height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    text-align: center
+    .astronaut
+        position: fixed
+        top: 0
+        left: 0
+        width: 100vw
+        height: 100vh
+        z-index: -1
     h1
-        font-size: gem(30)
-        color: var(--color-mona-lisa)
+        font-size: gem(90)
+        color: var(--color-submarine)
+    h2
+        font-size: gem(50)
+        color: var(--color-mercury)
