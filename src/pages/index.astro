@@ -4,18 +4,27 @@ import 'styles/home/index.sass';
 
 import PageLayot from 'layouts/page.astro';
 import { HomePage as PageSettings } from 'sitemap/pages';
-
-const COPY = PageSettings.copy;
+import { Locales } from 'sitemap/copyright';
 
 import AstroImage from 'assets/img/astro.jpeg'
+
+type Props = {
+	locale: Locales
+}
+
+const {locale = 'en'} = Astro.props;
+
+const COPY = PageSettings.copy[locale];
 ---
 
-<PageLayot {...PageSettings}>
+<PageLayot {...PageSettings} locale={locale}>
 	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
-		<h1>{COPY.title}</h1>
-		<h2>{COPY.subtitle}</h2>
-		<img src={AstroImage} class="astronaut" alt="Astronaut"/>
+		<section class="hero">
+			<h1>{COPY.title}</h1>
+			<h2>{COPY.subtitle}</h2>
+			<img src={AstroImage} class="astronaut" alt="Astronaut"/>
+		</section>
 	</main>
 </PageLayot>
 
-<script type="module" src="./src/scripts/pages/homePage"></script>
+<script src="app/pages/homePage"></script>

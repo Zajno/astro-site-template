@@ -1,4 +1,4 @@
-import type { Locales } from './copyright';
+import type { Locales, PageCopyright } from './copyright';
 
 export type SitePage<TCopy = any> = {
     /** unique page ID */
@@ -12,10 +12,8 @@ export type SitePage<TCopy = any> = {
     /** how this instance should be referenced via URL, relative path */
     href: string,
 	// canonical?: string;
-    /** page's locale */
-	locale: Locales;
     /** page's copy, usually a structured object specific for this page type */
-    copy: TCopy,
+    copy: PageCopyright<TCopy>,
 	noIndex?: boolean;
 	disableScripts?: boolean | 'force';
 }

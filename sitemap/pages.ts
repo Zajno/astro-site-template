@@ -7,15 +7,7 @@ export const HomePage: SitePage<HomeCopyrightShape> = {
     href: '/',
 	title: 'Home Page | Zajno Digital Design Agency',
 	description: 'Full-service digital design and development agency specializing in UX/UI design, crafting thought-out personalized experiences for web and mobile.',
-    locale: HomeCopyright.default,
-    copy: HomeCopyright[HomeCopyright.default],
-
-    // TODO: Add what needed
-    // i18n: [ // looks similar but in future more fields can be different
-    //     { locale: 'en', href: '/en', path: 'en/index.html', copy: HomeCopyright.en },
-    //     { locale: 'ja', href: '/ja', path: 'ja/index.html', copy: HomeCopyright.ja },
-    //     { locale: 'ko', href: '/ko', path: 'ko/index.html', copy: HomeCopyright.ko },
-    // ],
+    copy: HomeCopyright,
 };
 
 export const AboutPage: SitePage<AboutCopyrightShape> = {
@@ -23,8 +15,7 @@ export const AboutPage: SitePage<AboutCopyrightShape> = {
     href: '/about',
 	title: 'About Page | Zajno Digital Design Agency',
 	description: 'Full-service digital design and development agency specializing in UX/UI design, crafting thought-out personalized experiences for web and mobile.',
-    locale: AboutCopyright.default,
-    copy: AboutCopyright[AboutCopyright.default],
+    copy: AboutCopyright,
 };
 
 export const Page404: SitePage = {
@@ -32,7 +23,6 @@ export const Page404: SitePage = {
     href: '/404',
 	title: 'Page Not Found',
 	description: '',
-    locale: 'en',
     copy: undefined,
     disableScripts: true,
 };
@@ -42,7 +32,6 @@ export const NotSupported: SitePage = {
     href: '/not-supported',
 	title: '',
 	description: '',
-    locale: 'en',
     copy: undefined,
     disableScripts: true,
 };
@@ -52,7 +41,6 @@ export const NoScript: SitePage = {
     href: '/no-script',
 	title: 'Enable JavaScript',
 	description: 'This website requires scripts to be enabled/allowed in your browser.',
-    locale: 'en',
     copy: undefined,
     noIndex: true,
     disableScripts: 'force',

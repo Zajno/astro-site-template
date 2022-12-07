@@ -4,17 +4,21 @@ import 'styles/about/index.sass';
 
 import PageLayot from 'layouts/page.astro';
 import { AboutPage as PageSettings } from 'sitemap/pages';
+import { Locales } from 'sitemap/copyright';
 
+type Props = {
+	locale: Locales
+}
 const {locale = 'en'} = Astro.props;
 
-const COPY = PageSettings.copy;
+const COPY = PageSettings.copy[locale];
 ---
 
-<PageLayot {...PageSettings}>
+<PageLayot {...PageSettings} locale={locale}>
 	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
 		<h1>{COPY.title}</h1>
 		<h1>{COPY.subtitle}</h1>
 	</main>
 </PageLayot>
 
-<script type="module" src="./src/scripts/pages/aboutPage"></script>
+<script src="app/pages/aboutPage"></script>

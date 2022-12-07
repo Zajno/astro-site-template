@@ -1,4 +1,4 @@
-export const poliffils = true;
+export const polyffils = true;
 
 declare global {
     interface NodeList {

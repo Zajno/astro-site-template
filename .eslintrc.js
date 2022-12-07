@@ -1,7 +1,7 @@
 module.exports = {
     extends: [
       "plugin:astro/recommended",
-    //   "@zajno/eslint-config",
+      "@zajno/eslint-config",
     ],
     overrides: [
       {

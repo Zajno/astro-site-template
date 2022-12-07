@@ -1,19 +1,24 @@
 ---
 import type { SitePage } from 'sitemap/types';
+// import Polyfills from 'components/common/scripts/polyfills.astro';
+import AppConfig from 'components/common/scripts/appConfig.astro';
 
-import favicon from 'assets/img/favicon/zajno.ico'
+import favicon from 'assets/img/favicon/favicon.ico'
 import ogImage from 'assets/img/og-image/zajno.png';
 
 import Header from 'components/common/header.astro'
 import Footer from 'components/common/footer.astro'
 import MobileMenu from 'components/common/mobileMenu.astro'
-import CssVarsTest from 'components/common/scripts/css-vars-test.html'
-import WindowAppReady from 'components/common/scripts/window.appReady.html'
+import CssVarsTest from 'components/common/scripts/css-vars-test.astro'
+import WindowAppReady from 'components/common/scripts/window.appReady.astro';
 import NotSupported from 'components/common/scripts/not-supported.astro';
 
 import { NoScriptId } from 'sitemap/pages';
+import { Locales } from 'sitemap/copyright';
 
-type Props = SitePage;
+type Props = SitePage & {
+	locale: Locales
+};
 
 //default values
 const {
@@ -31,6 +36,8 @@ const pageAlts = {
 	links: [] as any[],
 	default: '',
 } // PageAlts ??????
+
+declare const __HOSTNAME__: string;
 
 const bodyClass = `locale-${locale}`;
 const canonical = `${__HOSTNAME__}${href}`;
@@ -91,8 +98,9 @@ const canonical = `${__HOSTNAME__}${href}`;
 		{pageAlts && <link rel="alternate" hreflang="x-default" href={pageAlts.default} />}
 
 		{(disableScripts !== 'force') && <WindowAppReady />}
-
+		<AppConfig />
 	</head>
+
 	<Header locale={locale}/>
 
 	<body class={`${bodyClass}`}>
@@ -108,5 +116,4 @@ const canonical = `${__HOSTNAME__}${href}`;
 
 	<MobileMenu locale={locale}/>
 
-	<script type="module" src="./src/scripts/polyfills.ts"></script>
 </html>

@@ -18,8 +18,8 @@
       "app/*": ["src/scripts/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
-      "sitemap/*": ["src/sitemap/*"],
-      "copyright/*": ["src/sitemap/copyright/*"],
+      "sitemap/*": ["sitemap/*"],
+      "copyright/*": ["sitemap/copyright/*"],
     }
   },
   "exclude": [

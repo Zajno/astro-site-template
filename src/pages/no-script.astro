@@ -6,10 +6,16 @@ import PageLayot from 'layouts/page.astro';
 import { NoScript as PageSettings } from 'sitemap/pages';
 
 import logo from 'assets/img/logo.png';
+import { Locales } from 'sitemap/copyright';
 
+type Props = {
+	locale: Locales
+}
+
+const {locale = 'en'} = Astro.props;
 ---
 
-<PageLayot {...PageSettings}>
+<PageLayot {...PageSettings} locale={locale}>
 	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
         <section class="no-script__section">
             <div class="no-script__container">

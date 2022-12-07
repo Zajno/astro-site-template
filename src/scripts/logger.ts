@@ -5,7 +5,7 @@ setMode(AppConfig.EnableLogger ? 'console' : false);
 
 export default logger;
 
-logger.log(`${__APP_NAME__} v${__APP_VERSION__}:${__APP_HASH__}`);
+logger.log(AppConfig.FullVersionName);
 
 export { createLogger };
 

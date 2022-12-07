@@ -4,14 +4,22 @@ import 'styles/common/ie-styles.sass';
 
 import PageLayot from 'layouts/page.astro';
 import { NotSupported as PageSettings} from 'sitemap/pages';
+import { Locales } from 'sitemap/copyright';
 
 import logo from 'assets/img/logo.png';
 import chromeLogo from 'assets/img/iechrome.png';
 import firefoxLogo from 'assets/img/iefirefox.png';
 import operaLogo from 'assets/img/ieopera.png';
+
+type Props = {
+	locale: Locales
+}
+
+const {locale = 'en'} = Astro.props;
+
 ---
 
-<PageLayot {...PageSettings}>
+<PageLayot {...PageSettings} locale={locale}>
 	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
         <section class="section-ie">
             <div class="ie__container">
