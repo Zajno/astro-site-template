@@ -28,6 +28,7 @@
     "@types/node": "^18.11.10",
     "@typescript-eslint/parser": "^5.45.0",
     "@zajno/eslint-config": "^2.2.0",
+    "astro-compress": "^1.1.18",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "eslint": "^8.29.0",

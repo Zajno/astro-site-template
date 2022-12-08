@@ -3,6 +3,8 @@ import * as AppConfig from './config/utils';
 import { version, name as appName } from './package.json';
 import sitemap from "@astrojs/sitemap";
 import { CurrentConfig } from './config';
+import compress from "astro-compress";
+
 const {
   env: envConfig,
   fullVersion
@@ -61,5 +63,10 @@ export default defineConfig({
     host: true
   },
   site: CurrentConfig.Hostname,
-  integrations: [sitemap()]
+  integrations: [
+    sitemap(),
+    compress({
+			css: false,
+		}),
+  ]
 });

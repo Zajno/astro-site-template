@@ -5,9 +5,8 @@
     }
     const { criticalChecks } = Astro.props;
 ---
-<div id='crit-check' data-criticalchecks={criticalChecks} />
 
-<script id="not-supported-fn">
+<script id="not-supported-fn" define:vars={{criticalChecks}}>
     "use strict";
     var nsl = false;
     window.loadNotSupported = function() {
@@ -35,9 +34,6 @@
             throw new Error("The browser is not supported. Follow links on the screen or contact site administrator.")
         })
     };
-    const dataEl = document.getElementById('crit-check');
-    const criticalChecks = dataEl.dataset.criticalchecks.split(',');
-    dataEl.remove();
 
     const checksVar = (typeof criticalChecks !== 'undefined' && criticalChecks)
         ? [`${criticalChecks.map(c => `${c}`).join(', ')}`]
