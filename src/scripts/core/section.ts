@@ -1,6 +1,11 @@
 import Component, { ComponentConfig } from './component';
 import type { IPage } from './page';
 
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export type Directions = 'up' | 'down';
 export type SectionActions = 'show' | 'hide';
 
@@ -42,6 +47,7 @@ export default class Section<TConfig extends SectionConfig = SectionConfig>
     };
 
     private _scrollPosition = 0;
+    private _sectionTrigger: ScrollTrigger = null;
 
     get page() { return this._config.page; }
     get scrollCoeffs(): Readonly<ActivationDirectCoeffs> { return this._scrollCoeffs; }
@@ -56,6 +62,24 @@ export default class Section<TConfig extends SectionConfig = SectionConfig>
         }
 
         await this.setupSection();
+
+        if (this.element) {
+            this._setupScrollTrigger();
+        }
+    }
+
+    private async _setupScrollTrigger() {
+        this._sectionTrigger = ScrollTrigger.create({
+            trigger: this.element,
+            start: 'top bottom-=10%',
+            end: 'bottom top-=10%',
+            scrub: true,
+            onEnter: () => this.activate(),
+            onEnterBack: () => this.activate(),
+            onUpdate: () => this.activate(),
+            onLeave: () => this.deactivate(),
+            onLeaveBack: () => this.deactivate(),
+        });
     }
 
     protected setupSection(): Promise<void> | void {

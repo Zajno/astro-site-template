@@ -7,7 +7,6 @@ declare global {
 }
 const cfg: AppConfigType = (window as any).AppConfig;
 
-console.log(cfg);
 export const AppConfig = {
     Env: cfg.e  || 'development',
     EnableLogger: cfg.l,

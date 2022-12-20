@@ -142,7 +142,6 @@ export default abstract class Page implements IPage {
                 : 1.0;
         }
         this._scrollPosition = scrollPosition;
-        this._updateSections();
     }
 
     protected resize() {
@@ -182,63 +181,4 @@ export default abstract class Page implements IPage {
             hide: (top, bottom, hideTreshold) => top > this._height - hideTreshold,
         },
     };
-
-    protected _updateSections() {
-        const coeffsDirection: Directions = this._scrollDirection <= 0
-            ? 'down' : 'up';
-
-        const getIsShow = this._scrollHelpers[coeffsDirection].show;
-        const getIsHide = this._scrollHelpers[coeffsDirection].hide;
-
-        const sectionsNum = this._sections.length;
-        for (let i = 0; i < sectionsNum; i++) {
-            const section = this._sections[i];
-            const { rect } = section;
-
-            const { top, bottom, height } = rect;
-
-            const coeffs = section.scrollCoeffs[coeffsDirection];
-            let show = null;
-
-            let showTreshold = this._height * coeffs.show;
-            if (section.fallbackTreshold && height < showTreshold) {
-                showTreshold = height * section.fallbackTreshold;
-            }
-
-            // show if top of next element is in range
-            if (getIsShow(top, bottom, showTreshold)) {
-                show = true;
-            }
-
-            let hideTreshold = this._height * coeffs.hide;
-            if (section.fallbackTreshold && height < hideTreshold) {
-                hideTreshold = height * section.fallbackTreshold;
-            }
-
-            // console.log({
-            //     // coeffsDirection,
-            //     // top,
-            //     bottom,
-            //     hideTreshold,
-            //     height,
-            //     pHeight: this._height,
-            //     coeff: coeffs.hide,
-            // })
-            if (getIsHide(top, bottom, hideTreshold)) {
-                show = false;
-            }
-            this._updateSectionActivation(show, section);
-        }
-    }
-
-    protected _updateSectionActivation(show: boolean, section: Section) {
-        if (show != null) {
-            if (show) {
-                section.activate({ direction: this._scrollDirection });
-                section.scroll(this._scrollPosition, this._scrollDirection);
-            } else if (section.isActive) {
-                section.deactivate({ direction: this._scrollDirection });
-            }
-        }
-    }
 }
