@@ -6,10 +6,6 @@ import type Section from './section';
 export interface IPage {
     readonly width: number;
     readonly height: number;
-
-    readonly scrollPosition: number;
-    readonly scrollDirection: number;
-
     readonly rem: number;
 }
 
@@ -32,9 +28,6 @@ export default abstract class Page implements IPage {
 
     private _centerY: number = 0.0;
 
-    private _scrollPosition: number = 0;
-    private _scrollDirection: 0 | -1 | 1 = -1;
-
     private _deltaY: number = 0;
     private _wheelDirection: Directions | null = null;
 
@@ -56,9 +49,6 @@ export default abstract class Page implements IPage {
 
     get width() { return this._width; }
     get height() { return this._height; }
-
-    get scrollPosition() { return this._scrollPosition; }
-    get scrollDirection() { return this._scrollDirection; }
 
     get centerY() { return this._centerY; }
 
@@ -132,16 +122,7 @@ export default abstract class Page implements IPage {
     }
 
     scroll() {
-        // this._scrollDirection = scrollDirection;
-        const scrollPosition = window.pageYOffset;
-        if (this._scrollPosition === scrollPosition) {
-            this._scrollDirection = 0.0;
-        } else {
-            this._scrollDirection = scrollPosition > this._scrollPosition
-                ? -1.0
-                : 1.0;
-        }
-        this._scrollPosition = scrollPosition;
+        /* override me if you want */
     }
 
     protected resize() {
