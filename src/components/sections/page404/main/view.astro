@@ -1,0 +1,25 @@
+---
+import './style.scss';
+
+import Section from "layouts/section.astro";
+import logo from 'assets/img/logo.png';
+---
+
+<Section className="page-404__section">
+    <div class="page-404__container">
+        <div class="page-404__logo-block">
+            <img src={logo} alt="Zajno logo" class="page-404__logo-block__image" />
+        </div>
+        <div class="page-404__text-block">
+            <h2 class="page-404__text-block__title title-page-404">404</h2>
+            <p class="page-404__text-block__subtitle subtitle-page-404">
+                This link is broken or the page does not exist!
+            </p>
+        </div>
+        <div class="page-404__button-block">
+            <button onclick="location.href='/'" class="page-404__button-block__homepage-button label-page-404" type="button">
+                Back to Homepage
+            </button>
+        </div>
+    </div>
+</Section>

@@ -1,11 +1,11 @@
 
 export const HeaderEnCopy = {
     links: [{
-        title: 'Home EN',
+        title: 'home',
         href: '/',
     },
     {
-        title: 'About EN',
+        title: 'about',
         href: '/about',
     }]
 };

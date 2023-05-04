@@ -1,12 +1,9 @@
 ---
-import 'styles/base.sass';
-import 'styles/home/index.sass';
-
 import PageLayot from 'layouts/page.astro';
 import { HomePage as PageSettings } from 'sitemap/pages';
 import { Locales } from 'sitemap/copyright';
-
-import AstroImage from 'assets/img/astro.jpeg'
+import HeroSection from 'sections/home/hero/view.astro';
+import SecondSection from 'sections/home/second/view.astro';
 
 type Props = {
 	locale: Locales
@@ -18,13 +15,6 @@ const COPY = PageSettings.copy[locale];
 ---
 
 <PageLayot {...PageSettings} locale={locale}>
-	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
-		<section class="hero">
-			<h1>{COPY.title}</h1>
-			<h2>{COPY.subtitle}</h2>
-			<img src={AstroImage} class="astronaut" alt="Astronaut"/>
-		</section>
-	</main>
+	<HeroSection COPY={COPY}/>
+	<SecondSection COPY={COPY}/>
 </PageLayot>
-
-<script src="app/pages/homePage"></script>

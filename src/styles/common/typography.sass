@@ -13,11 +13,11 @@
 
 // title h1
 @mixin title-h1
-    @include mixed-lbl(var(--color-white), var(--sub-font), var(--font-size-h1), var(--font-weight-7), var(--letter-spacing-h1), var(--line-height-h1))
+    @include mixed-lbl(var(--color-black), var(--main-font), var(--font-size-h1), var(--font-weight-7), var(--letter-spacing-h1), var(--line-height-h1))
 
 // title h2
 @mixin title-h2
-    @include mixed-lbl(var(--color-white), var(--sub-font), var(--font-size-h2), var(--font-weight-7), var(--letter-spacing-h2), var(--line-height-h1))
+    @include mixed-lbl(var(--color-outer-space), var(--main-font), var(--font-size-h2), var(--font-weight-7), var(--letter-spacing-h2), var(--line-height-h2))
 
 // title h3
 @mixin title-h3
@@ -29,7 +29,7 @@
 
 // label1
 @mixin label-1
-    @include mixed-lbl(var(--color-white), var(--main-font), var(--font-size-label1), var(--font-weight-3), var(--letter-spacing-label1), var(--line-height-label))
+    @include mixed-lbl(var(--color-black), var(--main-font), var(--font-size-label1), var(--font-weight-3), var(--letter-spacing-label1), var(--line-height-label))
 
 // label2
 @mixin label-2
@@ -101,7 +101,7 @@ article, footer, header, nav, section
     &.low-text
         text-transform: lowercase
 
-    &.title
+    &.title-h1
         @include title-h1
 
     &.title-h2
@@ -154,7 +154,3 @@ article, footer, header, nav, section
 
     &.label-page-404
         @include label-page-404
-    &::selection
-        color: var(--color-mona-lisa)
-        background: none
-        text-shadow: none

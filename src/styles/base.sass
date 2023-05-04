@@ -6,22 +6,19 @@
 html, body
     width: 100%
 
-body,
-main
+body
     overflow-x: hidden
-    overflow: hidden
 
 body
-    background: black
+    background: var(--color-white)
     display: flex
     flex-direction: column
     font-family: var(--main-font)
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
     text-rendering: optimizeLegibility
-    &.mobile-menu-open
-        overflow: hidden
     &.modal-active
+        height: 100%
         overflow: hidden
 
 main
@@ -29,6 +26,7 @@ main
     width: 100%
     flex: 1 0 auto
     margin-top: var(--header-height)
+    overflow: hidden
 
 .footer
     width: 100%

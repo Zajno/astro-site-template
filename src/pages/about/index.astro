@@ -1,7 +1,4 @@
 ---
-import 'styles/base.sass';
-import 'styles/about/index.sass';
-
 import PageLayot from 'layouts/page.astro';
 import { AboutPage as PageSettings } from 'sitemap/pages';
 import { Locales } from 'sitemap/copyright';
@@ -15,10 +12,4 @@ const COPY = PageSettings.copy[locale];
 ---
 
 <PageLayot {...PageSettings} locale={locale}>
-	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
-		<h1>{COPY.title}</h1>
-		<h1>{COPY.subtitle}</h1>
-	</main>
 </PageLayot>
-
-<script src="app/pages/aboutPage"></script>

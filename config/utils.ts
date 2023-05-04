@@ -5,8 +5,12 @@ import * as git from 'git-rev-sync';
 import { Environments } from '.';
 import { getFullVersionName } from './version';
 import { CurrentConfig } from '.';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const DefaultEnvironment = 'development';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // fill *required* env variables here. they might not exist, but should be listed anyway
 const knownEnv = {

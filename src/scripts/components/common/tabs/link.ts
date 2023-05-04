@@ -4,7 +4,7 @@ import { TabItemElement, TabItem } from './tab';
 import { OptAwait } from '@zajno/common/async/misc';
 
 export type TabLinkItemConfig = ComponentConfig<TabItemElement> & {
-
+    //
 };
 
 export abstract class TabLinkItem<T extends TabLinkItemConfig = TabLinkItemConfig> extends Component<T> {

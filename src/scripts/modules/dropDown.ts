@@ -32,8 +32,8 @@ export default class DropDown {
         });
 
         document.body.addEventListener('click', (e) => {
-            // @ts-ignore
-            if (e.target !== this.mainLink && (e.target.parentNode !== this.dropLink && !e.target.classList.contains('js-btn-switch'))) {
+            const target = e.target as Element;
+            if (target !== this.mainLink && (target.parentNode !== this.dropLink && !target.classList.contains('js-btn-switch'))) {
                 this.dropLink.classList.remove('active');
             }
         });

@@ -1,12 +1,9 @@
 ---
-import 'styles/base.sass';
-import 'styles/page404/index.sass';
-
 import PageLayot from 'layouts/page.astro';
 import { Page404 as PageSettings} from 'sitemap/pages';
 
-import logo from 'assets/img/logo.png';
 import { Locales } from 'sitemap/copyright';
+import MainSection from 'sections/page404/main/view.astro';
 
 type Props = {
 	locale: Locales
@@ -16,25 +13,11 @@ const {locale = 'en'} = Astro.props;
 
 ---
 
-<PageLayot {...PageSettings} locale={locale}>
-	<main id={`${PageSettings.id}`} data-page-id={`${PageSettings.id}`}>
-        <section class="page-404__section">
-            <div class="page-404__container">
-                <div class="page-404__logo-block">
-                    <img src={logo} alt="Zajno logo" class="page-404__logo-block__image" />
-                </div>
-                <div class="page-404__text-block">
-                    <h2 class="page-404__text-block__title title-page-404">404</h2>
-                    <p class="page-404__text-block__subtitle subtitle-page-404">
-                        This link is broken or the page does not exist!
-                    </p>
-                </div>
-                <div class="page-404__button-block">
-                    <button onclick="location.href='/'" class="page-404__button-block__homepage-button label-page-404" type="button">
-                        Back to Homepage
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
+<PageLayot
+    {...PageSettings}
+    locale={locale}
+    isActiveFooter={false}
+    isActiveMobileMenu={false}
+>
+    <MainSection />
 </PageLayot>

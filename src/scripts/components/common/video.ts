@@ -19,7 +19,7 @@ export type VideoConfig = LazyLoadConfig & {
 
 type VideoSource = HTMLSourceElement & {
     targetSrc?: string;
-    srcSet?: {};
+    srcSet?: any;
 };
 
 const SCREEN_WIDTH_FOR_VIDEOS = 1024;

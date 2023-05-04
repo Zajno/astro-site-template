@@ -1,0 +1,28 @@
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--header-height);
+    ul {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        li {
+            font-size: gem(30);
+            &:not(:last-child) {
+                margin-right: gem(30);
+            }
+            a {
+                text-decoration: none;
+                transition: all 375ms ease;
+            }
+            &:hover {
+                a {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+}

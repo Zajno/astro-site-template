@@ -1,0 +1,50 @@
+---
+    import './style.scss';
+
+    import { HeaderCopyright, Locales } from 'sitemap/copyright';
+
+    type Props = {
+        locale: Locales
+    }
+
+    const { locale } = Astro.props;
+
+    const COPY = HeaderCopyright[locale];
+
+    // const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang, true);
+
+    // here are all options for the language dropdown
+    // const allLocales = [
+    //     {
+    //         language: 'en',
+    //         img:'🇬🇧',
+    //         url: getLocaleHref('en'),
+    //     },
+    //     {
+    //         language: 'ja',
+    //         img:'🇯🇵',
+    //         url: getLocaleHref('ja'),
+    //     },
+    //     {
+    //         language: 'ko',
+    //         img:'🇰🇷',
+    //         url: getLocaleHref('ko'),
+    //     },
+    // ];
+
+    // choosing the selected one and filtering the list
+    // const [locale] = allLocales.splice(allLocales.findIndex(l => l.language == page.output.locale), 1);
+---
+
+<header id="header" class="header">
+    <div class="container">
+        <ul class="menu">
+            {COPY.links.map(link => (
+                    <li class="menu__item">
+                        <a class="label-1" href={link.href}>{link.title}</a>
+                    </li>
+                )
+            )}
+        </ul>
+    </div>
+</header>

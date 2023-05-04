@@ -1,5 +1,11 @@
 
 export const HomeEnCopy = {
-    title: 'ASTRO STATIC SITE TEMPLATE',
-    subtitle: 'by Zajno',
+    heroSection : {
+        title: 'ZAJNO',
+        subtitle: 'astro template',
+    },
+    secondSection : {
+        title: 'Hello',
+        subtitle: 'second section',
+    }
 };

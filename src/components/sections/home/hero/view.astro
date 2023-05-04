@@ -1,0 +1,23 @@
+---
+import './style.scss';
+
+import Section from "layouts/section.astro";
+
+import { HomeCopyrightShape } from "sitemap/copyright";
+import { HomePageSections } from 'components/sections/sectionTypes';
+
+type Props = { COPY: HomeCopyrightShape }
+
+const { COPY } = Astro.props;
+const sectionCopy = COPY.heroSection;
+
+---
+
+<Section className="hero-section" id={HomePageSections.Hero}>
+    <div class="container">
+        <h1 class="title-h1">{sectionCopy.title}</h1>
+        <h2 class="title-h2">{sectionCopy.subtitle}</h2>
+    </div>
+</Section>
+
+<script src="./script.ts"></script>

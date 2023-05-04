@@ -8,7 +8,7 @@ declare global {
 const cfg: AppConfigType = (window as any).AppConfig;
 
 export const AppConfig = {
-    Env: cfg.e  || 'development',
+    Env: cfg.e || 'development',
     EnableLogger: cfg.l,
     FullVersionName: cfg.v,
     Features: cfg.f,

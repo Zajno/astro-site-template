@@ -15,15 +15,24 @@ const {
 export default defineConfig({
   vite: {
     define: envConfig,
+    assetsInclude: ['**/*.mov'],
     build: {
       rollupOptions: {
         output: {
           chunkFileNames: 'js/[name]-[hash].js',
           entryFileNames: 'js/[name]-[hash].js',
 
-          assetFileNames: ({name}) => {
+          assetFileNames: ({ name }) => {
             if (/\.css$/.test(name ?? '')) {
               return 'css/[name]-[hash][extname]';
+            }
+            const lottieImagePath = getLottieImagePath(name);
+            if (lottieImagePath) {
+              return lottieImagePath;
+            }
+            const lottieJSONPath = getLottieJSONPath(name);
+            if (lottieJSONPath) {
+              return lottieJSONPath;
             }
             if (/\.(png|jpe?g|gif|webp|ico)$/.test(name ?? '')){
                 return 'assets/img/[name]-[hash][extname]';
@@ -37,14 +46,10 @@ export default defineConfig({
             if (/\.mp3$|\.wav$/.test(name ?? '')){
               return 'assets/audio/[name]-[hash][extname]';
             }
-            if (/lottie[\\/].*\.json$/.test(name ?? '')){
-              return 'assets/lottie/[name]-[hash][extname]';
-            }
-
             return 'assets/[name]-[hash][extname]';
           },
         },
-      }
+      },
     },
     css: {
         preprocessorOptions: {
@@ -57,10 +62,9 @@ export default defineConfig({
         },
     },
   },
-
   server: {
     port: 8080,
-    host: true
+    host: true,
   },
   site: CurrentConfig.Hostname,
   integrations: [
@@ -68,5 +72,23 @@ export default defineConfig({
     compress({
 			css: false,
 		}),
-  ]
+  ],
 });
+
+const getLottieImagePath = (name) => {
+  const regex = /lottie[\\/]((.*)[\\/])?images[\\/].*\.(png|jpe?g|gif|webp)$/;
+  const m = regex.exec(name);
+
+  if (m !== null) {
+    return `assets/lottie/${m[2] ? `${m[2]}/` : '' }images/[name][extname]`;
+  }
+};
+
+const getLottieJSONPath = (name) => {
+  const regex = /lottie[\\/]((.*)[\\/])?.*\.json$/;
+  const m = regex.exec(name);
+
+  if (m !== null) {
+    return `assets/lottie/${m[2] ? `${m[2]}/` : '' }[name]-[hash][extname]`;
+  }
+};

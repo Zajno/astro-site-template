@@ -18,6 +18,7 @@
       "app/*": ["src/scripts/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
+      "sections/*": ["src/components/sections/*"],
       "sitemap/*": ["sitemap/*"],
       "copyright/*": ["sitemap/copyright/*"],
     }

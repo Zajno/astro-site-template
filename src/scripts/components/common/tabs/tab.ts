@@ -16,6 +16,7 @@ export interface TabItemElement extends HTMLElement {
 }
 
 export type TabItemConfig = ComponentConfig<TabItemElement> & {
+    //
 };
 
 export class TabItem<TConfig extends TabItemConfig = TabItemConfig> extends Component<TConfig> {

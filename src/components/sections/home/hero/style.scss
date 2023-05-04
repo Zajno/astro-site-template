@@ -1,0 +1,16 @@
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h2 {
+        opacity: 0.6;
+        width: 100%;
+        text-align: right;
+        margin-right: gem(200);
+    }
+}

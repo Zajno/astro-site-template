@@ -1,15 +1,15 @@
 ---
+import 'styles/base.sass';
+
 import type { SitePage } from 'sitemap/types';
-// import Polyfills from 'components/common/scripts/polyfills.astro';
 import AppConfig from 'components/common/scripts/appConfig.astro';
 
-import favicon from 'assets/img/favicon/favicon.ico'
-import ogImage from 'assets/img/og-image/zajno.png';
+import ogImage from 'assets/img/og-image/og-image.jpeg';
 
-import Header from 'components/common/header.astro'
-import Footer from 'components/common/footer.astro'
-import MobileMenu from 'components/common/mobileMenu.astro'
-import CssVarsTest from 'components/common/scripts/css-vars-test.astro'
+import Header from 'components/common/header/view.astro';
+import Footer from 'components/common/footer/view.astro';
+import MobileMenu from 'components/common/mobileMenu/view.astro';
+import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
 import WindowAppReady from 'components/common/scripts/window.appReady.astro';
 import NotSupported from 'components/common/scripts/not-supported.astro';
 
@@ -17,7 +17,10 @@ import { NoScriptId } from 'sitemap/pages';
 import { Locales } from 'sitemap/copyright';
 
 type Props = SitePage & {
-	locale: Locales
+	locale: Locales,
+	isActiveHeader?: boolean,
+	isActiveFooter?: boolean,
+	isActiveMobileMenu?: boolean,
 };
 
 //default values
@@ -29,18 +32,22 @@ const {
 	href,
 	image,
 	noIndex = false,
-	disableScripts = false
+	disableScripts = false,
+	isActiveFooter = true,
+	isActiveMobileMenu = true,
+	isActiveHeader = true
 } = Astro.props;
-
-const pageAlts = {
-	links: [] as any[],
-	default: '',
-} // PageAlts ??????
 
 declare const __HOSTNAME__: string;
 
 const bodyClass = `locale-${locale}`;
 const canonical = `${__HOSTNAME__}${href}`;
+
+const pageAlts = {
+	links: [] as any[],
+	default: canonical,
+}
+
 ---
 
 <!DOCTYPE html>
@@ -53,7 +60,7 @@ const canonical = `${__HOSTNAME__}${href}`;
 		{noIndex && <meta name="robots" content="noindex"/>}
 		{!noIndex && (<meta name="generator" content={Astro.generator} />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
 		<meta name="description" content={description}/>
 		<meta property="og:description" content={description}/>
 		<meta property="og:title" content={title} />
@@ -73,12 +80,16 @@ const canonical = `${__HOSTNAME__}${href}`;
 		<meta name="twitter:title" content={title}/>
 		<meta name="twitter:description" content={description}/>
 
-		<link rel="shortcut icon" href={favicon} type="image/x-icon"/>
-		<meta name="msapplication-TileColor" content="#da532c"/>
-		<meta name="theme-color" content="#ffffff"/>
+		<link rel="icon" href="favicon/fav.ico?0" sizes="any" />
+		<link rel="icon" href="favicon/fav-dark.svg?0" media="(prefers-color-scheme: dark)"/>
+		<link rel="icon" href="favicon/fav-light.svg?0" media="(prefers-color-scheme: light)"/>
+		<link rel="apple-touch-icon" href="favicon/apple-touch.png?0"/>
+		<link crossorigin="use-credentials" rel="manifest" href="favicon/manifest.json?0"/>
+		<meta name="theme-color" content="#fff"/>
 
-		<link rel="preconnect" href="https://fonts.gstatic.com"/>
-		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"/>
 		)}
 
 
@@ -100,20 +111,25 @@ const canonical = `${__HOSTNAME__}${href}`;
 		{(disableScripts !== 'force') && <WindowAppReady />}
 		<AppConfig />
 	</head>
-
-	<Header locale={locale}/>
-
 	<body class={`${bodyClass}`}>
-		<slot />
-
+		{isActiveHeader && <Header locale={locale}/>}
+		<main id={`${id}`} data-page-id={`${id}`}>
+			<slot />
+		</main>
+		{isActiveFooter && <Footer locale={locale}/>}
 		{disableScripts !== 'force' &&
 			<CssVarsTest />
 			<NotSupported criticalChecks={[ "supportsCssVars" ]} />
 		}
 	</body>
-
-	<Footer locale={locale}/>
-
-	<MobileMenu locale={locale}/>
-
+	{isActiveMobileMenu && <MobileMenu locale={locale}/>}
 </html>
+
+<script>
+	import Lazy from 'src/scripts/components/lazy';
+
+	Lazy.RegisterAllImages();
+    window.appReady(() => {
+        Lazy.BeginLoading();
+    });
+</script>
