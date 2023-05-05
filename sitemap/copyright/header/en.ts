@@ -7,5 +7,5 @@ export const HeaderEnCopy = {
     {
         title: 'about',
         href: '/about',
-    }]
+    }],
 };

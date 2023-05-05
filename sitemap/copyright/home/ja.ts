@@ -1,6 +1,12 @@
 import type { HomeCopyrightShape } from './index';
 
 export const HomeJaCopy: HomeCopyrightShape = {
-    title: 'TITLE JP',
-    subtitle: 'SUBTITLE JP',
+    heroSection : {
+        title: 'ZAJNO',
+        subtitle: 'astro template',
+    },
+    secondSection : {
+        title: 'Hello',
+        subtitle: 'second section',
+    },
 };

@@ -7,5 +7,5 @@ export const HomeEnCopy = {
     secondSection : {
         title: 'Hello',
         subtitle: 'second section',
-    }
+    },
 };
