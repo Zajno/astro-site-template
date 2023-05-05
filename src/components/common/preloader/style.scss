@@ -1,0 +1,47 @@
+.preloader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F0EEF1;
+    z-index: 100;
+    &__list {
+        display: inline-block;
+        position: relative;
+        width: gem(80);
+        height: gem(80);
+    }
+    &__block {
+        display: inline-block;
+        position: absolute;
+        left: gem(8);
+        width: gem(16);
+        background: #000;
+        animation: preloaderAnimation 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        &:nth-child(1) {
+            left: gem(8);
+            animation-delay: -0.24s;
+        }
+        &:nth-child(2) {
+            left: gem(32);
+            animation-delay: -0.12s;
+        }
+        &:nth-child(3) {
+            left: gem(56);
+            animation-delay: 0;
+        }
+    }
+}
+
+@keyframes preloaderAnimation {
+    0% {
+      top: gem(8);
+      height: gem(64);
+    }
+    50%, 100% {
+      top: gem(24);
+      height: gem(32);
+    }
+  }

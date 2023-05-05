@@ -3,15 +3,16 @@ import 'styles/base.sass';
 
 import type { SitePage } from 'sitemap/types';
 import AppConfig from 'components/common/scripts/appConfig.astro';
+import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
+import WindowAppReady from 'components/common/scripts/window.appReady.astro';
+import NotSupported from 'components/common/scripts/not-supported.astro';
 
 import ogImage from 'assets/img/og-image/og-image.jpeg';
 
 import Header from 'components/common/header/view.astro';
 import Footer from 'components/common/footer/view.astro';
 import MobileMenu from 'components/common/mobileMenu/view.astro';
-import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
-import WindowAppReady from 'components/common/scripts/window.appReady.astro';
-import NotSupported from 'components/common/scripts/not-supported.astro';
+import Preloader from 'components/common/preloader/view.astro';
 
 import { NoScriptId } from 'sitemap/pages';
 import { Locales } from 'sitemap/copyright';
@@ -123,6 +124,7 @@ const pageAlts = {
 		}
 	</body>
 	{isActiveMobileMenu && <MobileMenu locale={locale}/>}
+	<Preloader />
 </html>
 
 <script>
