@@ -2,11 +2,11 @@ import type { HeaderCopyrightShape } from './index';
 
 export const HeaderJaCopy: HeaderCopyrightShape = {
     links: [{
-        title: 'Home JA',
-        href: '/',
+        title: 'ホームページ',
+        href: '/ja',
     },
     {
-        title: 'About JA',
-        href: '/about',
+        title: 'だいたい',
+        href: '/about/ja',
     }],
 };

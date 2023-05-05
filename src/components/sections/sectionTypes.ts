@@ -1,4 +1,4 @@
 export enum HomePageSections {
-    Hero = 'HomePage-hero',
-    Second = 'HomePage-second'
+    Hero = 'homepage-hero',
+    Second = 'homepage-second'
 }

@@ -6,6 +6,15 @@ import Section from "layouts/section.astro";
 import { HomeCopyrightShape } from "sitemap/copyright";
 import { HomePageSections } from 'components/sections/sectionTypes';
 
+import aboutCoinWEBM from 'assets/video/about-coin.webm';
+import aboutCoinWMOV from 'assets/video/about-coin.mov';
+import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
+import aboutCoinWMobileMOV from 'assets/video/about-coin-mobile.mov';
+
+import exampleSVG from 'assets/img/example-svg.svg?raw';
+
+import exampleIMG from 'assets/img/og-image/og-image.jpeg';
+
 type Props = { COPY: HomeCopyrightShape }
 
 const { COPY } = Astro.props;
@@ -14,9 +23,47 @@ const sectionCopy = COPY.secondSection;
 ---
 
 <Section className="second-section" id={HomePageSections.Second}>
-    <div class="container">
+    <img class="container">
         <h1 class="title-h1">{sectionCopy.title}</h1>
         <h2 class="title-h2">{sectionCopy.subtitle}</h2>
+
+        <!-- Video example -->
+        <!-- Check script.ts u need to setup video! -->
+        <!-- <video class="video-js lazy" autoplay loop playsinline muted data-load-priority="0">
+            <source type='video/mp4; codecs="hvc1"' src="#"
+                data-src={aboutCoinWMobileMOV}
+                data-src481={aboutCoinWMOV}
+                data-src1025={aboutCoinWMOV}
+            />
+            <source type="video/webm" src="#"
+                data-src={aboutCoinWMobileWEBM}
+                data-src481={aboutCoinWEBM}
+                data-src1025={aboutCoinWEBM}
+            />
+            Your browser does not support the video tag.
+        </video> -->
+
+        <!-- SVG example -->
+        <!-- <Fragment set:html={exampleSVG} /> -->
+
+        <!-- Picture example -->
+
+        <!-- <picture>
+            <source srcset={exampleIMG} media="(max-width: 480px)" type="image/jpg"/>
+            <source srcset={exampleIMG} media="(max-width: 1024px)" type="image/jpg"/>
+            <source srcset={exampleIMG} media="(min-width: 1025px)" type="image/jpg"/>
+            <img class="lazy" alt="Card background" data-load-priority="1">
+        </picture> -->
+
+        <!-- Image example -->
+
+        <!-- <img
+            src="#"
+            data-src={exampleIMG}
+            class="lazy"
+            data-load-priority="2"
+            alt="puzzle image"
+        /> -->
     </div>
 </Section>
 

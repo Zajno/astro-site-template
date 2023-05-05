@@ -48,13 +48,16 @@ Manager.registerBreakpoint(AppBreakpoints.Mobile);
 
 const resizeEvent = new Event<{width: number, height: number}>();
 
-window.onresize = () => {
+const resize = () => {
     const width = document.body.clientWidth;
     const height = window.innerHeight;
 
     Manager.resize(width, height);
     resizeEvent.trigger({ width, height });
 };
+
+resize();
+window.onresize = resize;
 
 // that's just a wrapper for core Breakpoints, nothing else should be added here
 export const Breakpoints = {

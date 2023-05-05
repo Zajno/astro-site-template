@@ -16,4 +16,5 @@ export type SitePage<TCopy = any> = {
     copy: PageCopyright<TCopy>,
 	noIndex?: boolean;
 	disableScripts?: boolean | 'force';
-}
+};
+

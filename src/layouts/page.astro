@@ -19,6 +19,7 @@ import { Locales } from 'sitemap/copyright';
 
 type Props = SitePage & {
 	locale: Locales,
+	isActivePreloader?: boolean,
 	isActiveHeader?: boolean,
 	isActiveFooter?: boolean,
 	isActiveMobileMenu?: boolean,
@@ -36,7 +37,8 @@ const {
 	disableScripts = false,
 	isActiveFooter = true,
 	isActiveMobileMenu = true,
-	isActiveHeader = true
+	isActiveHeader = true,
+	isActivePreloader = true,
 } = Astro.props;
 
 declare const __HOSTNAME__: string;
@@ -124,7 +126,7 @@ const pageAlts = {
 		}
 	</body>
 	{isActiveMobileMenu && <MobileMenu locale={locale}/>}
-	<Preloader />
+	{isActivePreloader && <Preloader />}
 </html>
 
 <script>

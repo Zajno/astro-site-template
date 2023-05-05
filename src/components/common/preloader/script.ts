@@ -5,23 +5,18 @@ import { LazyQueue } from 'app/components/lazy/lazyLoadComponent';
 
 class Preloader extends Component {
     private _smoother: ScrollSmoother = null;
-    private _loaderIsActive: boolean = true;
 
-    constructor(el: HTMLElement, smoother?: ScrollSmoother) {
-        super({ el } as ComponentConfig);
+    constructor(config: ComponentConfig, smoother?: ScrollSmoother) {
+        super(config);
 
         this._smoother = smoother;
     }
 
     doSetup() {
-        this.setupAnimItems();
-    }
-
-    resize() {
         // TODO
     }
 
-    setupAnimItems() {
+    resize() {
         // TODO
     }
 
@@ -41,7 +36,7 @@ class Preloader extends Component {
     }
 }
 
-const preloader = new Preloader(document.getElementById(CommonComponents.Preloader));
+const preloader = new Preloader({ el: document.getElementById(CommonComponents.Preloader) });
 
 // If you want hide preloader after some priority.
 // LazyQueue.afterPriorityRun.on((prio) => prio === 1 && preloader.hide());

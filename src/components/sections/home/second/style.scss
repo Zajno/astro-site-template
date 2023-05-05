@@ -1,7 +1,7 @@
 .second-section {
     position: relative;
     width: 100vw;
-    height: calc(100vh - var(--header-height));
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

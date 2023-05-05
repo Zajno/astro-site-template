@@ -1,6 +1,6 @@
 
-export const AllLocales = ['en', 'ja', 'ko'] as const;
+export const AllLocales = ['en', 'ja'] as const;
 
 export type Locales = typeof AllLocales[number];
 
-export type PageCopyright<T extends Object> = Partial<Record<Locales, T>> & { default: Locales };
+export type PageCopyright<T extends object> = Partial<Record<Locales, T>> & { default: Locales };
