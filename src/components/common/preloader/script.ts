@@ -47,7 +47,7 @@ const preloader = new Preloader(document.getElementById(CommonComponents.Preload
 // LazyQueue.afterPriorityRun.on((prio) => prio === 1 && preloader.hide());
 
 // If you want hide preloader before some priority.
-// LazyQueue.afterPriorityRun.on((prio) => prio === 1 && preloader.hide());
+// LazyQueue.beforePriorityRun.on((prio) => prio === 1 && preloader.hide());
 
 // If you want hide preloader after after lazy finished.
 LazyQueue.finished.on(() => preloader.hide());
