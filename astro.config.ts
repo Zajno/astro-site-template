@@ -1,13 +1,13 @@
 import { defineConfig } from 'astro/config';
 import * as AppConfig from './config/utils';
 import { version, name as appName } from './package.json';
-import sitemap from "@astrojs/sitemap";
+import sitemap from '@astrojs/sitemap';
 import { CurrentConfig } from './config';
-import compress from "astro-compress";
+import compress from 'astro-compress';
 
 const {
   env: envConfig,
-  fullVersion
+  fullVersion,
 } = AppConfig.generateVariables('.env', version, appName);
 
 // https://astro.build/config
