@@ -2,6 +2,8 @@ import Component, { ComponentConfig } from 'app/core/component';
 import gsap from 'gsap';
 import { CommonComponents } from '../commonTypes';
 import { LazyQueue } from 'app/components/lazy/lazyLoadComponent';
+import { oneTimeSubscription } from '@zajno/common/observing/event';
+import { timeoutPromise } from '@zajno/common/async/timeout';
 
 class Preloader extends Component {
     private _smoother: ScrollSmoother = null;
@@ -35,14 +37,19 @@ class Preloader extends Component {
         gsap.to(this.element, { autoAlpha: 0 });
     }
 }
+const maxWaitTime = 10000;
+const minWaitTime = 1000;
 
 const preloader = new Preloader({ el: document.getElementById(CommonComponents.Preloader) });
 
 // If you want hide preloader after some priority.
-// LazyQueue.afterPriorityRun.on((prio) => prio === 1 && preloader.hide());
+// await timeoutPromise(oneTimeSubscription(LazyQueue.afterPriorityRun, (prio) => prio === 0), maxWaitTime, minWaitTime)
+//         .then(() => preloader.hide());
 
 // If you want hide preloader before some priority.
-// LazyQueue.beforePriorityRun.on((prio) => prio === 1 && preloader.hide());
+// await timeoutPromise(oneTimeSubscription(LazyQueue.beforePriorityRun, (prio) => prio === 0), maxWaitTime, minWaitTime)
+//         .then(() => preloader.hide());
 
 // If you want hide preloader after after lazy finished.
-LazyQueue.finished.on(() => preloader.hide());
+await timeoutPromise(oneTimeSubscription(LazyQueue.finished), maxWaitTime, minWaitTime)
+    .then(() => preloader.hide());
