@@ -24,4 +24,4 @@ class Header extends Component {
     }
 }
 
-new Header({ el: document.getElementById(CommonComponents.Header) });
+new Header({ el: document.getElementById(CommonComponents.Header) }).setup();

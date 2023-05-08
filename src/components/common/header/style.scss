@@ -4,6 +4,11 @@
     left: 0;
     width: 100vw;
     height: var(--header-height);
+    .container {
+        padding: gem(10);
+        display: flex;
+        justify-content: center
+    }
     ul {
         display: flex;
         align-items: center;

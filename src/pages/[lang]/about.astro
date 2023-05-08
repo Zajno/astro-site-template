@@ -1,0 +1,16 @@
+---
+import { Locales } from 'sitemap/copyright/types';
+import AboutPage from '../about.astro';
+
+export function getStaticPaths() {
+  return [
+    {params: {lang: 'en'}},
+    {params: {lang: 'ja'}}
+  ]
+}
+
+const {lang} = Astro.params;
+
+---
+
+<AboutPage locale={lang as Locales} />

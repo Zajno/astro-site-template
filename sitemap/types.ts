@@ -1,6 +1,6 @@
 import type { Locales, PageCopyright } from './copyright';
 
-export type SitePage<TCopy = any> = {
+export type SitePage<TCopy extends object = any> = {
     /** unique page ID */
 	id: string | number;
     /** page's title, also used in meta */

@@ -1,8 +1,8 @@
 ---
-import { CommonComponents } from '../commonTypes';
+    import { CommonComponents } from '../commonTypes';
     import './style.scss';
 
-    import { HeaderCopyright, Locales } from 'sitemap/copyright';
+    import { HeaderCopyright, Locales, languages } from 'sitemap/copyright';
 
     type Props = {
         locale: Locales
@@ -12,31 +12,8 @@ import { CommonComponents } from '../commonTypes';
 
     const COPY = HeaderCopyright[locale];
 
-    // TODO LOCALE CHANGE !!!
-
-    // const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang, true);
-
-    // here are all options for the language dropdown
-    // const allLocales = [
-    //     {
-    //         language: 'en',
-    //         img:'🇬🇧',
-    //         url: getLocaleHref('en'),
-    //     },
-    //     {
-    //         language: 'ja',
-    //         img:'🇯🇵',
-    //         url: getLocaleHref('ja'),
-    //     },
-    //     {
-    //         language: 'ko',
-    //         img:'🇰🇷',
-    //         url: getLocaleHref('ko'),
-    //     },
-    // ];
-
-    // choosing the selected one and filtering the list
-    // const [locale] = allLocales.splice(allLocales.findIndex(l => l.language == page.output.locale), 1);
+    const {pathname} = Astro.url;
+    const {lang} = Astro.params;
 ---
 
 <header class="header" id={CommonComponents.Header}>
@@ -48,6 +25,14 @@ import { CommonComponents } from '../commonTypes';
                     </li>
                 )
             )}
+        </ul>
+
+        <ul class="lang-select">
+            {Object.entries(languages).map(([langCode, label]) => (
+                <li class="lang-select__item">
+                    <a href={`/${langCode}${pathname}`}>{label}</a>
+                </li>
+            ))}
         </ul>
     </div>
 </header>

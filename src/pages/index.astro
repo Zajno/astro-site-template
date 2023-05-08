@@ -1,7 +1,7 @@
 ---
 import PageLayot from 'layouts/page.astro';
 import { HomePage as PageSettings } from 'sitemap/pages';
-import { Locales } from 'sitemap/copyright';
+import { Locales, defaultLang } from 'sitemap/copyright';
 import HeroSection from 'sections/home/hero/view.astro';
 import SecondSection from 'sections/home/second/view.astro';
 
@@ -9,7 +9,7 @@ type Props = {
 	locale: Locales
 }
 
-const {locale = 'en'} = Astro.props;
+const {locale = defaultLang} = Astro.props;
 
 const COPY = PageSettings.copy[locale];
 ---

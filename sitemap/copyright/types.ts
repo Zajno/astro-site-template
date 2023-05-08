@@ -1,6 +1,17 @@
 
-export const AllLocales = ['en', 'ja'] as const;
+export const languages = Object.freeze({
+    en: 'English',
+    ja: 'Japan',
+});
 
-export type Locales = typeof AllLocales[number];
+export const defaultLang: Locales = 'en';
 
-export type PageCopyright<T extends object> = Partial<Record<Locales, T>> & { default: Locales };
+export type Locales = keyof typeof languages;
+
+export type PageCopyright<T extends object> = Record<Locales, T>;
+
+export function getLangFromUrl<TCopy extends object = any>(url: URL, copy: PageCopyright<TCopy>) {
+    const [, lang] = url.pathname.split('/');
+    if (lang in copy) return lang as keyof typeof copy;
+    return defaultLang;
+}
