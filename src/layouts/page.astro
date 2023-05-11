@@ -9,6 +9,13 @@ import NotSupported from 'components/common/scripts/not-supported.astro';
 
 import ogImage from 'assets/img/og-image/og-image.jpeg';
 
+import favAndroid from 'assets/favicon/android-chrome.png';
+import favApple from 'assets/favicon/apple-touch.png?url';
+import favDark from 'assets/favicon/fav-dark.svg?url';
+import favLight from 'assets/favicon/fav-light.svg?url';
+import favico from 'assets/favicon/fav.ico?url';
+import manifest from 'assets/favicon/manifest.json?url';
+
 import Header from 'components/common/header/view.astro';
 import Footer from 'components/common/footer/view.astro';
 import MobileMenu from 'components/common/mobileMenu/view.astro';
@@ -83,11 +90,11 @@ const pageAlts = {
 		<meta name="twitter:title" content={title}/>
 		<meta name="twitter:description" content={description}/>
 
-		<link rel="icon" href="favicon/fav.ico?0" sizes="any" />
-		<link rel="icon" href="favicon/fav-dark.svg?0" media="(prefers-color-scheme: dark)"/>
-		<link rel="icon" href="favicon/fav-light.svg?0" media="(prefers-color-scheme: light)"/>
-		<link rel="apple-touch-icon" href="favicon/apple-touch.png?0"/>
-		<link crossorigin="use-credentials" rel="manifest" href="favicon/manifest.json?0"/>
+		<link rel="icon" href={favico} sizes="any" />
+		<link rel="icon" href={favDark} media="(prefers-color-scheme: dark)"/>
+		<link rel="icon" href={favLight} media="(prefers-color-scheme: light)"/>
+		<link rel="apple-touch-icon" href={favApple}/>
+		<link crossorigin="use-credentials" rel="manifest" href={manifest}/>
 		<meta name="theme-color" content="#fff"/>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>

@@ -1,4 +1,5 @@
 ---
+import path from 'path';
     import { CommonComponents } from '../commonTypes';
     import './style.scss';
 
@@ -14,25 +15,47 @@
 
     const {pathname} = Astro.url;
     const {lang} = Astro.params;
+
+    const createLangLink = (langCode: string) => {
+        const pathItems = pathname.split('/');
+        const languageCodes = Object.keys(languages);
+
+        const found = pathItems.map(item => {
+            if (item === languageCodes[languageCodes.indexOf(item)]) {
+                return langCode;
+            }
+            return item;
+        })
+
+        return found.join('/');
+    }
+
+    const createHref = (path: string) => lang ? `/${lang}${path}` : `${path}`;
 ---
 
 <header class="header" id={CommonComponents.Header}>
     <div class="container">
         <ul class="menu">
-            {COPY.links.map(link => (
-                    <li class="menu__item">
-                        <a class="label-1" href={link.href}>{link.title}</a>
-                    </li>
-                )
+            {COPY.links.map(link => {
+                const linkHref = createHref(link.href);
+                return (
+                        <li class="menu__item">
+                            <a class="label-1" href={linkHref}>{link.title}</a>
+                        </li>
+                    )
+                }
             )}
         </ul>
 
         <ul class="lang-select">
-            {Object.entries(languages).map(([langCode, label]) => (
-                <li class="lang-select__item">
-                    <a href={`/${langCode}${pathname}`}>{label}</a>
-                </li>
-            ))}
+            {Object.entries(languages).map(([langCode, label]) => {
+                const langSelectHref = createLangLink(langCode);
+                return (
+                    <li class="lang-select__item">
+                        <a href={langSelectHref}>{label}</a>
+                    </li>
+                )
+            })}
         </ul>
     </div>
 </header>
