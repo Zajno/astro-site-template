@@ -17,6 +17,8 @@
       "pages/*": ["src/pages/*"],
       "app/*": ["src/scripts/*"],
       "assets/*": ["src/assets/*"],
+      "srcipts/*": ["src/scripts/*"],
+      "utils/*": ["src/scripts/utils/*"],
       "components/*": ["src/components/*"],
       "sections/*": ["src/components/sections/*"],
       "sitemap/*": ["sitemap/*"],

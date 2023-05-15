@@ -1,15 +1,10 @@
 ---
-import { Locales } from 'sitemap/copyright/types';
+import { Locales, createStaticPathGetter } from 'sitemap/copyright/types';
 import AboutPage from '../about.astro';
 
-export function getStaticPaths() {
-  return [
-    {params: {lang: 'en'}},
-    {params: {lang: 'ja'}}
-  ]
-}
+export const getStaticPaths = createStaticPathGetter();
 
-const {lang} = Astro.params;
+const { lang } = Astro.params;
 
 ---
 

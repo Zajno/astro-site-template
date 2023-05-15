@@ -4,6 +4,7 @@ import { version, name as appName } from './package.json';
 import sitemap from '@astrojs/sitemap';
 import { CurrentConfig } from './config';
 import compress from 'astro-compress';
+import { defaultLang, languages } from './sitemap/copyright';
 
 const {
   env: envConfig,
@@ -68,7 +69,16 @@ export default defineConfig({
   },
   site: CurrentConfig.Hostname,
   integrations: [
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: defaultLang,
+        locales: Object.keys(languages).reduce((prev, curr) => {
+          prev[curr] = curr;
+          return prev;
+        }, {}),
+      },
+    },
+    ),
     compress({
 			css: false,
 		}),

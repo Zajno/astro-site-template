@@ -1,9 +1,9 @@
 ---
-import path from 'path';
     import { CommonComponents } from '../commonTypes';
     import './style.scss';
 
-    import { HeaderCopyright, Locales, languages } from 'sitemap/copyright';
+    import { HeaderCopyright, Locales, defaultLang, languages } from 'sitemap/copyright';
+    import { createLangLink } from 'utils/createLangLink';
 
     type Props = {
         locale: Locales
@@ -13,22 +13,8 @@ import path from 'path';
 
     const COPY = HeaderCopyright[locale];
 
-    const {pathname} = Astro.url;
-    const {lang} = Astro.params;
-
-    const createLangLink = (langCode: string) => {
-        const pathItems = pathname.split('/');
-        const languageCodes = Object.keys(languages);
-
-        const found = pathItems.map(item => {
-            if (item === languageCodes[languageCodes.indexOf(item)]) {
-                return langCode;
-            }
-            return item;
-        })
-
-        return found.join('/');
-    }
+    const { pathname } = Astro.url;
+    const { lang } = Astro.params;
 
     const createHref = (path: string) => lang ? `/${lang}${path}` : `${path}`;
 ---
@@ -49,7 +35,7 @@ import path from 'path';
 
         <ul class="lang-select">
             {Object.entries(languages).map(([langCode, label]) => {
-                const langSelectHref = createLangLink(langCode);
+                const langSelectHref = createLangLink(pathname, langCode, languages, defaultLang);
                 return (
                     <li class="lang-select__item">
                         <a href={langSelectHref}>{label}</a>

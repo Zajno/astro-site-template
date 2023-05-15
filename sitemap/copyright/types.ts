@@ -10,8 +10,30 @@ export type Locales = keyof typeof languages;
 
 export type PageCopyright<T extends object> = Record<Locales, T>;
 
-export function getLangFromUrl<TCopy extends object = any>(url: URL, copy: PageCopyright<TCopy>) {
-    const [, lang] = url.pathname.split('/');
-    if (lang in copy) return lang as keyof typeof copy;
-    return defaultLang;
-}
+
+export const createStaticPathGetter = () => {
+    const result = [];
+    Object.keys(languages).forEach(locale => {
+        if (locale !== defaultLang) {
+            result.push({ params: { lang: locale } });
+        }
+    });
+
+    return function () { return result; };
+};
+
+export const createPageAlterantes = (hostname: string, href: string, currentLocale: Locales) => {
+    const pageAlternates = [];
+    Object.keys(languages).forEach(locale => {
+        if (locale === currentLocale) {
+            return;
+        }
+
+        pageAlternates.push({
+            lang: locale,
+            url: `${hostname}/${locale}${href}`,
+        });
+    });
+
+    return pageAlternates;
+};

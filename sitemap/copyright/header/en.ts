@@ -1,4 +1,3 @@
-
 export const HeaderEnCopy = {
     links: [{
         title: 'home',

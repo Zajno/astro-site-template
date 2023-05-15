@@ -1,4 +1,4 @@
-import type { Locales, PageCopyright } from './copyright';
+import type { PageCopyright } from './copyright';
 
 export type SitePage<TCopy extends object = any> = {
     /** unique page ID */

@@ -22,7 +22,7 @@ import MobileMenu from 'components/common/mobileMenu/view.astro';
 import Preloader from 'components/common/preloader/view.astro';
 
 import { NoScriptId } from 'sitemap/pages';
-import { Locales } from 'sitemap/copyright';
+import { Locales, createPageAlterantes, defaultLang } from 'sitemap/copyright';
 
 type Props = SitePage & {
 	locale: Locales,
@@ -51,13 +51,14 @@ const {
 declare const __HOSTNAME__: string;
 
 const bodyClass = `locale-${locale}`;
-const canonical = `${__HOSTNAME__}${href}`;
+const canonicalLocale = locale === defaultLang ? '' : `/${locale}`;
+const canonical = `${__HOSTNAME__}${canonicalLocale}${href}`;
+const defaultLangCanonical = `${__HOSTNAME__}${href}`;
 
 const pageAlts = {
-	links: [] as any[],
-	default: canonical,
+	links: createPageAlterantes(__HOSTNAME__, href, locale),
+	default: defaultLangCanonical,
 }
-
 ---
 
 <!DOCTYPE html>
@@ -111,10 +112,10 @@ const pageAlts = {
 		}
 
 		<!-- i18n alternatives for search engines -->
-		{	pageAlts.links.forEach(p => {
-				const { lang, url } = p
-				return <link rel="alternate" hreflang={lang} href={url} />
-			})
+		{
+			pageAlts.links.map(page => (
+				<link rel="alternate" hreflang={page.lang} href={page.url} />
+			))
 		}
 		{pageAlts && <link rel="alternate" hreflang="x-default" href={pageAlts.default} />}
 
