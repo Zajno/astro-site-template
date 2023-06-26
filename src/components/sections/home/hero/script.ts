@@ -1,5 +1,6 @@
 import Section from 'app/core/section';
 import { inFrames } from 'app/utils/inFrames';
+import { setupManyComponents } from 'app/utils/setupManyComponents';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
 import SplitText from 'gsap/SplitText';
@@ -39,6 +40,9 @@ export default class HeroSection extends Section {
 
 new HeroSection({ el: document.getElementById(HomePageSections.Hero) }).setup();
 
-// [...document.querySelectorAll('.hero-section')].forEach((s, i) => {
-//     new HeroSection({ el: s as HTMLElement }).setup();
-// });
+// Setup scripts for same sections.
+
+// setupManyComponents(HeroSection, [
+//     document.getElementById(HomePageSections.Hero),
+//     document.getElementById(HomePageSections.Hero),
+// ]);
