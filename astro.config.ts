@@ -18,6 +18,7 @@ export default defineConfig({
     define: envConfig,
     assetsInclude: ['**/*.mov'],
     build: {
+      assetsInlineLimit: 0,
       rollupOptions: {
         output: {
           chunkFileNames: 'js/[name]-[hash].js',
@@ -48,6 +49,17 @@ export default defineConfig({
               return 'assets/audio/[name]-[hash][extname]';
             }
             return 'assets/[name]-[hash][extname]';
+          },
+          manualChunks: {
+            lottie: [
+                'lottie-web',
+            ],
+            gsap: [
+                'gsap',
+                'gsap/SplitText',
+                'gsap/ScrollTrigger',
+                'gsap/ScrollSmoother',
+            ],
           },
         },
       },
