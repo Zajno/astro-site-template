@@ -3,9 +3,6 @@ import './style.scss';
 
 import Section from "layouts/section.astro";
 
-import { HomeCopyrightShape } from "sitemap/copyright";
-import { HomePageSections } from 'components/sections/sectionTypes';
-
 import aboutCoinWEBM from 'assets/video/about-coin.webm';
 import aboutCoinWMOV from 'assets/video/about-coin.mov';
 import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
@@ -15,17 +12,24 @@ import exampleSVG from 'assets/img/example-svg.svg?raw';
 
 import exampleIMG from 'assets/img/og-image/og-image.jpeg';
 
-type Props = { COPY: HomeCopyrightShape }
+type SectionCopyright = {
+    title: string,
+    subtitle: string,
+}
 
-const { COPY } = Astro.props;
-const sectionCopy = COPY.secondSection;
+type Props = {
+    id: string,
+    COPY: SectionCopyright,
+}
+
+const { COPY, id } = Astro.props;
 
 ---
 
-<Section className="second-section" id={HomePageSections.Second}>
+<Section className="second-section" id={id}>
     <div class="container">
-        <h1 class="title-h1">{sectionCopy.title}</h1>
-        <h2 class="title-h2">{sectionCopy.subtitle}</h2>
+        <h1 class="title-h1">{COPY.title}</h1>
+        <h2 class="title-h2">{COPY.subtitle}</h2>
 
         <!-- Video example -->
         <!-- Check script.ts u need to setup video! -->
