@@ -1,4 +1,4 @@
-import Component, { ComponentConfig } from 'app/core/component';
+import Component, { ComponentConfig } from 'scripts/core/component';
 
 import { TabItemElement, TabItem } from './tab';
 import { OptAwait } from '@zajno/common/async/misc';

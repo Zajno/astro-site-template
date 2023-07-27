@@ -1,6 +1,6 @@
-import Section from 'app/core/section';
-import { inFrames } from 'app/utils/inFrames';
-import { setupManyComponents } from 'app/utils/setupManyComponents';
+import Section from 'scripts/core/section';
+import { inFrames } from 'scripts/utils/inFrames';
+import { setupManyComponents } from 'scripts/utils/setupManyComponents';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
 import SplitText from 'gsap/SplitText';

@@ -1,4 +1,4 @@
-import { Breakpoints } from 'app/appBreakpoints';
+import { Breakpoints } from 'scripts/appBreakpoints';
 import Component, { ComponentConfig } from './component';
 
 import gsap from 'gsap';

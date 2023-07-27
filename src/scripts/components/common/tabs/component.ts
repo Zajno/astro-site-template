@@ -1,5 +1,5 @@
-import Component , { ComponentConfig } from 'app/core/component';
-import logger from 'app/logger';
+import Component , { ComponentConfig } from 'scripts/core/component';
+import logger from 'scripts/logger';
 
 import { HtmlTabItem, TabItemElement, TabItem } from './tab';
 import { HtmlTabLinkItem, TabLinkItem } from './link';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import logger from 'app/logger';
+import logger from 'scripts/logger';
 
 declare global {
     export function appReady(cb: () => any): void;

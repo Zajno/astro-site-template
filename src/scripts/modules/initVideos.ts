@@ -1,4 +1,4 @@
-import logger from 'app/logger';
+import logger from 'scripts/logger';
 
 const SCREEN_WIDTH_FOR_VIDEOS = 1024;
 // if (window.innerWidth > 1024 && $('.home-hero-img-wrap').length > 0) {

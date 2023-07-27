@@ -1,7 +1,7 @@
 import type gsap from 'gsap';
 import { TimelineMax, Power1 } from 'gsap';
-import { createLogger, ILogger } from 'app/logger';
-import Component, { ComponentConfig } from 'app/core/component';
+import { createLogger, ILogger } from 'scripts/logger';
+import Component, { ComponentConfig } from 'scripts/core/component';
 
 type PathTransition = {
     path: string,

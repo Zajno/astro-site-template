@@ -1,6 +1,6 @@
 import logger from '@zajno/common/logger';
 import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
-import Component, { ComponentConfig } from 'app/core/component';
+import Component, { ComponentConfig } from 'scripts/core/component';
 
 const classes = {
     show: 'lazyLoaded',

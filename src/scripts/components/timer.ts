@@ -1,4 +1,4 @@
-import Component from 'app/core/component';
+import Component from 'scripts/core/component';
 import { setTimeoutAsync } from '@zajno/common/async/timeout';
 import { gsap } from 'gsap';
 

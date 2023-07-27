@@ -1,4 +1,4 @@
-import Component, { ComponentConfig, ActivateConfig } from 'app/core/component';
+import Component, { ComponentConfig, ActivateConfig } from 'scripts/core/component';
 
 export interface TabItemElement extends HTMLElement {
     linkHooks?: {
@@ -52,7 +52,7 @@ export class TabItem<TConfig extends TabItemConfig = TabItemConfig> extends Comp
         /* no-op */
     }
 }
- export interface HtmlTabItemConfig extends TabItemConfig {
+export interface HtmlTabItemConfig extends TabItemConfig {
     activateClass?: string;
     clicksEnabled?: boolean;
     hoversEnabled?: boolean;

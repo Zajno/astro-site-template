@@ -1,9 +1,9 @@
-import logger from 'app/logger';
+import logger from 'scripts/logger';
 
-import { SUPPORT_MIX_BLEND as supportMixBlend } from 'app/utils/constants';
+import { SUPPORT_MIX_BLEND as supportMixBlend } from 'scripts/utils/constants';
 
-import LazyLoadComponent, { LazyLoadConfig } from 'app/components/lazy/lazyLoadComponent';
-import ImageLazyLoadComponent from 'app/components/lazy/imageLazyLoadComponent';
+import LazyLoadComponent, { LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
+import ImageLazyLoadComponent from 'scripts/components/lazy/imageLazyLoadComponent';
 
 const enum States {
     Undefined = 0,

@@ -1,6 +1,6 @@
 // core
 import { TimelineMax } from 'gsap';
-import Component, { ComponentConfig } from 'app/core/component';
+import Component, { ComponentConfig } from 'scripts/core/component';
 
 export type ModalConfig = ComponentConfig & {
     modal: HTMLElement;

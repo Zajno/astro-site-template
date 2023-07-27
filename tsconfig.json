@@ -15,10 +15,8 @@
       "styles/*": ["src/styles/*"],
       "layouts/*": ["src/layouts/*"],
       "pages/*": ["src/pages/*"],
-      "app/*": ["src/scripts/*"],
       "assets/*": ["src/assets/*"],
-      "srcipts/*": ["src/scripts/*"],
-      "utils/*": ["src/scripts/utils/*"],
+      "scripts/*": ["src/scripts/*"],
       "components/*": ["src/components/*"],
       "sections/*": ["src/components/sections/*"],
       "sitemap/*": ["sitemap/*"],
@@ -28,6 +26,13 @@
   "exclude": [
     "node_modules",
     "dist"
+  ],
+  "include": [
+    "sitemap",
+    "src",
+    "config/**/*",
+    "astro.config.ts",
+    "src/env.d.ts"
   ],
   "references": []
 }

@@ -1,4 +1,4 @@
-import Component, { ComponentConfig } from 'app/core/component';
+import Component, { ComponentConfig } from 'scripts/core/component';
 import gsap from 'gsap';
 
 export type CustomScrollConfig = ComponentConfig & {

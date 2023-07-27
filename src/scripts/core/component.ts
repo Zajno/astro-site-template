@@ -1,4 +1,4 @@
-import logger from 'app/logger';
+import logger from 'scripts/logger';
 
 export interface ComponentConfig<T extends HTMLElement = HTMLElement> {
     el: T;

@@ -17,7 +17,7 @@ export function getUrlVarsV2() {
     const urlParams = {};
 
     while ((match = search.exec(query))) {
-       urlParams[decode(match[1])] = decode(match[2]);
+        urlParams[decode(match[1])] = decode(match[2]);
     }
 
     return urlParams;

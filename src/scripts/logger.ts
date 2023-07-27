@@ -1,5 +1,5 @@
 import logger, { setMode, createLogger, ILogger } from '@zajno/common/logger';
-import { AppConfig } from 'app/utils/config';
+import { AppConfig } from 'scripts/utils/config';
 
 setMode(AppConfig.EnableLogger ? 'console' : false);
 

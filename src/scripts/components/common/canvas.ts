@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import LazyLoadComponent, { LazyLoadConfig } from 'app/components/lazy/lazyLoadComponent';
+import LazyLoadComponent, { LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
 import Particle, { ParticleSettings } from './canvasParticle';
 
 type CanvasSettings = ParticleSettings & {

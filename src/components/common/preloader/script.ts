@@ -1,7 +1,7 @@
-import Component, { ComponentConfig } from 'app/core/component';
+import Component, { ComponentConfig } from 'scripts/core/component';
 import gsap from 'gsap';
 import { CommonComponents } from '../commonTypes';
-import { LazyQueue } from 'app/components/lazy/lazyLoadComponent';
+import { LazyQueue } from 'scripts/components/lazy/lazyLoadComponent';
 import { oneTimeSubscription } from '@zajno/common/observing/event';
 import { timeoutPromise } from '@zajno/common/async/timeout';
 

@@ -2,7 +2,6 @@
 import 'styles/base.sass';
 
 import type { SitePage } from 'sitemap/types';
-import AppConfig from 'components/common/scripts/appConfig.astro';
 import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
 import WindowAppReady from 'components/common/scripts/window.appReady.astro';
 import NotSupported from 'components/common/scripts/not-supported.astro';
@@ -48,15 +47,15 @@ const {
 	isActivePreloader = true,
 } = Astro.props;
 
-declare const __HOSTNAME__: string;
+const hostname = import.meta.env.PUBLIC_APP_URL;
 
 const bodyClass = `locale-${locale}`;
 const canonicalLocale = locale === defaultLang ? '' : `/${locale}`;
-const canonical = `${__HOSTNAME__}${canonicalLocale}${href}`;
-const defaultLangCanonical = `${__HOSTNAME__}${href}`;
+const canonical = `${hostname}${canonicalLocale}${href}`;
+const defaultLangCanonical = `${hostname}${href}`;
 
 const pageAlts = {
-	links: createPageAlterantes(__HOSTNAME__, href, locale),
+	links: createPageAlterantes(hostname, href, locale),
 	default: defaultLangCanonical,
 }
 ---
@@ -120,7 +119,6 @@ const pageAlts = {
 		{pageAlts && <link rel="alternate" hreflang="x-default" href={pageAlts.default} />}
 
 		{(disableScripts !== 'force') && <WindowAppReady />}
-		<AppConfig />
 	</head>
 	<body class={`${bodyClass}`}>
 		{isActiveHeader && <Header locale={locale}/>}

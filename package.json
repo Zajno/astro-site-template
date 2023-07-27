@@ -1,6 +1,6 @@
 {
   "name": "@zajno/static-astro-site-template",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "Static website astro template by Zajno",
   "private": true,
   "author": "Zajno <hello@zajno.com> (https://zajno.com)",
@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:ts": "tsc --watch --noEmit",
     "build": "yarn build:ts && astro build",
     "build:ts": "yarn tsc --noEmit",
     "build:prod": "yarn build --define-process-env-node-env production",
@@ -35,9 +36,9 @@
     "@zajno/eslint-config": "^2.3.0",
     "astro-compress": "^1.1.18",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3",
     "eslint": "^8.29.0",
     "eslint-plugin-astro": "^0.21.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "git-rev-sync": "^3.0.2",
     "sass": "^1.56.1",
     "typescript": "^5.0.4"

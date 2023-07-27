@@ -1,5 +1,5 @@
-import logger from 'app/logger';
-import createReadyPattern from 'app/utils/readyPattern';
+import logger from 'scripts/logger';
+import createReadyPattern from 'scripts/utils/readyPattern';
 
 import LazyLoadComponent, { LazyLoadConfig } from './lazyLoadComponent';
 
@@ -16,7 +16,7 @@ export interface ImageLazyLoadConfig extends LazyLoadConfig {
 }
 
 export default class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfig> {
-   private _picture: HTMLPictureElement;
+    private _picture: HTMLPictureElement;
 
     get image() {
         return this._config.el;

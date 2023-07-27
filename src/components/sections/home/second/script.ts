@@ -1,8 +1,8 @@
 
-import { Breakpoints } from 'app/appBreakpoints';
-import Video from 'app/components/common/video';
-import Section from 'app/core/section';
-import { inFrames } from 'app/utils/inFrames';
+import { Breakpoints } from 'scripts/appBreakpoints';
+import Video from 'scripts/components/common/video';
+import Section from 'scripts/core/section';
+import { inFrames } from 'scripts/utils/inFrames';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
 import SplitText from 'gsap/SplitText';
