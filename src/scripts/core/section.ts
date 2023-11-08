@@ -1,15 +1,15 @@
 import { Breakpoints } from 'scripts/appBreakpoints';
-import Component, { ComponentConfig } from './component';
+import Component, { type ComponentConfig } from './component';
 
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { ScrollTrigger, createScrollTrigger } from 'scripts/lib/gsap/scrollTrigger';
 
 export type SectionConfig = ComponentConfig;
 
-export default class Section<TConfig extends SectionConfig = SectionConfig> extends Component<TConfig> {
+export class Section<TConfig extends SectionConfig = SectionConfig> extends Component<TConfig> {
     private _sectionTrigger: ScrollTrigger = null;
+
+    // set this if needed during setupSection
+    protected _activationTriggerProps: Omit<ScrollTrigger.StaticVars, 'onEnter' | 'onEnterBack' | 'onLeave' | 'onLeaveBack'> = null;
 
     get sectionTrigger() { return this._sectionTrigger; }
 
@@ -31,31 +31,36 @@ export default class Section<TConfig extends SectionConfig = SectionConfig> exte
         }
     }
 
-    private async _setupScrollTrigger() {
-        this._sectionTrigger = ScrollTrigger.create({
+    private _setupScrollTrigger() {
+        this._sectionTrigger = createScrollTrigger({
             trigger: this.element,
             start: 'top bottom-=10%',
             end: 'bottom top-=10%',
-            scrub: true,
-            onEnter: () => this.activate(),
-            onEnterBack: () => this.activate(),
-            onUpdate: () => this.activate(),
-            onLeave: () => this.deactivate(),
-            onLeaveBack: () => this.deactivate(),
+            ...this._activationTriggerProps,
+            onEnter: () => this.activate({ direction: 1 }),
+            onEnterBack: () => this.activate({ direction: -1 }),
+            onLeave: () => this.deactivate({ direction: 1 }),
+            onLeaveBack: () => this.deactivate({ direction: -1 }),
         });
     }
 
+    public start(): Promise<void> | void {
+        /* override me */
+    }
+
     protected setupSection(): Promise<void> | void {
-        /* override me if you want */
+        /* override me */
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public resize(width: number, height: number) {
-        /* override me if you want */
+        /* override me */
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public wheel(deltaY: number, wheelDirection: number) {
-        /* override me if you want */
+        /* override me */
     }
 }
+
+export default Section;

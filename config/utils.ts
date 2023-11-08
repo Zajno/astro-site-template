@@ -1,5 +1,5 @@
 import * as git from 'git-rev-sync';
-import { Environments } from '.';
+import { type Environments } from '.';
 import { getFullVersionName } from './version';
 import { CurrentConfig } from '.';
 import path from 'path';

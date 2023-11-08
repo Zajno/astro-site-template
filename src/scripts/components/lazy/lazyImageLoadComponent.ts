@@ -1,7 +1,7 @@
 import logger from 'scripts/logger';
 import createReadyPattern from 'scripts/utils/readyPattern';
 
-import LazyLoadComponent, { LazyLoadConfig } from './lazyLoadComponent';
+import { LazyLoadComponent, type LazyLoadConfig } from './lazyLoadComponent';
 
 const LOG_ENABLED = false;
 
@@ -11,11 +11,9 @@ function log(...args) {
     }
 }
 
-export interface ImageLazyLoadConfig extends LazyLoadConfig {
-    el: HTMLImageElement;
-}
+export type ImageLazyLoadConfig = LazyLoadConfig<HTMLImageElement>;
 
-export default class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfig> {
+export class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfig> {
     private _picture: HTMLPictureElement;
 
     get image() {
@@ -96,8 +94,8 @@ export default class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyL
     }
 
     static RegisterAll(selector = 'img.lazy') {
-        const arrImage = [...document.querySelectorAll(selector)];
+        const arrImage = [...document.querySelectorAll<HTMLImageElement>(selector)];
         return Promise.all(arrImage
-            .map(el => new ImageLazyLoadComponent({ el: el as HTMLImageElement, register: true }).setup()));
+            .map(el => new ImageLazyLoadComponent({ el, register: true }).setup()));
     }
 }

@@ -1,11 +1,12 @@
 ---
 import './style.scss';
 
-import Section from "layouts/section.astro";
-import logo from 'assets/img/logo.png';
+import Section from 'layouts/section.astro';
+import logo from 'assets/img/logo.png?url';
+
 ---
 
-<Section className="page-404__section">
+<Section className="page-404__section" id="page-404">
     <div class="page-404__container">
         <div class="page-404__logo-block">
             <img src={logo} alt="Zajno logo" class="page-404__logo-block__image" />

@@ -1,6 +1,6 @@
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 
-import { TabItemElement, TabItem } from './tab';
+import { type TabItemElement, TabItem } from './tab';
 import { OptAwait } from '@zajno/common/async/misc';
 
 export type TabLinkItemConfig = ComponentConfig<TabItemElement> & {
@@ -18,7 +18,7 @@ export abstract class TabLinkItem<T extends TabLinkItemConfig = TabLinkItemConfi
 
     get tabs() { return this._tabs; }
 
-    public setActivateCallback(cb: (link: TabLinkItem) => void) {
+    public setActivateCallback(cb: (link: TabLinkItem) => any) {
         this._activateCallback = cb;
         return this;
     }

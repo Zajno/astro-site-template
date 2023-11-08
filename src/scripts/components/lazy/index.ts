@@ -1,13 +1,5 @@
 
-import { BeginLoading, SetMainElement } from './lazyLoadComponent';
-import ImageLazyLoadComponent from './imageLazyLoadComponent';
-
-function RegisterAllImages() {
-    ImageLazyLoadComponent.RegisterAll();
-}
-
-export default {
-    RegisterAllImages,
+export {
     BeginLoading,
     SetMainElement,
-};
+} from './lazyLoadComponent';

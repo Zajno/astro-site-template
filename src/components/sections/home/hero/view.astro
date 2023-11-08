@@ -1,17 +1,17 @@
 ---
 import './style.scss';
 
-import Section from "layouts/section.astro";
+import Section from 'layouts/section.astro';
 
 type SectionCopyright = {
     title: string,
     subtitle: string,
-}
+};
 
 type Props = {
     id: string,
     COPY: SectionCopyright,
-}
+};
 
 const { COPY, id } = Astro.props;
 

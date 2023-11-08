@@ -1,6 +1,6 @@
 import gsap from 'gsap';
-import LazyLoadComponent, { LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
-import Particle, { ParticleSettings } from './canvasParticle';
+import { LazyLoadComponent,  type LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
+import Particle, { type ParticleSettings } from './canvasParticle';
 
 type CanvasSettings = ParticleSettings & {
     canvas: HTMLCanvasElement;

@@ -1,22 +1,22 @@
 ---
-    import { CommonComponents } from '../commonTypes';
-    import './style.scss';
+import { CommonComponents } from '../commonTypes';
+import './style.scss';
 
-    import { HeaderCopyright, Locales, defaultLang, languages } from 'sitemap/copyright';
-    import { createLangLink } from 'scripts/utils/createLangLink';
+import { HeaderCopyright, type Locales, defaultLang, languages } from 'sitemap/copyright';
+import { createLangLink } from 'scripts/utils/createLangLink';
 
     type Props = {
         locale: Locales
-    }
+    };
 
-    const { locale } = Astro.props;
+const { locale } = Astro.props;
 
-    const COPY = HeaderCopyright[locale];
+const COPY = HeaderCopyright[locale];
 
-    const { pathname } = Astro.url;
-    const { lang } = Astro.params;
+const { pathname } = Astro.url;
+const { lang } = Astro.params;
 
-    const createHref = (path: string) => lang ? `/${lang}${path}` : `${path}`;
+const createHref = (path: string) => lang ? `/${lang}${path}` : `${path}`;
 ---
 
 <header class="header" id={CommonComponents.Header}>
@@ -25,11 +25,11 @@
             {COPY.links.map(link => {
                 const linkHref = createHref(link.href);
                 return (
-                        <li class="menu__item">
-                            <a class="label-1" href={linkHref}>{link.title}</a>
-                        </li>
-                    )
-                }
+                    <li class="menu__item">
+                        <a class="label-1" href={linkHref}>{link.title}</a>
+                    </li>
+                );
+            },
             )}
         </ul>
 
@@ -40,7 +40,7 @@
                     <li class="lang-select__item">
                         <a href={langSelectHref}>{label}</a>
                     </li>
-                )
+                );
             })}
         </ul>
     </div>

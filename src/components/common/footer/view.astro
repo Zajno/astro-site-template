@@ -1,18 +1,21 @@
 ---
-    import { CommonComponents } from '../commonTypes';
-    import './style.scss';
+import { CommonComponents } from '../commonTypes';
+import './style.scss';
 
-    import { FooterCopyright, Locales } from "sitemap/copyright";
+import {
+    // FooterCopyright,
+    type Locales,
+} from 'sitemap/copyright';
 
-    type Props = {
-        locale: Locales
-    }
+type Props = {
+    locale: Locales
+};
 
-    const { locale } = Astro.props;
+// const { locale } = Astro.props;
 
-    const Strings = FooterCopyright[locale];
+// const Strings = FooterCopyright[locale];
 
-    const year = new Date().getFullYear();
+// const year = new Date().getFullYear();
 ---
 
 <footer class="footer" id={CommonComponents.Footer}>

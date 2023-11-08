@@ -1,7 +1,7 @@
 import {
-    BreakpointData as BreakpointBaseData,
+    type BreakpointData as BreakpointBaseData,
     BreakpointsManager,
-    ICurrentBreakpointInfo,
+    type ICurrentBreakpointInfo,
 } from '@zajno/common-web/breakpoints';
 import { Event } from '@zajno/common/observing/event';
 
@@ -13,7 +13,22 @@ export enum BreakpointType {
     Mobile = 'Mobile',
 }
 
+export enum BreakpointRules {
+    Desktop = '(min-width: 1025px)',
+    Tablet = '(min-width: 481px) and (max-width: 1024px)',
+    MobileAndTablet = '(max-width: 1024px)',
+    Mobile = '(max-width: 480px)',
+
+}
+
 type BreakpointData = BreakpointBaseData<BreakpointType>;
+
+export const AppMediaQueries = {
+    [BreakpointType.Desktop]: BreakpointRules.Desktop,
+    [BreakpointType.Tablet]: BreakpointRules.Tablet,
+    [BreakpointType.Mobile]: BreakpointRules.Mobile,
+};
+
 
 const AppBreakpoints: Record<BreakpointType, BreakpointData> = {
     Desktop: {
@@ -21,21 +36,21 @@ const AppBreakpoints: Record<BreakpointType, BreakpointData> = {
         name: BreakpointType.Desktop,
         width: 1440,
         height: 0,
-        mediaQuery: '(min-width: 1025px)',
+        mediaQuery: AppMediaQueries.Desktop,
     },
     Tablet: {
         id: 2,
         name: BreakpointType.Tablet,
         width: 768,
         height: 0,
-        mediaQuery: '(min-width: 481px) and (max-width: 1024px)',
+        mediaQuery: AppMediaQueries.Tablet,
     },
     Mobile: {
         id: 1,
         name: BreakpointType.Mobile,
         width: 375,
         height: 0,
-        mediaQuery: '(max-width: 480px)',
+        mediaQuery: AppMediaQueries.Mobile,
     },
 };
 
@@ -55,9 +70,10 @@ const resize = () => {
     Manager.resize(width, height);
     resizeEvent.trigger({ width, height });
 };
-
-resize();
-window.onresize = resize;
+if (!import.meta.env.SSR) {
+    resize();
+    window.onresize = resize;
+}
 
 // that's just a wrapper for core Breakpoints, nothing else should be added here
 export const Breakpoints = {
@@ -70,6 +86,10 @@ export const Breakpoints = {
     resize(width: number, height: number) { return Manager.resize(width, height); },
 
     isActive(...breakpointsIds: number[]) {
-        return breakpointsIds.includes(this.Current.breakpoint.id);
+        return breakpointsIds.includes(Manager.breakpoint.id);
     },
+
+    get isDesktop() { return Manager.breakpoint.name === BreakpointType.Desktop; },
+    get isTablet() { return Manager.breakpoint.name === BreakpointType.Tablet; },
+    get isMobile() { return Manager.breakpoint.name === BreakpointType.Mobile; },
 };

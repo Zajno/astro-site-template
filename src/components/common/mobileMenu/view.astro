@@ -1,17 +1,20 @@
 ---
 import { CommonComponents } from '../commonTypes';
-    import './style.scss';
-    import { Locales, ModalMenuCopyright } from "sitemap/copyright";
+import './style.scss';
+import {
+    type Locales,
+    // ModalMenuCopyright
+} from 'sitemap/copyright';
 
-    type Props = {
-        locale: Locales
-    }
+type Props = {
+    locale: Locales
+};
 
-    const { locale } = Astro.props;
+// const { locale } = Astro.props;
 
-    const Strings = ModalMenuCopyright[locale];
+// const Strings = ModalMenuCopyright[locale];
 
-    // const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang);
+// const getLocaleHref = (lang) => Sitemap.getLocaleHref(page, lang);
 ---
 
 

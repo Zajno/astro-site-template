@@ -1,4 +1,4 @@
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 import { CommonComponents } from '../commonTypes';
 import gsap from 'gsap';
 

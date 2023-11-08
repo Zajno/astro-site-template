@@ -1,4 +1,4 @@
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 import { TweenLite } from 'gsap';
 
 export type CursorConfig = ComponentConfig & {

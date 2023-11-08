@@ -1,15 +1,15 @@
 ---
 import PageLayot from 'layouts/page.astro';
-import { Page404 as PageSettings} from 'sitemap/pages';
+import { Page404 as PageSettings } from 'sitemap/pages';
 
-import { Locales } from 'sitemap/copyright';
+import { type Locales } from 'sitemap/copyright';
 import MainSection from 'sections/page404/main/view.astro';
 
 type Props = {
 	locale: Locales
-}
+};
 
-const {locale = 'en'} = Astro.props;
+const { locale = 'en' } = Astro.props;
 
 ---
 

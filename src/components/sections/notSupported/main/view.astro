@@ -1,16 +1,16 @@
 ---
 import './style.scss';
 
-import Section from "layouts/section.astro";
+import Section from 'layouts/section.astro';
 
-import logo from 'assets/img/logo.png';
-import chromeLogo from 'assets/img/iechrome.png';
-import firefoxLogo from 'assets/img/iefirefox.png';
-import operaLogo from 'assets/img/ieopera.png';
+import logo from 'assets/img/logo.png?url';
+import chromeLogo from 'assets/img/iechrome.png?url';
+import firefoxLogo from 'assets/img/iefirefox.png?url';
+import operaLogo from 'assets/img/ieopera.png?url';
 
 ---
 
-<Section className="section-ie">
+<Section className="section-ie" id="section-ie">
     <div class="ie__container">
         <div class="ie__logo-block">
             <img src={logo} alt="Zajno logo" class="ie__logo-block__image" />

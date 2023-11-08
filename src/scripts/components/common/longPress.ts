@@ -1,5 +1,5 @@
 import logger from 'scripts/logger';
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 
 export type LongPressConfig = ComponentConfig & {
     longPressDuration: number;

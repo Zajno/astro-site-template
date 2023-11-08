@@ -2,8 +2,8 @@ import logger from 'scripts/logger';
 
 import { SUPPORT_MIX_BLEND as supportMixBlend } from 'scripts/utils/constants';
 
-import LazyLoadComponent, { LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
-import ImageLazyLoadComponent from 'scripts/components/lazy/imageLazyLoadComponent';
+import { LazyLoadComponent, type LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
+import { ImageLazyLoadComponent } from 'scripts/components/lazy/lazyImageLoadComponent';
 
 const enum States {
     Undefined = 0,
@@ -30,10 +30,10 @@ function getObjectDataSrc(source: VideoSource) {
 
     let minWidth = Number.MAX_VALUE;
     let fallbackLink = null;
-
-    Object.keys(source.dataset).forEach((dataSrc) => {
+    const keys: string[] = Object.keys(source.dataset);
+    keys.forEach((dataSrc) => {
         if (/^src/.test(dataSrc)) {
-            const key = dataSrc.substr(3);
+            const key = dataSrc.substring(3);
             const width = (+key) || 0;
             const link = source.dataset[dataSrc];
             data[width] = link;
@@ -72,7 +72,7 @@ function srcSet(source: VideoSource, width: number) {
 
 export default class Video extends LazyLoadComponent<VideoConfig> {
 
-    private _widthVieport: number;
+    private _widthViewport: number;
     private _playState: States;
     private _requestedState: States;
     private _changingState: boolean;
@@ -126,7 +126,7 @@ export default class Video extends LazyLoadComponent<VideoConfig> {
         this.log('_checkIsSourceChanged', this.element, this._sources);
         for (let i = 0; i < this._sources.length; ++i) {
             const source = this._sources[i];
-            const targetSrc = srcSet(source, this._widthVieport);
+            const targetSrc = srcSet(source, this._widthViewport);
             this.log(`Changing source ${source.src} to ${targetSrc}`);
             if (source.targetSrc !== targetSrc) {
                 if (doReplace) {
@@ -297,7 +297,7 @@ export default class Video extends LazyLoadComponent<VideoConfig> {
         const usePlaceholder = !!((this._hasPlaceholder && isMobile)
             || (this._hasMixBlend && !supportMixBlend));
 
-        this._widthVieport = width;
+        this._widthViewport = width;
 
         if (this._usePlaceholder === usePlaceholder) {
 

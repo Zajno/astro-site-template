@@ -1,26 +1,26 @@
 ---
 import './style.scss';
 
-import Section from "layouts/section.astro";
+import Section from 'layouts/section.astro';
 
-import aboutCoinWEBM from 'assets/video/about-coin.webm';
-import aboutCoinWMOV from 'assets/video/about-coin.mov';
-import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
-import aboutCoinWMobileMOV from 'assets/video/about-coin-mobile.mov';
+// import aboutCoinWEBM from 'assets/video/about-coin.webm';
+// import aboutCoinWMOV from 'assets/video/about-coin.mov';
+// import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
+// import aboutCoinWMobileMOV from 'assets/video/about-coin-mobile.mov';
 
-import exampleSVG from 'assets/img/example-svg.svg?raw';
+// import exampleSVG from 'assets/img/example-svg.svg?raw';
 
-import exampleIMG from 'assets/img/og-image/og-image.jpeg';
+// import exampleIMG from 'assets/img/og-image/og-image.jpeg';
 
 type SectionCopyright = {
     title: string,
     subtitle: string,
-}
+};
 
 type Props = {
     id: string,
     COPY: SectionCopyright,
-}
+};
 
 const { COPY, id } = Astro.props;
 

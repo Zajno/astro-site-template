@@ -1,10 +1,10 @@
 // core
 import { TimelineMax } from 'gsap';
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 
 export type ModalConfig = ComponentConfig & {
     modal: HTMLElement;
-    modalContent?: any | null;
+    modalContent?: any;
     openButton: any;
     closeButton: any;
     modalActiveClass?: string;

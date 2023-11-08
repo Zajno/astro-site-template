@@ -5,9 +5,7 @@ import Section from 'scripts/core/section';
 import { inFrames } from 'scripts/utils/inFrames';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
-import SplitText from 'gsap/SplitText';
-
-gsap.registerPlugin(SplitText);
+import { SplitText } from 'scripts/lib/gsap/splitText';
 
 export default class SecondSection extends Section {
     private _video: Video;
@@ -38,7 +36,7 @@ export default class SecondSection extends Section {
         /* TODO */
     }
 
-    public resize(width: number, height: number): void {
+    public resize() {
         this._rem = Breakpoints.Current.rem;
 
         // if (this._video) {

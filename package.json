@@ -1,12 +1,12 @@
 {
   "name": "@zajno/static-astro-site-template",
-  "version": "1.3.0",
-  "description": "Static website astro template by Zajno",
+  "version": "2.0",
+  "description": "Astro website template by Zajno",
   "private": true,
   "author": "Zajno <hello@zajno.com> (https://zajno.com)",
   "type": "module",
   "engines": {
-    "node": "^16"
+    "node": "^18"
   },
   "scripts": {
     "dev": "astro dev",
@@ -19,28 +19,30 @@
     "preview": "astro preview",
     "astro": "astro",
     "emulate": "firebase emulators:start --only hosting",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
-    "@astrojs/sitemap": "^1.0.0",
-    "@zajno/common": "^2.0.5",
-    "@zajno/common-web": "^1.0.0",
-    "astro": "^2.3.4",
+    "@astrojs/sitemap": "^3.0.3",
+    "@zajno/common": "^2.1.1",
+    "@zajno/common-web": "^1.0.1",
+    "astro": "^3.4.4",
+    "astro-webmanifest": "^1.0.0",
     "detect-browser": "^5.3.0",
     "gsap": "npm:@gsap/shockingly",
-    "lottie-web": "^5.10.0",
-    "regenerator-runtime": "^0.13.11"
+    "lottie-web": "^5.12.2",
+    "regenerator-runtime": "^0.14.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.10",
-    "@zajno/eslint-config": "^2.3.0",
-    "astro-compress": "^1.1.18",
+    "@types/node": "^20.9.0",
+    "@zajno/eslint-config": "^3.0.0",
+    "astro-compress": "^2.2.3",
+    "astro-eslint-parser": "^0.16.0",
     "cross-env": "^7.0.3",
-    "eslint": "^8.29.0",
-    "eslint-plugin-astro": "^0.21.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-astro": "^0.29.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "git-rev-sync": "^3.0.2",
-    "sass": "^1.56.1",
-    "typescript": "^5.0.4"
+    "sass": "^1.69.5",
+    "typescript": "^5.2.2"
   }
 }

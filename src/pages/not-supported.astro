@@ -1,14 +1,14 @@
 ---
 import PageLayot from 'layouts/page.astro';
-import { NotSupported as PageSettings} from 'sitemap/pages';
-import { Locales } from 'sitemap/copyright';
+import { NotSupported as PageSettings } from 'sitemap/pages';
+import { type Locales } from 'sitemap/copyright';
 import MainSection from 'sections/notSupported/main/view.astro';
 
 type Props = {
 	locale: Locales
-}
+};
 
-const {locale = 'en'} = Astro.props;
+const { locale = 'en' } = Astro.props;
 
 ---
 

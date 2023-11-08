@@ -1,21 +1,21 @@
 ---
 import PageLayot from 'layouts/page.astro';
 import { HomePage as PageSettings } from 'sitemap/pages';
-import { Locales, defaultLang } from 'sitemap/copyright';
+import { type Locales, defaultLang } from 'sitemap/copyright';
 import HeroSection from 'sections/home/hero/view.astro';
 import SecondSection from 'sections/home/second/view.astro';
 import { HomePageSections } from 'components/sections/sectionTypes';
 
 type Props = {
 	locale: Locales
-}
+};
 
-const {locale = defaultLang} = Astro.props;
+const { locale = defaultLang } = Astro.props;
 
 const COPY = PageSettings.copy[locale];
 ---
 
 <PageLayot {...PageSettings} locale={locale}>
-	<HeroSection COPY={COPY.heroSection} id={HomePageSections.Hero}/>
-	<SecondSection COPY={COPY.secondSection} id={HomePageSections.Second}/>
+    <HeroSection COPY={COPY.heroSection} id={HomePageSections.Hero}/>
+    <SecondSection COPY={COPY.secondSection} id={HomePageSections.Second}/>
 </PageLayot>

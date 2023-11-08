@@ -5,23 +5,15 @@ import type { SitePage } from 'sitemap/types';
 import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
 import WindowAppReady from 'components/common/scripts/window.appReady.astro';
 import NotSupported from 'components/common/scripts/not-supported.astro';
-
-import ogImage from 'assets/img/og-image/og-image.jpeg';
-
-import favAndroid from 'assets/favicon/android-chrome.png';
-import favApple from 'assets/favicon/apple-touch.png?url';
-import favDark from 'assets/favicon/fav-dark.svg?url';
-import favLight from 'assets/favicon/fav-light.svg?url';
-import favico from 'assets/favicon/fav.ico?url';
-import manifest from 'assets/favicon/manifest.json?url';
-
+import PageMeta from "./meta.astro";
+import Fonts from "./fonts.astro";
 import Header from 'components/common/header/view.astro';
 import Footer from 'components/common/footer/view.astro';
 import MobileMenu from 'components/common/mobileMenu/view.astro';
 import Preloader from 'components/common/preloader/view.astro';
 
 import { NoScriptId } from 'sitemap/pages';
-import { Locales, createPageAlterantes, defaultLang } from 'sitemap/copyright';
+import { type Locales  } from 'sitemap/copyright';
 
 type Props = SitePage & {
 	locale: Locales,
@@ -29,116 +21,99 @@ type Props = SitePage & {
 	isActiveHeader?: boolean,
 	isActiveFooter?: boolean,
 	isActiveMobileMenu?: boolean,
+    noSmoothWrapper?: boolean,
 };
 
-//default values
+// default values
 const {
-	id,
-	locale,
-	title = 'Title',
-	description = 'Description',
-	href,
-	image,
-	noIndex = false,
-	disableScripts = false,
-	isActiveFooter = true,
-	isActiveMobileMenu = true,
-	isActiveHeader = true,
-	isActivePreloader = true,
+    id,
+    locale,
+    title = 'Title',
+    description = 'Description',
+    href,
+    image,
+    noIndex = false,
+    disableScripts = false,
+    isActiveFooter = true,
+    isActiveMobileMenu = true,
+    isActiveHeader = true,
+    isActivePreloader = true,
+    noSmoothWrapper = false,
 } = Astro.props;
 
-const hostname = import.meta.env.PUBLIC_APP_URL;
-
 const bodyClass = `locale-${locale}`;
-const canonicalLocale = locale === defaultLang ? '' : `/${locale}`;
-const canonical = `${hostname}${canonicalLocale}${href}`;
-const defaultLangCanonical = `${hostname}${href}`;
 
-const pageAlts = {
-	links: createPageAlterantes(hostname, href, locale),
-	default: defaultLangCanonical,
-}
 ---
 
 <!DOCTYPE html>
 <html lang={locale}>
-	<head>
-		<meta charset="utf-8" />
+    <head>
+        <PageMeta
+			locale={locale}
+			href={href}
+			title={title}
+			description={description}
+			image={image}
+			noIndex={noIndex}
+		/>
 
-		<title>{title}</title>
+        <Fonts />
 
-		{noIndex && <meta name="robots" content="noindex"/>}
-		{!noIndex && (<meta name="generator" content={Astro.generator} />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-		<meta name="description" content={description}/>
-		<meta property="og:description" content={description}/>
-		<meta property="og:title" content={title} />
-		<meta property="og:type" content="website"/>
-		<meta property="og:url" content={canonical}/>
-		<meta property="og:site_name" content={title}/>
-		<meta property="og:title" content={title}/>
-		<meta property="og:description" content={description}/>
-		<meta property="og:image:width" content="1200"/>
-		<meta property="og:image:height" content="630"/>
-		<meta property="og:image" content={image ? image : ogImage}/>
-		<meta property="og:image:alt" content={description}/>
-
-		<meta name="twitter:card" content="summary"/>
-		<meta name="twitter:image" content={image ? image : ogImage}/>
-
-		<meta name="twitter:title" content={title}/>
-		<meta name="twitter:description" content={description}/>
-
-		<link rel="icon" href={favico} sizes="any" />
-		<link rel="icon" href={favDark} media="(prefers-color-scheme: dark)"/>
-		<link rel="icon" href={favLight} media="(prefers-color-scheme: light)"/>
-		<link rel="apple-touch-icon" href={favApple}/>
-		<link crossorigin="use-credentials" rel="manifest" href={manifest}/>
-		<meta name="theme-color" content="#fff"/>
-
-		<link rel="preconnect" href="https://fonts.googleapis.com"/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-		<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"/>
-		)}
-
-
-		{(id != NoScriptId)
-			? (<noscript>
-				<meta http-equiv="refresh" content="0;url=/no-script.html"/>
-			</noscript>)
-			: <script> window.location.href = '/' </script>
-		}
-
-		<!-- i18n alternatives for search engines -->
-		{
-			pageAlts.links.map(page => (
-				<link rel="alternate" hreflang={page.lang} href={page.url} />
-			))
-		}
-		{pageAlts && <link rel="alternate" hreflang="x-default" href={pageAlts.default} />}
+        {(id != NoScriptId)
+            ? (
+                <noscript>
+                    <meta http-equiv="refresh" content="0;url=/no-script.html"/>
+                </noscript>
+            )
+            : <script> window.location.href = '/' </script>
+        }
 
 		{(disableScripts !== 'force') && <WindowAppReady />}
-	</head>
-	<body class={`${bodyClass}`}>
-		{isActiveHeader && <Header locale={locale}/>}
-		<main id={`${id}`} data-page-id={`${id}`}>
-			<slot />
-		</main>
-		{isActiveFooter && <Footer locale={locale}/>}
-		{disableScripts !== 'force' &&
-			<CssVarsTest />
-			<NotSupported criticalChecks={[ "supportsCssVars" ]} />
+    </head>
+
+    <body class={`${bodyClass}`}>
+        {isActiveHeader && <Header locale={locale}/>}
+
+        {noSmoothWrapper
+			? (
+				<>
+					<main id={`${id}`} data-page-id={`${id}`}>
+						<slot />
+					</main>
+					{isActiveFooter && <Footer locale={locale}/>}
+					<script>window.DISABLE_SMOOTHER_WRAPPER = 1</script>
+				</>
+			)
+			: (
+				<div id="smooth-wrapper">
+					<div id="smooth-content">
+						<main id={`${id}`} data-page-id={`${id}`}>
+							<slot />
+						</main>
+						{isActiveFooter && <Footer locale={locale}/>}
+					</div>
+				</div>
+			)
 		}
-	</body>
-	{isActiveMobileMenu && <MobileMenu locale={locale}/>}
-	{isActivePreloader && <Preloader />}
+
+        {isActiveFooter && <Footer locale={locale}/>}
+        {disableScripts !== 'force' &&
+			<CssVarsTest />
+			<NotSupported criticalChecks={[ 'supportsCssVars' ]} />
+        }
+    </body>
+    {isActiveMobileMenu && <MobileMenu locale={locale}/>}
+    {isActivePreloader && <Preloader />}
 </html>
 
 <script>
-	import Lazy from 'src/scripts/components/lazy';
+	import * as Lazy from 'src/scripts/components/lazy';
+	import { ImageLazyLoadComponent } from 'src/scripts/components/lazy/lazyImageLoadComponent';
+	import { LazyScriptComponent } from 'src/scripts/components/lazy/lazyScriptComponent';
 
-	Lazy.RegisterAllImages();
+	ImageLazyLoadComponent.RegisterAll();
+	LazyScriptComponent.RegisterAll();
+
     window.appReady(() => {
         Lazy.BeginLoading();
     });

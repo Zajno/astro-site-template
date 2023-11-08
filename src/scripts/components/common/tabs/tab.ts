@@ -1,4 +1,4 @@
-import Component, { ComponentConfig, ActivateConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig, type ActivateConfig } from 'scripts/core/component';
 
 export interface TabItemElement extends HTMLElement {
     linkHooks?: {

@@ -1,4 +1,4 @@
-import { Environments } from '.';
+import { type Environments } from '.';
 
 export function getFullVersionName(version: string, env: Environments, hash: string) {
     const v = version || '0';

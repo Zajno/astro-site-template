@@ -5,9 +5,9 @@ const SCREEN_WIDTH_FOR_VIDEOS = 1024;
 
 export default function initVideos(width: number) {
     // home page change content video & img
-    const videos = document.querySelectorAll('.home-hero-img-wrap video') as NodeListOf<HTMLVideoElement>;
-    const videoSources = document.querySelectorAll('.home-hero-img-wrap video source') as NodeListOf<HTMLSourceElement>;
-    const imgEl = document.querySelectorAll('.home-hero-img-wrap .img-large') as NodeListOf<HTMLImageElement>;
+    const videos = document.querySelectorAll('.home-hero-img-wrap video') ;
+    const videoSources = document.querySelectorAll('.home-hero-img-wrap video source') ;
+    const imgEl = document.querySelectorAll('.home-hero-img-wrap .img-large') ;
 
     // logger.log('initVideos:', videos);
     if (width > SCREEN_WIDTH_FOR_VIDEOS && videos.length > 0) {

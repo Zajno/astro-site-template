@@ -1,11 +1,9 @@
 import Section from 'scripts/core/section';
 import { inFrames } from 'scripts/utils/inFrames';
-import { setupManyComponents } from 'scripts/utils/setupManyComponents';
+// import { setupManyComponents } from 'scripts/utils/setupManyComponents';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
-import SplitText from 'gsap/SplitText';
-
-gsap.registerPlugin(SplitText);
+import { SplitText } from 'scripts/lib/gsap/splitText';
 
 export default class HeroSection extends Section {
     private isActivated: boolean;

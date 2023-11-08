@@ -1,4 +1,3 @@
-/* eslint-disable proposal/class-property-no-initialized */
 import gsap from 'gsap';
 
 export default class MobileMenu {
@@ -92,7 +91,7 @@ export default class MobileMenu {
 }
 
 export function createMobileMenu() {
-    const _btn = document.querySelectorAll('.mobile-menu-button') as NodeListOf<HTMLElement>;
+    const _btn = document.querySelectorAll<HTMLElement>('.mobile-menu-button') ;
     const _menu = document.getElementById('mobile-menu');
 
     return new MobileMenu(_menu, _btn);

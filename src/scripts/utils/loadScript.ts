@@ -3,7 +3,7 @@
 export function loadScript(src: string) {
 
     return new Promise<void>((resolve, reject) => {
-        const script = window.document.createElement('script') as HTMLScriptElement;
+        const script = window.document.createElement('script') ;
 
         script.src = src;
         script.type = 'text/javascript';
@@ -18,7 +18,7 @@ export function loadScript(src: string) {
 
 export function runScript(content: string) {
 
-    const script = window.document.createElement('script') as HTMLScriptElement;
+    const script = window.document.createElement('script') ;
 
     script.type = 'text/javascript';
     script.innerHTML = content;

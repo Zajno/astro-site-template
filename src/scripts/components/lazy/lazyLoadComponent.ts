@@ -1,6 +1,6 @@
-import logger from '@zajno/common/logger';
+import logger from 'scripts/logger';
 import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
-import Component, { ComponentConfig } from 'scripts/core/component';
+import Component, { type ComponentConfig } from 'scripts/core/component';
 
 const classes = {
     show: 'lazyLoaded',
@@ -35,8 +35,9 @@ export function SetMainElement(el: HTMLElement) {
     mainElement = el;
 }
 
-export interface LazyLoadConfig extends ComponentConfig {
+export interface LazyLoadConfig<TElement extends HTMLElement = HTMLElement> extends ComponentConfig<TElement> {
     register?: boolean;
+    priority?: number;
 }
 
 enum LoadingState {
@@ -47,7 +48,7 @@ enum LoadingState {
     Loaded = 5,
 }
 
-export default abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoadConfig>
+export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoadConfig>
     extends Component<TConfig> implements ILazyLoadable {
 
     private _state: LoadingState = LoadingState.None;
@@ -68,7 +69,7 @@ export default abstract class LazyLoadComponent<TConfig extends LazyLoadConfig =
     }
 
     protected async doSetup(): Promise<void> {
-        this._priority = +this.element.dataset.loadPriority || 0;
+        this._priority = this._config.priority ?? (+this.element.dataset.loadPriority || 0);
 
         this._loadClasses = [classes.show];
         this.populateAdditionalClasses();

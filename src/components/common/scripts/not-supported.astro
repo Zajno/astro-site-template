@@ -2,11 +2,11 @@
     //  not supported browser fallback script
     type Props = {
         criticalChecks: string[];
-    }
-    const { criticalChecks } = Astro.props;
+    };
+const { criticalChecks } = Astro.props;
 ---
 
-<script id="not-supported-fn" define:vars={{criticalChecks}}>
+<script id="not-supported-fn" define:vars={{ criticalChecks }}>
     "use strict";
     var nsl = false;
     window.loadNotSupported = function() {

@@ -1,8 +1,8 @@
 import type { LottiePlayer, AnimationConfigWithPath, AnimationItem } from 'lottie-web';
 import gsap from 'gsap';
 
-import LazyLoadComponent from 'scripts/components/lazy/lazyLoadComponent';
-import { ImageLazyLoadConfig } from '../lazy/imageLazyLoadComponent';
+import { LazyLoadComponent } from 'scripts/components/lazy/lazyLoadComponent';
+import { type ImageLazyLoadConfig } from '../lazy/lazyImageLoadComponent';
 import { createLogger } from 'scripts/logger';
 
 const logger = createLogger('[LottieComponent]');

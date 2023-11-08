@@ -10,5 +10,5 @@ const version = browser?.version?.split('.', 1);
 const target = document.body;
 target?.classList.add(
     'browser-' + (browser?.name || '?'),
-    'browser-version-' + (version || '?'),
+    'browser-version-' + (version.toString() || '?'),
 );

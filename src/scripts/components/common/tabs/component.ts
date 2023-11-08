@@ -1,7 +1,7 @@
-import Component , { ComponentConfig } from 'scripts/core/component';
+import Component , { type ComponentConfig } from 'scripts/core/component';
 import logger from 'scripts/logger';
 
-import { HtmlTabItem, TabItemElement, TabItem } from './tab';
+import { HtmlTabItem, type TabItemElement, TabItem } from './tab';
 import { HtmlTabLinkItem, TabLinkItem } from './link';
 import { OptAwait } from '@zajno/common/async/misc';
 
@@ -63,7 +63,7 @@ export class TabsComponent extends Component<TabsComponentConfig> {
     protected async doSetup() {
         await Promise.all(this._tabs.map(t => t.setup()));
 
-        this._links.forEach(async (link, index) => {
+        await Promise.all(this._links.map(async (link, index) => {
             const targetID = link.targetId;
             this._tabs.forEach(tab => {
                 if (targetID === tab.tabId) {
@@ -88,7 +88,7 @@ export class TabsComponent extends Component<TabsComponentConfig> {
                     this._currentActiveIndex = index;
                 }
             }
-        });
+        }));
     }
 
     get currentIndex() { return this._currentActiveIndex; }
