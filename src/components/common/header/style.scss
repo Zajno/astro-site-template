@@ -4,6 +4,7 @@
     left: 0;
     width: 100vw;
     height: var(--header-height);
+    z-index: 2;
     .container {
         padding: gem(10);
         display: flex;

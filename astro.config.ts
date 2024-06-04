@@ -3,7 +3,6 @@ import * as AppConfig from './config/utils';
 import sitemap from '@astrojs/sitemap';
 import webmanifest from 'astro-webmanifest';
 import { CurrentConfig } from './config';
-import compress from 'astro-compress';
 import { defaultLang, languages } from './sitemap/copyright';
 import { BaseMeta } from './sitemap/pages';
 
@@ -85,10 +84,6 @@ export default defineConfig({
             },
         },
         ),
-        compress({
-            CSS: false,
-            HTML: false,
-        }),
         webmanifest({
             name: BaseMeta.Title,
             description: BaseMeta.Description,
