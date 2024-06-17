@@ -2,6 +2,7 @@ import logger from 'scripts/logger';
 import createReadyPattern from 'scripts/utils/readyPattern';
 
 import { LazyLoadComponent, type LazyLoadConfig } from './lazyLoadComponent';
+import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 
 const LOG_ENABLED = false;
 
@@ -93,9 +94,9 @@ export class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfi
             : this._doImageLoading());
     }
 
-    static RegisterAll(selector = 'img.lazy') {
+    static RegisterAll(lazyQueue: ParallelQueue, selector = 'img.lazy') {
         const arrImage = [...document.querySelectorAll<HTMLImageElement>(selector)];
         return Promise.all(arrImage
-            .map(el => new ImageLazyLoadComponent({ el, register: true }).setup()));
+            .map(el => new ImageLazyLoadComponent({ el, register: true, lazyQueue }).setup()));
     }
 }

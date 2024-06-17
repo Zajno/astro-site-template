@@ -3,14 +3,14 @@ import './style.scss';
 
 import Section from 'layouts/section.astro';
 
-// import aboutCoinWEBM from 'assets/video/about-coin.webm';
-// import aboutCoinWMOV from 'assets/video/about-coin.mov';
-// import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
-// import aboutCoinWMobileMOV from 'assets/video/about-coin-mobile.mov';
+import aboutCoinWEBM from 'assets/video/about-coin.webm';
+import aboutCoinWMOV from 'assets/video/about-coin.mov';
+import aboutCoinWMobileWEBM from 'assets/video/about-coin-mobile.webm';
+import aboutCoinWMobileMOV from 'assets/video/about-coin-mobile.mov';
 
 // import exampleSVG from 'assets/img/example-svg.svg?raw';
 
-// import exampleIMG from 'assets/img/og-image/og-image.jpeg';
+import exampleIMG from 'assets/img/og-image/og-image.jpeg?url';
 
 type SectionCopyright = {
     title: string,
@@ -33,7 +33,7 @@ const { COPY, id } = Astro.props;
 
         <!-- Video example -->
         <!-- Check script.ts u need to setup video! -->
-        <!-- <video class="video-js lazy" autoplay loop playsinline muted data-load-priority="0">
+        <video class="video-js lazy" autoplay loop playsinline muted data-load-priority="1">
             <source type='video/mp4; codecs="hvc1"' src="#"
                 data-src={aboutCoinWMobileMOV}
                 data-src481={aboutCoinWMOV}
@@ -45,29 +45,29 @@ const { COPY, id } = Astro.props;
                 data-src1025={aboutCoinWEBM}
             />
             Your browser does not support the video tag.
-        </video> -->
+        </video>
 
         <!-- SVG example -->
         <!-- <Fragment set:html={exampleSVG} /> -->
 
         <!-- Picture example -->
 
-        <!-- <picture>
+        <picture>
             <source srcset={exampleIMG} media="(max-width: 480px)" type="image/jpg"/>
             <source srcset={exampleIMG} media="(max-width: 1024px)" type="image/jpg"/>
             <source srcset={exampleIMG} media="(min-width: 1025px)" type="image/jpg"/>
-            <img class="lazy" alt="Card background" data-load-priority="1">
-        </picture> -->
+            <img class="lazy" alt="Card background" data-load-priority="3">
+        </picture>
 
         <!-- Image example -->
 
-        <!-- <img
+        <img
             src="#"
             data-src={exampleIMG}
             class="lazy"
-            data-load-priority="2"
+            data-load-priority="5"
             alt="puzzle image"
-        /> -->
+        />
     </div>
 </Section>
 

@@ -26,12 +26,15 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
 
         await this.setupSection();
 
+        // console.log(this.element, 'before trigger setup');
+
         if (this.element) {
             this._setupScrollTrigger();
         }
     }
 
     private _setupScrollTrigger() {
+        // console.log(this.element, 'setup trigger');
         this._sectionTrigger = createScrollTrigger({
             trigger: this.element,
             start: 'top bottom-=10%',
@@ -41,6 +44,7 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
             onEnterBack: () => this.activate({ direction: -1 }),
             onLeave: () => this.deactivate({ direction: 1 }),
             onLeaveBack: () => this.deactivate({ direction: -1 }),
+            markers: true,
         });
     }
 
@@ -60,6 +64,10 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public wheel(deltaY: number, wheelDirection: number) {
         /* override me */
+    }
+
+    public unmount() {
+        this.sectionTrigger.kill();
     }
 }
 

@@ -1,3 +1,4 @@
+import type { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 import { LazyLoadComponent, type LazyLoadConfig } from './lazyLoadComponent';
 
 type ScriptLazyConfig = LazyLoadConfig<HTMLScriptElement>;
@@ -17,9 +18,9 @@ export class LazyScriptComponent extends LazyLoadComponent<ScriptLazyConfig> {
         return Promise.resolve();
     }
 
-    public static RegisterAll(selector = 'script[data-lazy]') {
+    public static RegisterAll(lazyQueue: ParallelQueue, selector = 'script[data-lazy]') {
         const arrImage = [...document.querySelectorAll<HTMLScriptElement>(selector)];
         return Promise.all(arrImage
-            .map(el => new LazyScriptComponent({ el, register: true }).setup()));
+            .map(el => new LazyScriptComponent({ el, register: true, lazyQueue }).setup()));
     }
 }

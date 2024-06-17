@@ -4,6 +4,7 @@ import { SUPPORT_MIX_BLEND as supportMixBlend } from 'scripts/utils/constants';
 
 import { LazyLoadComponent, type LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
 import { ImageLazyLoadComponent } from 'scripts/components/lazy/lazyImageLoadComponent';
+import type { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 
 const enum States {
     Undefined = 0,
@@ -70,7 +71,7 @@ function srcSet(source: VideoSource, width: number) {
     return data[currentBreakPoint];
 }
 
-export default class Video extends LazyLoadComponent<VideoConfig> {
+export class VideoLazyComponent extends LazyLoadComponent<VideoConfig> {
 
     private _widthViewport: number;
     private _playState: States;
@@ -330,10 +331,10 @@ export default class Video extends LazyLoadComponent<VideoConfig> {
     protected _deactivate() {
         this._switchToState(States.Paused);
     }
+
+    static RegisterAll(lazyQueue: ParallelQueue, selector = 'video.lazy') {
+        const arrVideo = [...document.querySelectorAll<HTMLVideoElement>(selector)];
+        return Promise.all(arrVideo
+            .map(el => new VideoLazyComponent({ el, register: true, lazyQueue }).setup()));
+    }
 }
-
-export const createVideoElement = (el: HTMLElement & HTMLVideoElement) => {
-    const lazyQueue = (window as any).lazyQueue;
-
-    return new Video({ el, lazyQueue });
-};

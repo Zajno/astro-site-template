@@ -1,0 +1,27 @@
+---
+import './style.scss';
+
+import Section from 'layouts/section.astro';
+
+type SectionCopyright = {
+    title: string,
+    subtitle: string,
+};
+
+type Props = {
+    id: string,
+    COPY: SectionCopyright,
+};
+
+const { COPY, id } = Astro.props;
+
+---
+
+<Section className="hero-section" id={id}>
+    <div class="container">
+        <h1 class="title-h1">{COPY.title}</h1>
+        <h2 class="title-h2">{COPY.subtitle}</h2>
+    </div>
+</Section>
+
+<script src="./script.ts"></script>

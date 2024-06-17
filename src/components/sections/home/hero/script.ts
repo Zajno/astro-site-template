@@ -36,7 +36,26 @@ export default class HeroSection extends Section {
     }
 }
 
-new HeroSection({ el: document.getElementById(HomePageSections.Hero) }).setup();
+let heroSection: HeroSection;
+
+document.addEventListener('astro:page-load', () => {
+    const el = document.getElementById(HomePageSections.Hero);
+
+    if (!el) {
+        return;
+    }
+
+    heroSection = new HeroSection({ el });
+    heroSection.setup();
+});
+
+document.addEventListener('astro:before-preparation', () => {
+    if (!heroSection) {
+        return;
+    }
+    heroSection.unmount();
+});
+
 
 // Setup scripts for same sections.
 

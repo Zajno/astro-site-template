@@ -2,40 +2,18 @@ import logger from 'scripts/logger';
 import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 import Component, { type ComponentConfig } from 'scripts/core/component';
 
-const classes = {
+export const LazyClasses = {
     show: 'lazyLoaded',
     mainLoadedTemplate: priority => `lazy-loaded-priority-${priority}`,
 };
-
-const LOG_ENABLED = true;
 
 interface ILazyLoadable extends Component {
     readonly priority: number;
     beginLoading(): void;
 }
 
-let mainElement: HTMLElement;
-export const LazyQueue = new ParallelQueue();
-
-LazyQueue.afterPriorityRun.on(p => {
-    if (mainElement) {
-        mainElement.classList.add(classes.mainLoadedTemplate(p));
-    }
-});
-
-if (LOG_ENABLED) {
-    LazyQueue.withLogger('Lazy');
-}
-
-export function BeginLoading() {
-    LazyQueue.start();
-}
-
-export function SetMainElement(el: HTMLElement) {
-    mainElement = el;
-}
-
 export interface LazyLoadConfig<TElement extends HTMLElement = HTMLElement> extends ComponentConfig<TElement> {
+    lazyQueue: ParallelQueue;
     register?: boolean;
     priority?: number;
 }
@@ -53,6 +31,7 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
 
     private _state: LoadingState = LoadingState.None;
     private _loadingPromise: Promise<void> = null;
+    public _lazyQueue: ParallelQueue;
 
     protected _priority: number;
     private _loadClasses: string[];
@@ -70,8 +49,9 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
 
     protected async doSetup(): Promise<void> {
         this._priority = this._config.priority ?? (+this.element.dataset.loadPriority || 0);
+        this._lazyQueue = this._config.lazyQueue;
 
-        this._loadClasses = [classes.show];
+        this._loadClasses = [LazyClasses.show];
         this.populateAdditionalClasses();
 
         if (this._config.register) {
@@ -86,7 +66,7 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
 
         this._state = LoadingState.Registered;
         this.log('registering...', this.priority, this._config);
-        LazyQueue.enqueue(() => this.beginLoading(), this.priority);
+        this._lazyQueue.enqueue(() => this.beginLoading(), this.priority);
     }
 
     protected populateAdditionalClasses() {

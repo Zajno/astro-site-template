@@ -1,32 +1,30 @@
-
-import { Breakpoints } from 'scripts/appBreakpoints';
-import Video, { createVideoElement } from 'scripts/components/common/video';
 import Section from 'scripts/core/section';
 import { inFrames } from 'scripts/utils/inFrames';
-import { HomePageSections } from 'components/sections/sectionTypes';
+// import { setupManyComponents } from 'scripts/utils/setupManyComponents';
+import { AboutPageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
 import { SplitText } from 'scripts/lib/gsap/splitText';
 
-export default class SecondSection extends Section {
-    private _video: Video;
-    private _rem: number;
+export default class HeroSection extends Section {
+    private isActivated: boolean;
 
     private splitedTitle: SplitText;
     private splitedSubTitle: SplitText;
+
     private get _title() { return this.element.querySelector('h1'); }
     private get _subTitle() { return this.element.querySelector('h2'); }
 
     async setupSection() {
-        this._video = createVideoElement(this.element.querySelector('.video-js'));
-        await this._video.setup();
-
         this.splitedTitle = new SplitText(this._title);
         this.splitedSubTitle = new SplitText(this._subTitle);
         gsap.set([this.splitedTitle.chars, this.splitedSubTitle.chars], { autoAlpha: 0 });
     }
 
     protected _activate() {
-        const timeline = gsap.timeline();
+        if (this.isActivated) {
+            return;
+        }
+        const timeline = gsap.timeline({ onStart: () => this.isActivated = false });
 
         timeline
             .fromTo(this.splitedTitle.chars, { autoAlpha: 0, y: 100 }, { autoAlpha: 1, y: 0, stagger: inFrames(10) }, 0)
@@ -36,32 +34,22 @@ export default class SecondSection extends Section {
     protected _deactivate() {
         /* TODO */
     }
-
-    public resize() {
-        this._rem = Breakpoints.Current.rem;
-
-        // if (this._video) {
-        //     this._video.resize(width, height);
-        // }
-    }
 }
 
-let secondSection: SecondSection;
-
 document.addEventListener('astro:page-load', () => {
-    const el = document.getElementById(HomePageSections.Second);
+    const el = document.getElementById(AboutPageSections.Hero);
 
     if (!el) {
         return;
     }
 
-    secondSection = new SecondSection({ el });
-    secondSection.setup();
+    new HeroSection({ el:el }).setup();
 });
 
-document.addEventListener('astro:before-preparation', () => {
-    if (!secondSection) {
-        return;
-    }
-    secondSection.unmount();
-});
+
+// Setup scripts for same sections.
+
+// setupManyComponents(HeroSection, [
+//     document.getElementById(HomePageSections.Hero),
+//     document.getElementById(HomePageSections.Hero),
+// ]);

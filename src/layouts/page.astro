@@ -14,6 +14,7 @@ import Preloader from 'components/common/preloader/view.astro';
 
 import { NoScriptId } from 'sitemap/pages';
 import { type Locales  } from 'sitemap/copyright';
+import { ViewTransitions } from 'astro:transitions';
 
 type Props = SitePage & {
 	locale: Locales,
@@ -43,11 +44,32 @@ const {
 
 const bodyClass = `locale-${locale}`;
 
+const anim = {
+  old: {
+    name: '-',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'forwards',
+  },
+  new: {
+    name: 'flyIn',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'backwards',
+  }
+};
+
+const myFade = {
+  forwards: anim,
+  backwards: anim,
+};
+
 ---
 
 <!DOCTYPE html>
 <html lang={locale}>
     <head>
+		<ViewTransitions />
         <PageMeta
 			locale={locale}
 			href={href}
@@ -71,7 +93,7 @@ const bodyClass = `locale-${locale}`;
 		{(disableScripts !== 'force') && <WindowAppReady />}
     </head>
 
-    <body class={`${bodyClass}`}>
+    <body class={`${bodyClass}`} transition:animate={myFade}>
         {isActiveHeader && <Header locale={locale}/>}
 
         {noSmoothWrapper
@@ -80,7 +102,9 @@ const bodyClass = `locale-${locale}`;
 					<main id={`${id}`} data-page-id={`${id}`}>
 						<slot />
 					</main>
+
 					{isActiveFooter && <Footer locale={locale}/>}
+
 					<script>window.DISABLE_SMOOTHER_WRAPPER = 1</script>
 				</>
 			)
@@ -106,15 +130,122 @@ const bodyClass = `locale-${locale}`;
     {isActivePreloader && <Preloader />}
 </html>
 
+
 <script>
-	import * as Lazy from 'src/scripts/components/lazy';
+	import { oneTimeSubscription } from '@zajno/common/observing/event';
+	import { setTimeoutAsync, timeoutPromise } from '@zajno/common/async/timeout';
+	import { PreloadEvent } from 'scripts/modules/pageEvents';
+	import { Breakpoints } from 'scripts/appBreakpoints';
+	import { CommonComponents } from 'components/common/commonTypes';
+	import { Preloader } from 'components/common/preloader/script';
 	import { ImageLazyLoadComponent } from 'src/scripts/components/lazy/lazyImageLoadComponent';
 	import { LazyScriptComponent } from 'src/scripts/components/lazy/lazyScriptComponent';
+	import { LazyClasses } from 'src/scripts/components/lazy/lazyLoadComponent';
+	import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
+	import { ScrollTrigger, isTouchDevice } from 'scripts/lib/gsap/scrollTrigger';
+	import { ScrollSmoother } from 'scripts/lib/gsap/scrollSmoother';
 
-	ImageLazyLoadComponent.RegisterAll();
-	LazyScriptComponent.RegisterAll();
+	const LOG_ENABLED = true;
 
-    window.appReady(() => {
-        Lazy.BeginLoading();
-    });
+	const MAX_WAIT_TIME = 10_000;
+	const MIN_WAIT_TIME = 1_000;
+	const TARGET_LAZY_PRIORITY = 10;
+	const TARGET_LAZY_PRIORITY_MOBILE = 20;
+
+	let lazyQueue: ParallelQueue = new ParallelQueue;
+
+	// set link to queue for video component
+	(window as any).lazyQueue = lazyQueue;
+
+	// initial
+	ImageLazyLoadComponent.RegisterAll(lazyQueue);
+	LazyScriptComponent.RegisterAll(lazyQueue);
+
+	// on change page with view transitions
+	document.addEventListener('astro:after-swap', () => {
+		lazyQueue = new ParallelQueue();
+
+		// set link to queue for video component
+		(window as any).lazyQueue = lazyQueue;
+
+		ImageLazyLoadComponent.RegisterAll(lazyQueue);
+		LazyScriptComponent.RegisterAll(lazyQueue);
+
+		const triggers = ScrollTrigger.getAll();
+		const smoother = ScrollSmoother.get();
+
+		console.log(triggers, smoother);
+		triggers.forEach(st => st.kill());
+		smoother?.kill();
+	})
+
+	document.addEventListener('astro:page-load', async () => {
+		const mainElement = document.querySelector('main');
+
+		lazyQueue.afterPriorityRun.on(p => {
+			if (mainElement) {
+				mainElement.classList.add(LazyClasses.mainLoadedTemplate(p));
+			}
+		});
+
+		if (LOG_ENABLED) {
+			lazyQueue.withLogger('Lazy');
+		}
+
+		lazyQueue.start();
+
+		(async () => {
+        	const el = document.getElementById(CommonComponents.Preloader);
+
+        	if (!el) {
+        	    PreloadEvent.trigger();
+        	    return;
+        	}
+
+        	const preloader = await new Preloader({ el }).setup();
+
+        	const targetLazyPriority = Breakpoints.isDesktop
+        	    ? TARGET_LAZY_PRIORITY
+        	    : TARGET_LAZY_PRIORITY_MOBILE;
+        	const nextTargetLazyPriority = targetLazyPriority + 1;
+
+        	// add dummy lazy task for target priority just to 100% get event for it
+        	lazyQueue.enqueue(() => Promise.resolve(), targetLazyPriority);
+
+        	// pause all items after target priority preloader exit smoother
+        	lazyQueue.enqueue(() => setTimeoutAsync(2000), nextTargetLazyPriority);
+
+        	timeoutPromise(oneTimeSubscription(lazyQueue.afterPriorityRun, p => p >= targetLazyPriority), MAX_WAIT_TIME, MIN_WAIT_TIME)
+        	    .then(async ({ timedOut, elapsed }) => {
+
+        	        if (timedOut) {
+        	            // eslint-disable-next-line no-console
+        	            console.warn('Preloader timed out, elapsed =', elapsed);
+        	        }
+
+        	        await preloader.hide();
+        	        PreloadEvent.trigger();
+        	});
+    	})();
+
+		await setTimeoutAsync(2000);
+
+		if (!(window as any).DISABLE_SMOOTHER_WRAPPER) {
+			const contentHeight = Math.round(document.getElementById('smooth-content').getBoundingClientRect().height);
+
+			document.body.style.height = `${contentHeight}px`;
+			document.body.style.overscrollBehavior = 'none';
+			document.body.style.scrollBehavior = 'auto';
+
+    		ScrollSmoother.create({
+				wrapper: document.getElementById('smooth-wrapper'),
+				content: document.getElementById('smooth-content'),
+    		    ignoreMobileResize: true,
+    		    // normalizeScroll: isTouchDevice,
+    		    smoothTouch: 0.1,
+				smooth: 2,
+    		});
+		}
+		ScrollTrigger.refresh();
+	})
 </script>
