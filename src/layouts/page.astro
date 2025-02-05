@@ -96,29 +96,12 @@ const myFade = {
     <body class={`${bodyClass}`} transition:animate={myFade}>
         {isActiveHeader && <Header locale={locale}/>}
 
-        {noSmoothWrapper
-			? (
-				<>
-					<main id={`${id}`} data-page-id={`${id}`}>
-						<slot />
-					</main>
 
-					{isActiveFooter && <Footer locale={locale}/>}
+		<main id={`${id}`} data-page-id={`${id}`}>
+			<slot />
+		</main>
 
-					<script>window.DISABLE_SMOOTHER_WRAPPER = 1</script>
-				</>
-			)
-			: (
-				<div id="smooth-wrapper">
-					<div id="smooth-content">
-						<main id={`${id}`} data-page-id={`${id}`}>
-							<slot />
-						</main>
-						{isActiveFooter && <Footer locale={locale}/>}
-					</div>
-				</div>
-			)
-		}
+		{ noSmoothWrapper && <script>window.DISABLE_SMOOTHER_WRAPPER = 1</script> }
 
         {isActiveFooter && <Footer locale={locale}/>}
         {disableScripts !== 'force' &&
@@ -143,7 +126,7 @@ const myFade = {
 	import { LazyClasses } from 'src/scripts/components/lazy/lazyLoadComponent';
 	import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 	import { ScrollTrigger, isTouchDevice } from 'scripts/lib/gsap/scrollTrigger';
-	import { ScrollSmoother } from 'scripts/lib/gsap/scrollSmoother';
+	import { getLenis } from 'scripts/modules/setupLenis';
 
 	const LOG_ENABLED = true;
 
@@ -172,11 +155,11 @@ const myFade = {
 		LazyScriptComponent.RegisterAll(lazyQueue);
 
 		const triggers = ScrollTrigger.getAll();
-		const smoother = ScrollSmoother.get();
+		const smoother = getLenis();
 
 		console.log(triggers, smoother);
 		triggers.forEach(st => st.kill());
-		smoother?.kill();
+		smoother?.destroy();
 	})
 
 	document.addEventListener('astro:page-load', async () => {
@@ -197,9 +180,9 @@ const myFade = {
 		(async () => {
         	const el = document.getElementById(CommonComponents.Preloader);
 
-        	if (!el) {
+			if (!el) {
         	    PreloadEvent.trigger();
-        	    return;
+        return;
         	}
 
         	const preloader = await new Preloader({ el }).setup();
@@ -231,20 +214,7 @@ const myFade = {
 		await setTimeoutAsync(2000);
 
 		if (!(window as any).DISABLE_SMOOTHER_WRAPPER) {
-			const contentHeight = Math.round(document.getElementById('smooth-content').getBoundingClientRect().height);
-
-			document.body.style.height = `${contentHeight}px`;
-			document.body.style.overscrollBehavior = 'none';
-			document.body.style.scrollBehavior = 'auto';
-
-    		ScrollSmoother.create({
-				wrapper: document.getElementById('smooth-wrapper'),
-				content: document.getElementById('smooth-content'),
-    		    ignoreMobileResize: true,
-    		    // normalizeScroll: isTouchDevice,
-    		    smoothTouch: 0.1,
-				smooth: 2,
-    		});
+			const lenis = getLenis();
 		}
 		ScrollTrigger.refresh();
 	})

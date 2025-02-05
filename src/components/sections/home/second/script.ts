@@ -5,14 +5,16 @@ import Section from 'scripts/core/section';
 import { inFrames } from 'scripts/utils/inFrames';
 import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
-import { SplitText } from 'scripts/lib/gsap/splitText';
+import setupTypeSplit from 'scripts/modules/splitType';
+import type SplitType from 'split-type';
+
 
 export default class SecondSection extends Section {
     private _video: Video;
     private _rem: number;
 
-    private splitedTitle: SplitText;
-    private splitedSubTitle: SplitText;
+    private splitedTitle: SplitType;
+    private splitedSubTitle: SplitType;
     private get _title() { return this.element.querySelector('h1'); }
     private get _subTitle() { return this.element.querySelector('h2'); }
 
@@ -20,9 +22,10 @@ export default class SecondSection extends Section {
         this._video = createVideoElement(this.element.querySelector('.video-js'));
         await this._video.setup();
 
-        this.splitedTitle = new SplitText(this._title);
-        this.splitedSubTitle = new SplitText(this._subTitle);
-        gsap.set([this.splitedTitle.chars, this.splitedSubTitle.chars], { autoAlpha: 0 });
+        this.splitedTitle = setupTypeSplit({ targetSplit: this._title, typeSplit: ['chars'] });
+        this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle, typeSplit: ['chars'] });
+        gsap.set(this.splitedTitle.chars, { autoAlpha: 0 });
+        gsap.set(this.splitedSubTitle.chars, { autoAlpha: 0 });
     }
 
     protected _activate() {

@@ -1,16 +1,17 @@
 import Component, { type ComponentConfig } from 'scripts/core/component';
 import gsap from 'gsap';
-import { ScrollSmoother } from 'scripts/lib/gsap/scrollSmoother';
 import { PRELOADER_ACTIVE_CLASS } from 'scripts/utils/constants';
 import { scrollToTop } from 'scripts/utils/scrollToTop';
+import Lenis from 'lenis';
+import { getLenis } from 'scripts/modules/setupLenis';
 
 export class Preloader extends Component {
-    private _smoother: ScrollSmoother;
+    private _smoother: Lenis;
 
-    constructor(config: ComponentConfig, smoother?: ScrollSmoother) {
+    constructor(config: ComponentConfig, smoother?: Lenis) {
         super(config);
 
-        this._smoother = smoother || ScrollSmoother.get();
+        this._smoother = smoother || getLenis();
     }
 
     doSetup() {
@@ -32,11 +33,11 @@ export class Preloader extends Component {
     }
 
     private enableScroll = () => {
-        this._smoother?.normalizer?.enable();
+        this._smoother?.start();
     };
 
     private disableScroll = () => {
-        this._smoother?.normalizer?.disable();
+        this._smoother?.stop();
         scrollToTop();
     };
 }

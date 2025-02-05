@@ -1,6 +1,7 @@
 import gsap from 'gsap';
-import { LazyLoadComponent,  type LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
+import { LazyLoadComponent, type LazyLoadConfig } from 'scripts/components/lazy/lazyLoadComponent';
 import Particle, { type ParticleSettings } from './canvasParticle';
+import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 
 type CanvasSettings = ParticleSettings & {
     canvas: HTMLCanvasElement;
@@ -27,6 +28,7 @@ export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & 
             ...config,
             el: config.canvas,
             register: true,
+            lazyQueue: new ParallelQueue,
         });
 
         this.canvas = this._config.canvas;

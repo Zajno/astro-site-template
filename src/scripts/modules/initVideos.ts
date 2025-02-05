@@ -13,13 +13,13 @@ export default function initVideos(width: number) {
     if (width > SCREEN_WIDTH_FOR_VIDEOS && videos.length > 0) {
         logger.log('initVideos: videos!');
         videoSources.forEach(elem => {
-            elem.src = elem.dataset.src; // $(elem).data('src');
+            (elem as HTMLSourceElement).src = (elem as HTMLSourceElement).dataset.src; // $(elem).data('src');
         });
-        videos[0].load();
+        (videos[0] as HTMLVideoElement).load();
     } else {
         logger.log('initVideos: images!');
         imgEl.forEach((elem) => {
-            elem.src = elem.dataset.src; // $(elem).data('src');
+            (elem as HTMLImageElement).src = (elem as HTMLImageElement).dataset.src; // $(elem).data('src');
         });
     }
 }
