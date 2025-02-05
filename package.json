@@ -31,7 +31,8 @@
     "gsap": "npm:@gsap/shockingly",
     "lenis": "^1.1.20",
     "lottie-web": "^5.12.2",
-    "regenerator-runtime": "^0.14.1"
+    "regenerator-runtime": "^0.14.1",
+    "split-type": "^0.3.4"
   },
   "devDependencies": {
     "@types/node": "^20.14.1",
