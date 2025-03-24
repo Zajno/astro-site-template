@@ -18,6 +18,8 @@ const { COPY, id } = Astro.props;
 ---
 
 <Section className="hero-section" id={id}>
+    <div class="timeline"></div>
+    <canvas class="canvas"></canvas>
     <div class="container">
         <h1 class="title-h1">{COPY.title}</h1>
         <h2 class="title-h2">{COPY.subtitle}</h2>

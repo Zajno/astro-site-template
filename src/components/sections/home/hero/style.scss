@@ -13,4 +13,15 @@
         text-align: right;
         margin-right: gem(200);
     }
+    .timeline{
+        height: 50000px;
+    }
+    .canvas{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+    }
 }
