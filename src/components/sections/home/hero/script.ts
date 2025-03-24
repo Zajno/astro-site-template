@@ -5,6 +5,7 @@ import { HomePageSections } from 'components/sections/sectionTypes';
 import gsap from 'gsap';
 import type SplitType from 'split-type';
 import setupTypeSplit from 'scripts/modules/splitType';
+import SequenceComponent, { type SequenceConfig } from 'scripts/modules/sequence';
 
 
 export default class HeroSection extends Section {
@@ -12,6 +13,7 @@ export default class HeroSection extends Section {
 
     private splitedTitle: SplitType;
     private splitedSubTitle: SplitType;
+    seq: SequenceComponent;
 
     private get _title() { return this.element.querySelector('h1'); }
     private get _subTitle() { return this.element.querySelector('h2'); }
@@ -21,11 +23,23 @@ export default class HeroSection extends Section {
         this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle, typeSplit: ['chars'] });
         gsap.set(this.splitedTitle.chars, { autoAlpha: 0 });
         gsap.set(this.splitedSubTitle.chars, { autoAlpha: 0 });
+        const sequenceConfig: SequenceConfig = {
+            el: this.element,
+            triggerElement: this.element.querySelector('.timeline'),
+            canvasElement: this.element.querySelector('.canvas'),
+            totalFrames: {
+                Desktop: 40,
+                Tablet: 40,
+                Mobile: 40,
+            },
 
-
+        };
+        this.seq = new SequenceComponent(sequenceConfig);
+        this.seq.setup();
     }
 
     protected _activate() {
+        this.seq.activate();
         if (this.isActivated) {
             return;
         }
