@@ -2,6 +2,7 @@ import { Breakpoints } from 'scripts/appBreakpoints';
 import Component, { type ComponentConfig } from './component';
 
 import { ScrollTrigger, createScrollTrigger } from 'scripts/lib/gsap/scrollTrigger';
+// import { PreloadEvent } from 'scripts/modules/pageEvents';
 
 export type SectionConfig = ComponentConfig;
 
@@ -19,7 +20,6 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
 
     protected async doSetup() {
         Breakpoints.resizeEvent.on((sizes) => this.resize(sizes.width, sizes.height));
-
         if (this.element && this.element.style) {
             this.element.style.visibility = 'visible';
         }
@@ -29,12 +29,13 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
         // console.log(this.element, 'before trigger setup');
 
         if (this.element) {
+            // PreloadEvent.on(() => this._setupScrollTrigger());
             this._setupScrollTrigger();
         }
     }
 
     private _setupScrollTrigger() {
-        // console.log(this.element, 'setup trigger');
+        console.log(this.element, 'setup trigger');
         this._sectionTrigger = createScrollTrigger({
             trigger: this.element,
             start: 'top bottom-=10%',

@@ -1,5 +1,5 @@
 import { ScrollTrigger } from 'scripts/lib/gsap/scrollTrigger';
-import { ScrollSmoother } from 'scripts/lib/gsap/scrollSmoother';
+import { getLenis } from 'scripts/modules/setupLenis';
 
 type Options = {
     smooth?: boolean;
@@ -24,15 +24,15 @@ export function scrollToTop(options?: Options) {
         document.documentElement.style.scrollBehavior = 'unset';
     }
 
-    const smoother = ScrollSmoother?.get();
+    const smoother = getLenis();
 
     if (!smoother) {
         window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'instant' });
     } else {
         if (smooth) {
-            smoother.scrollTo(0, true);
+            smoother.scrollTo(0, { duration: 1 });
         } else {
-            smoother.scrollTop(0);
+            smoother.scrollTo(0, { immediate: true, force: true });
         }
     }
 
