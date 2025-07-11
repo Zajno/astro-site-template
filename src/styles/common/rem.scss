@@ -1,4 +1,4 @@
-@import './gem.scss';
+@use 'src/styles/common/gem' as *;
 
 // The main idea here is to make 1rem = 1px in design,
 // so when resizing browser window, content should be just scaled via rems

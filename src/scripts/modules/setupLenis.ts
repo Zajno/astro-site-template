@@ -2,7 +2,8 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Breakpoints } from 'scripts/appBreakpoints';
-import logger from '@zajno/common/logger';
+import { createLogger } from 'scripts/logger';
+const logger = createLogger('[setupLenis]');
 
 declare global {
     interface Window {

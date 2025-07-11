@@ -16,7 +16,6 @@ function updateGradientFunc(target: HTMLElement, source: LinearGradient) {
             ')',
         ].join('');
 
-        // logger.log('CSS', css);
         target.style.backgroundImage = css;
     };
 }

@@ -3,7 +3,7 @@ import logger from 'scripts/logger';
 
 import { HtmlTabItem, type TabItemElement, TabItem } from './tab';
 import { HtmlTabLinkItem, TabLinkItem } from './link';
-import { OptAwait } from '@zajno/common/async/misc';
+import { OptAwait } from 'scripts/utils/helpers';
 
 export type ChangeCallback = (prev: TabLinkItem, next: TabLinkItem, direction: number) => void;
 

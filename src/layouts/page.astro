@@ -64,6 +64,10 @@ const myFade = {
   backwards: anim,
 };
 
+const isNoScriptPage = id === NoScriptId;
+const isRoot = href === '/' || href === '/index.html';
+
+
 ---
 
 <!DOCTYPE html>
@@ -81,14 +85,20 @@ const myFade = {
 
         <Fonts />
 
-        {(id != NoScriptId)
-            ? (
-                <noscript>
-                    <meta http-equiv="refresh" content="0;url=/no-script.html"/>
-                </noscript>
-            )
-            : <script> window.location.href = '/' </script>
-        }
+		{!isNoScriptPage && (
+            <noscript>
+                <meta http-equiv="refresh" content="0;url=/no-script.html"/>
+            </noscript>
+        )}
+        <!-- {isNoScriptPage && !isRoot && (
+
+            <script>
+				if (window.location.pathname === '/no-script.html') {
+					window.location.replace('/');
+				}
+            </script>
+        )} -->
+
 
 		{(disableScripts !== 'force') && <WindowAppReady />}
     </head>
@@ -101,7 +111,7 @@ const myFade = {
 			<slot />
 		</main>
 
-		{ noSmoothWrapper && <script>window.DISABLE_SMOOTHER_WRAPPER = 1</script> }
+		<!-- { noSmoothWrapper && <script>window.DISABLE_SMOOTHER_WRAPPER = 1</script> } -->
 
         {isActiveFooter && <Footer locale={locale}/>}
         {disableScripts !== 'force' &&
@@ -127,6 +137,7 @@ const myFade = {
 	import { ParallelQueue } from '@zajno/common/structures/queue/parallel';
 	import { ScrollTrigger, isTouchDevice } from 'scripts/lib/gsap/scrollTrigger';
 	import { getLenis } from 'scripts/modules/setupLenis';
+	import { createLogger } from 'scripts/logger';
 
 	const LOG_ENABLED = true;
 
@@ -172,7 +183,7 @@ const myFade = {
 		});
 
 		if (LOG_ENABLED) {
-			lazyQueue.withLogger('Lazy');
+			lazyQueue.setLogger(createLogger('Lazy'));
 		}
 
 		lazyQueue.start();

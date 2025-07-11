@@ -32,7 +32,8 @@
     "src",
     "config/**/*",
     "astro.config.ts",
-    "src/env.d.ts"
+    "src/env.d.ts",
+    "src/types/astro.d.ts"
   ],
   "references": []
 }

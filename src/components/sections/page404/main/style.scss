@@ -1,3 +1,5 @@
+@use 'src/styles/common/gem' as *;
+
 main, header, section {
     opacity: 1;
     visibility: visible;

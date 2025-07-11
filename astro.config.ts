@@ -57,16 +57,6 @@ export default defineConfig({
                 },
             },
         },
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    additionalData: "@import './src/styles/common/gem.scss';\r\n",
-                },
-                sass: {
-                    additionalData: "@import './src/styles/common/gem.scss'\r\n",
-                },
-            },
-        },
     },
     server: {
         port: 8080,

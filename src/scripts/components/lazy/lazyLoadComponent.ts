@@ -9,7 +9,7 @@ export const LazyClasses = {
 
 interface ILazyLoadable extends Component {
     readonly priority: number;
-    beginLoading(): void;
+    beginLoading(): Promise<void>;
 }
 
 export interface LazyLoadConfig<TElement extends HTMLElement = HTMLElement> extends ComponentConfig<TElement> {
