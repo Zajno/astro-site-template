@@ -2,6 +2,7 @@ import { Breakpoints } from 'scripts/appBreakpoints';
 import Component, { type ComponentConfig } from './component';
 
 import { ScrollTrigger, createScrollTrigger } from 'scripts/lib/gsap/scrollTrigger';
+import logger from 'scripts/logger';
 // import { PreloadEvent } from 'scripts/modules/pageEvents';
 
 export type SectionConfig = ComponentConfig;
@@ -35,7 +36,7 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
     }
 
     private _setupScrollTrigger() {
-        console.log(this.element, 'setup trigger');
+        logger.log(this.element, 'setup trigger');
         this._sectionTrigger = createScrollTrigger({
             trigger: this.element,
             start: 'top bottom-=10%',

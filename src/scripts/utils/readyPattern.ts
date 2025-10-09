@@ -11,7 +11,7 @@ export default function addReadyEvent(target: EventTarget) {
         listeners.forEach(cb => {
             try {
                 cb(ok);
-            } catch (err) {
+            } catch (_err) {
                 // no-op
             }
         });
@@ -25,7 +25,7 @@ export default function addReadyEvent(target: EventTarget) {
         if (isLoaded) {
             try {
                 cb(isOk);
-            } catch (err) {
+            } catch (_err) {
                 // no-op
             }
         } else {

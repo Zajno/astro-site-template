@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default class LenisManager {
     private static instance: Lenis;
 
-    private constructor(config?: LenisConfig) {
+    private constructor(_config?: LenisConfig) {
         if (!Breakpoints.isDesktop) return;
         if (!window.lenis) {
             window.lenis = new Lenis({
@@ -49,9 +49,9 @@ export default class LenisManager {
         LenisManager.instance = window.lenis;
     }
 
-    static getInstance(config?: LenisConfig ): Lenis {
+    static getInstance(_config?: LenisConfig): Lenis {
         if (!LenisManager.instance) {
-            new LenisManager(config);
+            new LenisManager(_config);
         }
         return LenisManager.instance;
     }
