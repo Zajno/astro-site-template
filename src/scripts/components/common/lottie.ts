@@ -17,10 +17,10 @@ export type LottieComponentConfig = ImageLazyLoadConfig & {
 };
 
 const LottieLoader = () => import('lottie-web') as Promise<any>;
-let LottieLibLoading: Promise<LottiePlayer>;
+let LottieLibLoading: Promise<LottiePlayer> | undefined;
 
 async function loadLottie() {
-    if (!LottieLibLoading) {
+    if (LottieLibLoading === undefined) {
         logger.log('Loading library...');
         LottieLibLoading = LottieLoader();
         LottieLibLoading.then(() => logger.log('Library has been loaded'));

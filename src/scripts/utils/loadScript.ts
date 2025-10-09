@@ -9,7 +9,7 @@ export function loadScript(src: string) {
         script.type = 'text/javascript';
         script.async = true;
         script.onload = () => resolve();
-        script.onerror = () => reject();
+        script.onerror = () => reject(new Error('Script loading failed'));
 
         window.document.body.appendChild(script);
     });

@@ -32,6 +32,7 @@
     "src",
     "config/**/*",
     "astro.config.ts",
+    "eslint.config.js",
     "src/env.d.ts",
     "src/types/astro.d.ts"
   ],

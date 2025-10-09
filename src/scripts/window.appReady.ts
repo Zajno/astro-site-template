@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-namespace */
+
 import logger from 'scripts/logger';
 
 declare global {
