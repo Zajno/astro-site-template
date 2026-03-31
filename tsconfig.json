@@ -19,8 +19,8 @@
       "scripts/*": ["src/scripts/*"],
       "components/*": ["src/components/*"],
       "sections/*": ["src/components/sections/*"],
-      "sitemap/*": ["sitemap/*"],
-      "copyright/*": ["sitemap/copyright/*"],
+      "data/*": ["data/*"],
+      "copyright/*": ["data/copyright/*"],
     }
   },
   "exclude": [
@@ -28,7 +28,7 @@
     "dist"
   ],
   "include": [
-    "sitemap",
+    "data",
     "src",
     "config/**/*",
     "astro.config.ts",

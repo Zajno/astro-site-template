@@ -1,7 +1,7 @@
 ---
 import 'styles/base.sass';
 
-import type { SitePage } from 'sitemap/types';
+import type { SitePage } from 'data/types';
 import CssVarsTest from 'components/common/scripts/css-vars-test.astro';
 import WindowAppReady from 'components/common/scripts/window.appReady.astro';
 import NotSupported from 'components/common/scripts/not-supported.astro';
@@ -12,8 +12,8 @@ import Footer from 'components/common/footer/view.astro';
 import MobileMenu from 'components/common/mobileMenu/view.astro';
 import Preloader from 'components/common/preloader/view.astro';
 
-import { NoScriptId } from 'sitemap/pages';
-import { type Locales  } from 'sitemap/copyright';
+import { NoScriptId } from 'data/pages';
+import { type Locales  } from 'data/copyright';
 import { ViewTransitions } from 'astro:transitions';
 
 type Props = SitePage & {

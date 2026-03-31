@@ -7,7 +7,7 @@ const logger = createLogger('[setupLenis]');
 
 declare global {
     interface Window {
-        lenis: Lenis;
+        lenisInstance: Lenis;
     }
 }
 
@@ -26,8 +26,8 @@ export default class LenisManager {
 
     private constructor(_config?: LenisConfig) {
         if (!Breakpoints.isDesktop) return;
-        if (!window.lenis) {
-            window.lenis = new Lenis({
+        if (!window.lenisInstance) {
+            window.lenisInstance = new Lenis({
                 wheelMultiplier: 0.7,
                 gestureOrientation: 'vertical',
                 smoothWheel: true,
@@ -35,18 +35,18 @@ export default class LenisManager {
                 duration: 1.1,
             });
 
-            logger.log('Lenis initialized:', window.lenis);
+            logger.log('Lenis initialized:', window.lenisInstance);
 
-            window.lenis.on('scroll', ScrollTrigger.update);
+            window.lenisInstance.on('scroll', ScrollTrigger.update);
 
             gsap.ticker.add((time) => {
-                window.lenis?.raf(time * 1000);
+                window.lenisInstance?.raf(time * 1000);
             });
 
             gsap.ticker.lagSmoothing(0);
         }
 
-        LenisManager.instance = window.lenis;
+        LenisManager.instance = window.lenisInstance;
     }
 
     static getInstance(_config?: LenisConfig): Lenis {

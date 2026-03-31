@@ -3,8 +3,8 @@ import * as AppConfig from './config/utils';
 import sitemap from '@astrojs/sitemap';
 import webmanifest from 'astro-webmanifest';
 import { CurrentConfig } from './config';
-import { defaultLang, languages } from './sitemap/copyright';
-import { BaseMeta } from './sitemap/pages';
+import { defaultLang, languages } from './data/copyright';
+import { BaseMeta } from './data/pages';
 
 // https://astro.build/config
 
