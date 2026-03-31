@@ -5,20 +5,20 @@ type languageType = {
 };
 
 export default class DropDown {
-    mainLink: HTMLElement;
-    subMenuLinks: NodeListOf<Element>;
-    dropLink: HTMLElement;
-    enBtn: HTMLElement;
-    esBtn: HTMLElement;
-    activeLanguage: languageType;
-    btnMob: NodeListOf<Element>;
-    ulrParam: URLSearchParams;
+    mainLink!: HTMLElement;
+    subMenuLinks!: NodeListOf<Element>;
+    dropLink!: HTMLElement;
+    enBtn!: HTMLElement;
+    esBtn!: HTMLElement;
+    activeLanguage!: languageType;
+    btnMob!: NodeListOf<Element>;
+    ulrParam!: URLSearchParams;
 
     constructor() {
         this.ulrParam = new URLSearchParams;
         this.btnMob = document.querySelectorAll('.mobile-language');
-        this.dropLink = document.querySelector('.has-drop-down');
-        this.mainLink = this.dropLink.querySelector('.drop-down-link');
+        this.dropLink = document.querySelector('.has-drop-down')!;
+        this.mainLink = this.dropLink.querySelector('.drop-down-link')!;
 
         this.subMenuLinks = this.dropLink.querySelectorAll('.drop-down-link--sub');
 

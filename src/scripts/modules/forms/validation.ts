@@ -69,7 +69,7 @@ function getValueValidator(fieldName: string) {
 }
 
 function getHandler(fieldName: string) {
-    let re = null;
+    let re: RegExp | null = null;
 
     switch (fieldName) {
         case 'accountSetup.csv':

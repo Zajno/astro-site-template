@@ -30,12 +30,12 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
     extends Component<TConfig> implements ILazyLoadable {
 
     private _state: LoadingState = LoadingState.None;
-    private _loadingPromise: Promise<void> = null;
-    public _lazyQueue: ParallelQueue;
+    private _loadingPromise: Promise<void> | null = null;
+    public _lazyQueue!: ParallelQueue;
 
-    protected _priority: number;
-    private _loadClasses: string[];
-    private _loggerName: string = null;
+    protected _priority!: number;
+    private _loadClasses!: string[];
+    private _loggerName: string | null = null;
 
     public get state() { return this._state; }
     public get priority() { return this._priority || 0; }
@@ -48,7 +48,7 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
     }
 
     protected async doSetup(): Promise<void> {
-        this._priority = this._config.priority ?? (+this.element.dataset.loadPriority || 0);
+        this._priority = this._config.priority ?? (+(this.element.dataset.loadPriority ?? '0') || 0);
         this._lazyQueue = this._config.lazyQueue;
 
         this._loadClasses = [LazyClasses.show];
@@ -97,7 +97,7 @@ export abstract class LazyLoadComponent<TConfig extends LazyLoadConfig = LazyLoa
     }
 
     public waitForLoaded(): Promise<void> {
-        return this._loadingPromise;
+        return this._loadingPromise!;
     }
 
     protected abstract _doLoading(): Promise<void>;

@@ -14,9 +14,9 @@ function init() {
     // Usage: minify/polyfill this (https://babeljs.io/en/repl), wrap with <script> and place to your <head>.
 
     let ild = false;
-    let cbs = [];
+    let cbs: (() => void)[] = [];
     const w = window;
-    const ercbs = [];
+    const ercbs: ((err: unknown) => void)[] = [];
 
     w.addEventListener('load', function () {
         ild = true;
@@ -27,7 +27,7 @@ function init() {
                 ercbs.forEach(c => c(err));
             }
         });
-        cbs = null;
+        cbs = [];
     });
 
     if (w.appReady) {

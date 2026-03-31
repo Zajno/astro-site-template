@@ -15,15 +15,15 @@ function log(...args) {
 export type ImageLazyLoadConfig = LazyLoadConfig<HTMLImageElement>;
 
 export class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfig> {
-    private _picture: HTMLPictureElement;
+    private _picture: HTMLPictureElement | null = null;
 
     get image() {
         return this._config.el;
     }
 
     protected async doSetup() {
-        this._picture = window.HTMLPictureElement && this.element.parentElement.tagName.toLowerCase() === 'picture'
-            ? this.element.parentElement
+        this._picture = window.HTMLPictureElement && this.element.parentElement?.tagName.toLowerCase() === 'picture'
+            ? this.element.parentElement as HTMLPictureElement
             : null;
 
         if (!this.element.classList.contains('lazy')) {
@@ -66,7 +66,7 @@ export class ImageLazyLoadComponent extends LazyLoadComponent<ImageLazyLoadConfi
 
         let hasTargetSrc = false;
 
-        const sources = this._picture.querySelectorAll('source');
+        const sources = this._picture!.querySelectorAll('source');
         sources.forEach(s => {
             if (s.dataset.srcset) {
                 s.srcset = s.dataset.srcset;

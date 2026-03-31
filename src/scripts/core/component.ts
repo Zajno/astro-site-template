@@ -16,7 +16,7 @@ export default abstract class Component<TConfig extends ComponentConfig = Compon
     private _wasActive = false;
     protected readonly _config: TConfig;
 
-    private _activateConfig: ActivateConfig = null;
+    private _activateConfig: ActivateConfig | undefined = undefined;
 
     constructor(config: TConfig) {
         this._config = config;
@@ -36,7 +36,7 @@ export default abstract class Component<TConfig extends ComponentConfig = Compon
     protected abstract doSetup(): Promise<void> | void;
 
     activate(config?: ActivateConfig) {
-        this._activateConfig = null;
+        this._activateConfig = undefined;
         if (this._active) {
             return true;
         }
@@ -51,7 +51,7 @@ export default abstract class Component<TConfig extends ComponentConfig = Compon
     }
 
     deactivate(config?: ActivateConfig) {
-        this._activateConfig = null;
+        this._activateConfig = undefined;
         if (!this._active) {
             return true;
         }

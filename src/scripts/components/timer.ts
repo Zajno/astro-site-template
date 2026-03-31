@@ -6,7 +6,7 @@ const pad = (n: number) => (n || 0).toString().padStart(2, '0');
 
 export class TimerComponent extends Component {
 
-    private _cancelation: () => void = null;
+    private _cancelation: (() => void) | null = null;
 
     protected doSetup(): void | Promise<void> {
         gsap.set(this.element, { autoAlpha: 0 });

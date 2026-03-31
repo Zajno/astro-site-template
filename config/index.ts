@@ -12,7 +12,7 @@ export type EnvironmentConfig = {
     EnableLogger: boolean,
 };
 
-const Configs: Partial<Record<Environments, EnvironmentConfig>> = {
+const Configs: Record<Environments, EnvironmentConfig> = {
     development: {
         Hostname: 'http://localhost:8080',
         EnableLogger: true,

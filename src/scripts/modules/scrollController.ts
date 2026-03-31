@@ -10,11 +10,11 @@ export type ScrollControllerConfig = ComponentConfig & {
 
 export default class ScrollController extends Component<ScrollControllerConfig> {
 
-    private _mouseCouterClearDelay: number;
+    private _mouseCouterClearDelay!: number;
     private _mouseCounter = 0;
-    private _timer: number;
-    private _deltaY: number;
-    private _wheelDirection: ScrollDirection;
+    private _timer!: number;
+    private _deltaY!: number;
+    private _wheelDirection!: ScrollDirection;
 
     private get wheelOffset() { return this._config.wheelOffset; }
     private get eventCallback() { return this._config.callback; }

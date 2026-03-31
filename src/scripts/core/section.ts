@@ -8,10 +8,10 @@ import logger from 'scripts/logger';
 export type SectionConfig = ComponentConfig;
 
 export class Section<TConfig extends SectionConfig = SectionConfig> extends Component<TConfig> {
-    private _sectionTrigger: ScrollTrigger = null;
+    private _sectionTrigger: ScrollTrigger | null = null;
 
     // set this if needed during setupSection
-    protected _activationTriggerProps: Omit<ScrollTrigger.StaticVars, 'onEnter' | 'onEnterBack' | 'onLeave' | 'onLeaveBack'> = null;
+    protected _activationTriggerProps: Omit<ScrollTrigger.StaticVars, 'onEnter' | 'onEnterBack' | 'onLeave' | 'onLeaveBack'> | null = null;
 
     get sectionTrigger() { return this._sectionTrigger; }
 
@@ -20,7 +20,7 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
     }
 
     protected async doSetup() {
-        Breakpoints.resizeEvent.on((sizes) => this.resize(sizes.width, sizes.height));
+        Breakpoints.resizeEvent.on((sizes) => sizes && this.resize(sizes.width, sizes.height));
         if (this.element && this.element.style) {
             this.element.style.visibility = 'visible';
         }
@@ -69,7 +69,7 @@ export class Section<TConfig extends SectionConfig = SectionConfig> extends Comp
     }
 
     public unmount() {
-        this.sectionTrigger.kill();
+        this.sectionTrigger?.kill();
     }
 }
 

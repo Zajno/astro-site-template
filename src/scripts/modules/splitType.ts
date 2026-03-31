@@ -30,7 +30,7 @@ export default function setupTypeSplit(config: SplitTypeConfig): SplitType {
             const wrapper = document.createElement('div');
             wrapper.classList.add(elementClassOverflow);
 
-            line.parentNode.insertBefore(wrapper, line);
+            line.parentNode!.insertBefore(wrapper, line);
             wrapper.appendChild(line);
         });
         //

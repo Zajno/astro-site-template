@@ -21,8 +21,8 @@ function updateGradientFunc(target: HTMLElement, source: LinearGradient) {
 }
 
 function animateFromTo(target: HTMLElement, duration: number, from: LinearGradient, to: LinearGradient) {
-    const stops = [];
-    const tweens = [];
+    const stops: { color: string; pos: number }[] = [];
+    const tweens: gsap.core.Tween[] = [];
 
     for (let i = 0; i < from.colors.length && i < to.colors.length; ++i) {
         const colorCurrent = { ...from.colors[i] };

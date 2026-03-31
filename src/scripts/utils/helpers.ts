@@ -1,5 +1,5 @@
 export function chunkArray(array, size) {
-    const result = [];
+    const result: unknown[][] = [];
     for (let i = 0; i < array.length; i += size) {
         result.push(array.slice(i, i + size));
     }

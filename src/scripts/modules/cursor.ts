@@ -7,17 +7,17 @@ export type CursorConfig = ComponentConfig & {
 
 export default class Cursor extends Component<CursorConfig> {
 
-    private _cursorOnLink: boolean;
-    private _isLinkAlreadyActive: boolean;
-    private _isCursorActive: boolean;
-    private _cursorSmall: HTMLElement;
-    private _cursorLarge: HTMLElement;
-    private _cursorHold: HTMLElement;
-    private _links: NodeListOf<HTMLElement>;
-    private _holdLinks: NodeListOf<HTMLElement>;
+    private _cursorOnLink: boolean = false;
+    private _isLinkAlreadyActive: boolean = false;
+    private _isCursorActive: boolean = false;
+    private _cursorSmall!: HTMLElement;
+    private _cursorLarge!: HTMLElement;
+    private _cursorHold!: HTMLElement;
+    private _links!: NodeListOf<HTMLElement>;
+    private _holdLinks!: NodeListOf<HTMLElement>;
 
-    private _clientX: number;
-    private _clientY: number;
+    private _clientX!: number;
+    private _clientY!: number;
 
     constructor(config) {
         super(config);
@@ -36,9 +36,9 @@ export default class Cursor extends Component<CursorConfig> {
     async doSetup() {
         this._cursorOnLink = false;
         this._isLinkAlreadyActive = false;
-        this._cursorSmall = this.element.querySelector('#cursor-inner');
-        this._cursorLarge = this.element.querySelector('#cursor-outer');
-        this._cursorHold = this.element.querySelector('.cursor-hold');
+        this._cursorSmall = this.element.querySelector<HTMLElement>('#cursor-inner')!;
+        this._cursorLarge = this.element.querySelector<HTMLElement>('#cursor-outer')!;
+        this._cursorHold = this.element.querySelector<HTMLElement>('.cursor-hold')!;
 
         this._links = this.element.querySelectorAll('.js-link');
         this._holdLinks = this.element.querySelectorAll('.js-link-hold');

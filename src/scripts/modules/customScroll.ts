@@ -2,22 +2,22 @@ import Component, { type ComponentConfig } from 'scripts/core/component';
 import gsap from 'gsap';
 
 export type CustomScrollConfig = ComponentConfig & {
-    el: HTMLDocument,
+    el: HTMLElement,
     target: HTMLElement,
     speed?: number,
 };
 
 export default class CustomScroll extends Component<CustomScrollConfig> {
 
-    private _speed: number;
-    private _resizeRequest: number;
-    private _endY: number;
-    private _y: number;
-    private _scrollRequest: number;
-    private _rafId: number;
-    private _tickFunctions: ((y: number) => void)[];
+    private _speed: number = 0;
+    private _resizeRequest: number = 0;
+    private _endY: number = 0;
+    private _y: number = 0;
+    private _scrollRequest: number = 0;
+    private _rafId: number | null = null;
+    private _tickFunctions: ((y: number) => void)[] = [];
 
-    get doc() { return this._config.el; }
+    get doc() { return this._config.el as unknown as Document; }
 
     doSetup() {
         this._speed = this._config.speed || 0.01; // scroll speed
@@ -26,7 +26,7 @@ export default class CustomScroll extends Component<CustomScrollConfig> {
         this._endY = 0;
         this._y = 0;
         this._scrollRequest = 0;
-        this._rafId = null;
+        this._rafId = null as number | null;
 
         this._tickFunctions = [];
 
@@ -81,7 +81,7 @@ export default class CustomScroll extends Component<CustomScrollConfig> {
             this._tickFunctions.forEach(func => func(this._y));
         }
 
-        this._rafId = this._scrollRequest > 0 ? requestAnimationFrame(this._updateScroller) : null;
+        this._rafId = this._scrollRequest > 0 ? requestAnimationFrame(this._updateScroller) : null as number | null;
     };
 
     _deactivate() {

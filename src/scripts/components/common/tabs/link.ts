@@ -9,7 +9,7 @@ export type TabLinkItemConfig = ComponentConfig<TabItemElement> & {
 
 export abstract class TabLinkItem<T extends TabLinkItemConfig = TabLinkItemConfig> extends Component<T> {
     private readonly _tabs: TabItem[] = [];
-    private _activateCallback: (link: TabLinkItem) => void = null;
+    private _activateCallback: ((link: TabLinkItem) => void) | null = null;
     private _chainActivation: boolean = false;
 
     get item(): TabItemElement { return this._config.el; }
@@ -81,7 +81,7 @@ export class HtmlTabLinkItem<T extends HtmlTabLinkItemConfig = HtmlTabLinkItemCo
     protected get hoverEnabled() { return this._config.hoverEnabled || false; }
     protected get clickEnabled() { return this._config.clickEnabled == null ? true : !!this._config.clickEnabled; }
 
-    get targetId() { return this.item.dataset.navTarget; }
+    get targetId(): string { return this.item.dataset.navTarget!; }
 
     protected doSetup() {
         if (this.clickEnabled) {

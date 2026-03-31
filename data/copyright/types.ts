@@ -12,7 +12,7 @@ export type PageCopyright<T extends object> = Record<Locales, T>;
 
 
 export const createStaticPathGetter = () => {
-    const result = [];
+    const result: { params: { lang: string } }[] = [];
     Object.keys(languages).forEach(locale => {
         if (locale !== defaultLang) {
             result.push({ params: { lang: locale } });
@@ -23,7 +23,7 @@ export const createStaticPathGetter = () => {
 };
 
 export const createPageAlterantes = (hostname: string, href: string, currentLocale: Locales) => {
-    const pageAlternates = [];
+    const pageAlternates: { lang: string; url: string }[] = [];
     Object.keys(languages).forEach(locale => {
         if (locale === currentLocale) {
             return;

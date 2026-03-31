@@ -3,7 +3,7 @@ export default function addReadyEvent(target: EventTarget) {
 
     let isLoaded = false;
     let isOk: boolean;
-    const listeners = [];
+    const listeners: ((ok: boolean) => void)[] = [];
 
     const onFinish = ok => {
         isLoaded = true;

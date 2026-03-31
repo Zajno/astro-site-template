@@ -9,7 +9,7 @@ export default function setProperty(obj, path: string, value) {
         return accumulator[currentValue];
     }, obj);
 
-    pointer[key] = value;
+    pointer[key!] = value;
     return obj;
 }
 

@@ -11,9 +11,9 @@ export type LongPressConfig = ComponentConfig & {
 export default class LongPress extends Component<LongPressConfig> {
 
     private _counter = 0;
-    private _links: NodeListOf<HTMLElement>;
+    private _links!: NodeListOf<HTMLElement>;
     private _longPressEvent = new CustomEvent('longpress');
-    private _timerID: number;
+    private _timerID: number = 0;
 
     async doSetup() {
         this._links = this.element.querySelectorAll('.longPress-link');

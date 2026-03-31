@@ -35,31 +35,31 @@ export type SequenceConfig = ComponentConfig & {
 };
 
 export default class SequenceComponent extends Component<SequenceConfig> {
-    private isActivated: boolean;
+    private isActivated!: boolean;
     private _currentFrame: { contents: number } = { contents: 1 };
-    private _canvas: HTMLCanvasElement;
-    private _ctx: CanvasRenderingContext2D;
+    private _canvas!: HTMLCanvasElement;
+    private _ctx!: CanvasRenderingContext2D;
     private _frameImages: Map<number, HTMLImageElement> = new Map();
 
 
     private isLooping = false;
     private lastScrollPosition = 0;
 
-    private scrollTrigger: globalThis.ScrollTrigger;
-    private _rem: number;
-    private animationTimeline: { Desktop: gsap.core.Timeline; Tablet: gsap.core.Timeline; Mobile: gsap.core.Timeline; };
-    private triggerElement: HTMLElement;
-    private _canvasElement: HTMLCanvasElement;
-    private totalFrames: { Desktop: number; Tablet: number; Mobile: number; };
-    private offsetVideoEnd: { Desktop: number; Tablet: number; Mobile: number; };
-    private countPreloadFrames: number;
-    private isLoopActive: boolean;
-    private loopDuration: number;
-    private framesPerLoop: number;
-    private transitionStartScrollOffset: number;
-    private loopStartFrame: number;
-    private loopEndFrame: number;
-    private transitionDuration: number;
+    private scrollTrigger!: globalThis.ScrollTrigger;
+    private _rem!: number;
+    private animationTimeline: { Desktop: gsap.core.Timeline; Tablet: gsap.core.Timeline; Mobile: gsap.core.Timeline; } | undefined;
+    private triggerElement!: HTMLElement;
+    private _canvasElement!: HTMLCanvasElement;
+    private totalFrames!: { Desktop: number; Tablet: number; Mobile: number; };
+    private offsetVideoEnd!: { Desktop: number; Tablet: number; Mobile: number; };
+    private countPreloadFrames!: number;
+    private isLoopActive!: boolean;
+    private loopDuration!: number;
+    private framesPerLoop!: number;
+    private transitionStartScrollOffset!: number;
+    private loopStartFrame!: number;
+    private loopEndFrame!: number;
+    private transitionDuration!: number;
     private get _currentBreakpointType() { return Breakpoints.Current.breakpoint.name; }
 
     constructor(config: SequenceConfig) {
@@ -85,7 +85,7 @@ export default class SequenceComponent extends Component<SequenceConfig> {
 
 
         if (this.isLoopActive) {
-            const loopConfig = config.loopConfig;
+            const loopConfig = config.loopConfig!;
             this.loopDuration = loopConfig.loopDuration;
             this.framesPerLoop = loopConfig.framesPerLoop;
             this.transitionStartScrollOffset = loopConfig.transitionStartScrollOffset;
@@ -127,7 +127,7 @@ export default class SequenceComponent extends Component<SequenceConfig> {
         if (this.isLooping && scrollProgress > 0) {
             this.isLooping = false;
             gsap.to(this._currentFrame, {
-                onComplete: () => this.isLooping = false,
+                onComplete: () => { this.isLooping = false; },
                 duration: this.transitionDuration,
                 contents: this.framesPerLoop - this.transitionStartScrollOffset,
                 ease: 'power2.inOut',
@@ -209,7 +209,7 @@ export default class SequenceComponent extends Component<SequenceConfig> {
 
 
         this._canvas = this._canvasElement;
-        this._ctx = this._canvas.getContext('2d');
+        this._ctx = this._canvas.getContext('2d')!;
 
         this.isLooping = this.isLoopActive;
         this.playLoop();

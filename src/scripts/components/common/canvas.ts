@@ -10,7 +10,7 @@ type CanvasSettings = ParticleSettings & {
 export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & CanvasSettings> {
 
     protected canvas: HTMLCanvasElement;
-    protected context: CanvasRenderingContext2D & {
+    protected context!: CanvasRenderingContext2D & {
         mozImageSmoothingEnabled?: boolean,
         webkitImageSmoothingEnabled?: true,
         msImageSmoothingEnabled?: true,
@@ -19,7 +19,7 @@ export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & 
     private particles: Particle[] = [];
 
     private isPlaying = false;
-    private startTime = null;
+    private startTime: number | null = null;
     // private drawTimer = null;
     private renderingAllowed = false;
 
@@ -32,7 +32,9 @@ export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & 
         });
 
         this.canvas = this._config.canvas;
-        this.context = this.canvas && this.canvas.getContext('2d');
+        if (this.canvas) {
+            this.context = this.canvas.getContext('2d') as typeof this.context;
+        }
 
         if (this.context) {
             // force enable antialiasing
@@ -89,7 +91,7 @@ export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & 
             return;
         }
 
-        const parent = this.canvas.parentElement;
+        const parent = this.canvas.parentElement!;
 
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
@@ -121,7 +123,7 @@ export default abstract class Canvas extends LazyLoadComponent<LazyLoadConfig & 
         this.context.setTransform(1, 0, 0, 1, 0, 0);
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        const deltaTime = timeStamp - this.startTime;
+        const deltaTime = timeStamp - this.startTime!;
         this.startTime = timeStamp;
 
         for (let i = 0; i < this.particles.length; i++) {

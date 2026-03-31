@@ -18,8 +18,8 @@ export default class Particle {
     protected width: number;
     protected height: number;
 
-    protected x: number;
-    protected y: number;
+    protected x!: number;
+    protected y!: number;
 
     protected _prevDeltaTime = 0;
 
@@ -57,8 +57,8 @@ export default class Particle {
 }
 
 export class FloatingParticle extends Particle {
-    private baseX: number;
-    private baseY: number;
+    private baseX!: number;
+    private baseY!: number;
 
     private dy = 0;
     private floatAmplitude: number;

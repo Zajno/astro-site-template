@@ -10,20 +10,20 @@ import type SplitType from 'split-type';
 
 
 export default class SecondSection extends Section {
-    private _video: Video;
-    private _rem: number;
+    private _video!: Video;
+    private _rem!: number;
 
-    private splitedTitle: SplitType;
-    private splitedSubTitle: SplitType;
+    private splitedTitle!: SplitType;
+    private splitedSubTitle!: SplitType;
     private get _title() { return this.element.querySelector('h1'); }
     private get _subTitle() { return this.element.querySelector('h2'); }
 
     async setupSection() {
-        this._video = createVideoElement(this.element.querySelector('.video-js'));
+        this._video = createVideoElement(this.element.querySelector('.video-js') as HTMLElement & HTMLVideoElement);
         await this._video.setup();
 
-        this.splitedTitle = setupTypeSplit({ targetSplit: this._title, typeSplit: ['chars'] });
-        this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle, typeSplit: ['chars'] });
+        this.splitedTitle = setupTypeSplit({ targetSplit: this._title!, typeSplit: ['chars'] });
+        this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle!, typeSplit: ['chars'] });
         gsap.set(this.splitedTitle.chars, { autoAlpha: 0 });
         gsap.set(this.splitedSubTitle.chars, { autoAlpha: 0 });
     }
@@ -33,7 +33,7 @@ export default class SecondSection extends Section {
 
         timeline
             .fromTo(this.splitedTitle.chars, { autoAlpha: 0, y: 100 }, { autoAlpha: 1, y: 0, stagger: inFrames(10) }, 0)
-            .fromTo(this.splitedSubTitle.chars, { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, stagger: inFrames(4) }, inFrames(10 * this.splitedTitle.chars.length));
+            .fromTo(this.splitedSubTitle.chars, { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, stagger: inFrames(4) }, inFrames(10 * (this.splitedTitle.chars?.length ?? 0)));
     }
 
     protected _deactivate() {

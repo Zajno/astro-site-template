@@ -13,7 +13,7 @@ export type SitePage<TCopy extends object = any> = {
     href: string,
 	// canonical?: string;
     /** page's copy, usually a structured object specific for this page type */
-    copy: PageCopyright<TCopy>,
+    copy?: PageCopyright<TCopy>,
 	noIndex?: boolean;
 	disableScripts?: boolean | 'force';
 };

@@ -24,13 +24,13 @@ export type TabsComponentConfig = ComponentConfig & TabItemsConfig & TabLinksCon
 const NoOp: ChangeCallback = () => { /* no-op */ };
 
 export class TabsComponent extends Component<TabsComponentConfig> {
-    private _prevButton: HTMLElement;
-    private _nextButton: HTMLElement;
+    private _prevButton!: HTMLElement;
+    private _nextButton!: HTMLElement;
     private syncActivate: boolean;
     private _tabs: TabItem[];
     private _links: TabLinkItem[];
     private _async: boolean;
-    private _currentActiveLink: TabLinkItem;
+    private _currentActiveLink: TabLinkItem | null;
     private _isSwitching: boolean;
     private _currentActiveIndex: number;
 
@@ -107,14 +107,14 @@ export class TabsComponent extends Component<TabsComponentConfig> {
         const prev = this._currentActiveLink;
         const next = link;
         const nextIndex = this._links.indexOf(link);
-        const prevIndex = this._links.indexOf(prev);
+        const prevIndex = this._links.indexOf(prev!);
 
         const direction = Math.sign(nextIndex - prevIndex) as -1 | 0 | 1;
 
         const cbs = {
-            before: () => (this._config.onWillChange || NoOp)(prev, next, direction),
-            inside: () => (this._config.onChanging || NoOp)(prev, next, direction),
-            after: () => (this._config.onChanged || NoOp)(prev, next, direction),
+            before: () => (this._config.onWillChange || NoOp)(prev!, next, direction),
+            inside: () => (this._config.onChanging || NoOp)(prev!, next, direction),
+            after: () => (this._config.onChanged || NoOp)(prev!, next, direction),
         };
 
         this._currentActiveLink = next;

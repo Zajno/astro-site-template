@@ -9,24 +9,24 @@ import SequenceComponent, { type SequenceConfig } from 'scripts/modules/sequence
 
 
 export default class HeroSection extends Section {
-    private isActivated: boolean;
+    private isActivated!: boolean;
 
-    private splitedTitle: SplitType;
-    private splitedSubTitle: SplitType;
-    seq: SequenceComponent;
+    private splitedTitle!: SplitType;
+    private splitedSubTitle!: SplitType;
+    seq!: SequenceComponent;
 
     private get _title() { return this.element.querySelector('h1'); }
     private get _subTitle() { return this.element.querySelector('h2'); }
 
     async setupSection() {
-        this.splitedTitle = setupTypeSplit({ targetSplit: this._title, typeSplit: ['chars'] });
-        this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle, typeSplit: ['chars'] });
+        this.splitedTitle = setupTypeSplit({ targetSplit: this._title!, typeSplit: ['chars'] });
+        this.splitedSubTitle = setupTypeSplit({ targetSplit: this._subTitle!, typeSplit: ['chars'] });
         gsap.set(this.splitedTitle.chars, { autoAlpha: 0 });
         gsap.set(this.splitedSubTitle.chars, { autoAlpha: 0 });
         const sequenceConfig: SequenceConfig = {
             el: this.element,
-            triggerElement: this.element.querySelector('.timeline'),
-            canvasElement: this.element.querySelector('.canvas'),
+            triggerElement: this.element.querySelector('.timeline') as HTMLElement,
+            canvasElement: this.element.querySelector('.canvas') as HTMLCanvasElement,
             totalFrames: {
                 Desktop: 40,
                 Tablet: 40,
@@ -43,11 +43,11 @@ export default class HeroSection extends Section {
         if (this.isActivated) {
             return;
         }
-        const timeline = gsap.timeline({ onStart: () => this.isActivated = false });
+        const timeline = gsap.timeline({ onStart: () => { this.isActivated = false; } });
 
         timeline
             .fromTo(this.splitedTitle.chars, { autoAlpha: 0, y: 100 }, { autoAlpha: 1, y: 0, stagger: inFrames(10) }, 0)
-            .fromTo(this.splitedSubTitle.chars, { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, stagger: inFrames(4) }, inFrames(10 * this.splitedTitle.chars.length));
+            .fromTo(this.splitedSubTitle.chars, { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, stagger: inFrames(4) }, inFrames(10 * (this.splitedTitle.chars?.length ?? 0)));
     }
 
     protected _deactivate() {

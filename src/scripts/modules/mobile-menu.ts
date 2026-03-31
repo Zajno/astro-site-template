@@ -12,7 +12,7 @@ export default class MobileMenu {
     constructor(private readonly menu: HTMLElement, private readonly btns: NodeListOf<HTMLElement>) {
         this.items = document.querySelectorAll('.mobile-menu .anim-item');
         this.links = document.querySelectorAll('.mobile-menu-link');
-        this.body = document.querySelector('body');
+        this.body = document.querySelector('body')!;
 
         this.setupBurger();
 
@@ -23,7 +23,7 @@ export default class MobileMenu {
                 });
 
                 const scroll = window.scrollTo({
-                    top: document.querySelector(`.${l.dataset.mobileAnchor}`).getBoundingClientRect().y + pageYOffset,
+                    top: (document.querySelector(`.${l.dataset.mobileAnchor}`)?.getBoundingClientRect().y ?? 0) + pageYOffset,
                     behavior: 'smooth',
                 });
 
@@ -48,7 +48,7 @@ export default class MobileMenu {
 
         gsap.fromTo(this.items, 0.5666,
             { y: -this.offset, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, stagger: 0.0666, onComplete: () => this.isOpen = true },
+            { y: 0, autoAlpha: 1, stagger: 0.0666, onComplete: () => { this.isOpen = true; } },
         );
     }
 
@@ -91,8 +91,9 @@ export default class MobileMenu {
 }
 
 export function createMobileMenu() {
-    const _btn = document.querySelectorAll<HTMLElement>('.mobile-menu-button') ;
+    const _btn = document.querySelectorAll<HTMLElement>('.mobile-menu-button');
     const _menu = document.getElementById('mobile-menu');
 
+    if (!_menu) return null;
     return new MobileMenu(_menu, _btn);
 }

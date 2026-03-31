@@ -30,17 +30,17 @@ function getObjectDataSrc(source: VideoSource) {
     const data: { [breakpoint: number]: string } = {};
 
     let minWidth = Number.MAX_VALUE;
-    let fallbackLink = null;
+    let fallbackLink: string | null = null;
     const keys: string[] = Object.keys(source.dataset);
     keys.forEach((dataSrc) => {
         if (/^src/.test(dataSrc)) {
             const key = dataSrc.substring(3);
             const width = (+key) || 0;
             const link = source.dataset[dataSrc];
-            data[width] = link;
+            data[width] = link!;
 
             if (width < minWidth) {
-                fallbackLink = link;
+                fallbackLink = link ?? null;
                 minWidth = width;
             }
         }
@@ -73,19 +73,19 @@ function srcSet(source: VideoSource, width: number) {
 
 export class VideoLazyComponent extends LazyLoadComponent<VideoConfig> {
 
-    private _widthViewport: number;
-    private _playState: States;
-    private _requestedState: States;
-    private _changingState: boolean;
+    private _widthViewport!: number;
+    private _playState!: States;
+    private _requestedState!: States;
+    private _changingState!: boolean;
 
-    private _placeHolder: HTMLImageElement;
-    private _hasPlaceholder: boolean;
+    private _placeHolder!: HTMLImageElement;
+    private _hasPlaceholder!: boolean;
     private _usePlaceholder?: boolean;
 
-    private _hasMixBlend: boolean;
-    private _placeHoldersLoaded: boolean;
+    private _hasMixBlend!: boolean;
+    private _placeHoldersLoaded!: boolean;
 
-    private _sources: VideoSource[];
+    private _sources!: VideoSource[];
 
     constructor(config: VideoConfig) {
         if (config.register == null) {
@@ -101,7 +101,7 @@ export class VideoLazyComponent extends LazyLoadComponent<VideoConfig> {
         this._playState = States.Undefined;
         this._requestedState = States.Undefined;
 
-        this._placeHolder = this.element.parentElement.querySelector('.video-placeholder');
+        this._placeHolder = this.element.parentElement!.querySelector<HTMLImageElement>('.video-placeholder')!;
         this._hasPlaceholder = this._placeHolder != null
             && this.element.classList.contains('has-placeholder-mobile');
 
@@ -266,7 +266,7 @@ export class VideoLazyComponent extends LazyLoadComponent<VideoConfig> {
 
         this._playState = targetState;
         const nextState = this._requestedState;
-        this._requestedState = null;
+        this._requestedState = States.Undefined;
 
         if (nextState && nextState !== this._playState) {
             this._switchToState(nextState);

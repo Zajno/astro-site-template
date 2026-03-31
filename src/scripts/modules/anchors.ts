@@ -12,7 +12,7 @@ export default function anchors(enableScroll: boolean, mobileMenu?) {
                 }
 
                 window.scrollTo({
-                    top: document.querySelector(`#${anchor.dataset.anchor}`).getBoundingClientRect().y + pageYOffset,
+                    top: document.querySelector(`#${anchor.dataset.anchor}`)!.getBoundingClientRect().y + pageYOffset,
                     behavior: 'smooth',
                 });
             });

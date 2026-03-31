@@ -1,4 +1,4 @@
-export const createLangLink = <T>(pathname: string, langCode: string, languages: T, defaultLang: string) => {
+export const createLangLink = <T extends object>(pathname: string, langCode: string, languages: T, defaultLang: string) => {
     let isLangcodeExist = false;
     const pathItems = pathname.split('/');
     const languageCodes = Object.keys(languages);

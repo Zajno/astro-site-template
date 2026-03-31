@@ -30,14 +30,14 @@ const DEFAULT_DURATION = 1;
 
 export default class SvgMorph extends Component<SvgMorphConfig> {
 
-    private _logger: ILogger;
-    private _states: { [s: string]: StateDefinition };
+    private _logger!: ILogger;
+    private _states!: { [s: string]: StateDefinition };
 
-    private _default: StateDefinition;
-    private _current: StateDefinition;
+    private _default: StateDefinition | null = null;
+    private _current: StateDefinition | null = null;
 
-    private _timeLine: TimelineMax;
-    private _currentResolve: () => void;
+    private _timeLine!: TimelineMax;
+    private _currentResolve: (() => void) | null = null;
 
     async doSetup() {
         this._logger = this._config.enableLogs
@@ -107,23 +107,23 @@ export default class SvgMorph extends Component<SvgMorphConfig> {
         for (let index = 0; index < this._current.paths.length; ++index) {
             const p = this._current.paths[index];
 
-            endless = endless || (p.repeat < 0);
+            endless = endless || (p.repeat! < 0);
 
             this._timeLine
-                .to(this.element, p.duration,
+                .to(this.element, p.duration!,
                     {
                         attr: {
                             d: p.path,
                         },
-                        repeat: p.repeat,
-                        yoyo: p.yoyo,
+                        repeat: p.repeat!,
+                        yoyo: p.yoyo!,
                         ease: p.ease,
                     });
         }
 
-        this._timeLine.yoyo(this._current.yoyo);
-        this._timeLine.repeat(this._current.repeat);
-        this._timeLine.timeScale(this._current.timescale);
+        this._timeLine.yoyo(this._current.yoyo!);
+        this._timeLine.repeat(this._current.repeat!);
+        this._timeLine.timeScale(this._current.timescale!);
 
         endless = endless || this._timeLine.repeat() < 0;
 

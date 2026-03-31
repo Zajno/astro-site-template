@@ -12,6 +12,16 @@ AppConfig.setConfigToProcessEnv();
 
 export default defineConfig({
     vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    loadPaths: ['.'],
+                },
+                sass: {
+                    loadPaths: ['.'],
+                },
+            },
+        },
         assetsInclude: [
             '**/*.mov',
             '**/*.splinecode',

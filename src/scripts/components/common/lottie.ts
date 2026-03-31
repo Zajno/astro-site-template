@@ -29,14 +29,14 @@ async function loadLottie() {
 }
 
 export default class LottieComponent extends LazyLoadComponent<LottieComponentConfig> {
-    private _params: AnimationConfigWithPath;
+    private _params!: AnimationConfigWithPath;
     private _isCompleted: boolean = true;
-    private _anim: AnimationItem;
+    private _anim!: AnimationItem;
 
     private _isLoaded: boolean = false;
     private _playPending: boolean = false;
 
-    private _lottie: LottiePlayer;
+    private _lottie!: LottiePlayer;
 
     public get animation(): AnimationItem { return this._anim; }
 
