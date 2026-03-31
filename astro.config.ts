@@ -30,39 +30,44 @@ export default defineConfig({
         ],
         build: {
             assetsInlineLimit: 0,
-            rollupOptions: {
-                output: {
-                    chunkFileNames: 'js/[name]-[hash].js',
-                    entryFileNames: 'js/[name]-[hash].js',
-
-                    assetFileNames: ({ name }) => {
-                        if (/\.css$/.test(name ?? '')) {
-                            return 'css/[name]-[hash][extname]';
-                        }
-                        const lottieImagePath = getLottieImagePath(name);
-                        if (lottieImagePath) {
-                            return lottieImagePath;
-                        }
-                        const lottieJSONPath = getLottieJSONPath(name);
-                        if (lottieJSONPath) {
-                            return lottieJSONPath;
-                        }
-                        if (/\.(png|jpe?g|gif|webp|ico)$/.test(name ?? '')){
-                            return 'assets/img/[name]-[hash][extname]';
-                        }
-                        if (/\.(woff|woff2|eot|ttf|otf)$/.test(name ?? '')){
-                            return 'assets/fonts/[name]-[hash][extname]';
-                        }
-                        if (/\.(webm|mp4|ogv|mov)$/.test(name ?? '')){
-                            return 'assets/video/[name]-[hash][extname]';
-                        }
-                        if (/\.mp3$|\.wav$/.test(name ?? '')){
-                            return 'assets/audio/[name]-[hash][extname]';
-                        }
-                        if (/\.glb$|\.gltf$/.test(name ?? '')){
-                            return 'assets/glb/[name]-[hash][extname]';
-                        }
-                        return 'assets/[name]-[hash][extname]';
+        },
+        environments: {
+            client: {
+                build: {
+                    rollupOptions: {
+                        output: {
+                            chunkFileNames: 'js/[name]-[hash].js',
+                            entryFileNames: 'js/[name]-[hash].js',
+                            assetFileNames: ({ name }) => {
+                                if (/\.css$/.test(name ?? '')) {
+                                    return 'css/[name]-[hash][extname]';
+                                }
+                                const lottieImagePath = getLottieImagePath(name);
+                                if (lottieImagePath) {
+                                    return lottieImagePath;
+                                }
+                                const lottieJSONPath = getLottieJSONPath(name);
+                                if (lottieJSONPath) {
+                                    return lottieJSONPath;
+                                }
+                                if (/\.(png|jpe?g|gif|webp|ico)$/.test(name ?? '')) {
+                                    return 'assets/img/[name]-[hash][extname]';
+                                }
+                                if (/\.(woff|woff2|eot|ttf|otf)$/.test(name ?? '')) {
+                                    return 'assets/fonts/[name]-[hash][extname]';
+                                }
+                                if (/\.(webm|mp4|ogv|mov)$/.test(name ?? '')) {
+                                    return 'assets/video/[name]-[hash][extname]';
+                                }
+                                if (/\.mp3$|\.wav$/.test(name ?? '')) {
+                                    return 'assets/audio/[name]-[hash][extname]';
+                                }
+                                if (/\.glb$|\.gltf$/.test(name ?? '')) {
+                                    return 'assets/glb/[name]-[hash][extname]';
+                                }
+                                return 'assets/[name]-[hash][extname]';
+                            },
+                        },
                     },
                 },
             },

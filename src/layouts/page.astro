@@ -14,7 +14,7 @@ import Preloader from 'components/common/preloader/view.astro';
 
 import { NoScriptId } from 'data/pages';
 import { type Locales  } from 'data/copyright';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 type Props = SitePage & {
 	locale: Locales,
@@ -73,7 +73,7 @@ const isRoot = href === '/' || href === '/index.html';
 <!DOCTYPE html>
 <html lang={locale}>
     <head>
-		<ViewTransitions />
+		<ClientRouter />
         <PageMeta
 			locale={locale}
 			href={href}
