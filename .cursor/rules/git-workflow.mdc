@@ -1,0 +1,32 @@
+---
+description: Git commit and branch workflow rules
+alwaysApply: true
+---
+
+# Git Workflow
+
+## Never commit directly to `main` without explicit user request
+
+- **NEVER** run `git push origin main` unless the user explicitly asks to push to main
+- **NEVER** run `git merge ... main` or `git checkout main && git merge` unless the user asks to merge into main
+- **NEVER** commit on `main` directly — always work on a feature/fix branch
+
+## Correct flow
+
+1. Create a branch: `git checkout -b <branch-name>`
+2. Make changes and commit on the branch
+3. **Ask the user** before merging into `main` or pushing to remote
+4. Only merge/push after explicit confirmation: _"merge into main"_, _"push"_, _"deploy"_
+
+## Branch naming
+
+- `deps/<package>` — dependency upgrades
+- `fix/<description>` — bug fixes
+- `feat/<description>` — new features
+- `docs/<description>` — documentation
+
+## Commits
+
+- Commit only when the user explicitly asks
+- Use concise, meaningful commit messages in English
+- Never amend pushed commits
