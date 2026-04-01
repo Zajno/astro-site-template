@@ -5,36 +5,47 @@ alwaysApply: true
 
 # Git Workflow
 
-## Step 0 — ALWAYS create a branch before any work
+## Check branch before starting ANY work
 
-Before touching any file, creating any file, or running any command that produces changes:
+Before touching any file, the agent MUST check the current branch with `git branch --show-current`.
 
-```bash
-git checkout -b <branch-name>
-```
+**If the current branch is `main` or `staging`:**
 
-**No exceptions.** Even for "small" fixes, rule files, or documentation.
+1. STOP immediately — do not make any changes yet
+2. Ask the user:
+   - Propose a new branch name based on the task (e.g. `feat/add-auth`, `fix/header-scroll`, `docs/update-readme`)
+   - List existing non-protected branches as alternatives to switch to
+   - Wait for explicit confirmation before proceeding
 
-## Never commit or push to `main` without explicit user request
+Example prompt to user:
+> Зараз ти на гілці `main`. Щоб почати роботу, потрібна окрема гілка.
+> Пропоную створити: `feat/...` — або перемкнутись на існуючу: `[список гілок]`.
+> Яку обрати?
 
-- **NEVER** commit directly on `main`
-- **NEVER** run `git push origin main` unless the user explicitly says to push
-- **NEVER** merge into `main` unless the user explicitly says to merge
+Only after the user confirms the branch — create or switch to it, then begin work.
+
+**If already on a feature branch** (anything other than `main` / `staging`): proceed normally.
+
+## Never commit or push to `main` / `staging` without explicit user request
+
+- **NEVER** commit directly on `main` or `staging`
+- **NEVER** run `git push origin main` or `git push origin staging` unless the user explicitly says to push
+- **NEVER** merge into `main` or `staging` unless the user explicitly says to merge
 
 ## Ask before merging or pushing
 
 After finishing work on a branch, always stop and ask:
-- _"Хочеш змерджити в main?"_
-- _"Хочеш запушити?"_
+> Хочеш змерджити в main і запушити?
 
 Only proceed after explicit confirmation.
 
-## Branch naming
+## Branch naming conventions
 
 - `deps/<package>` — dependency upgrades
 - `fix/<description>` — bug fixes
 - `feat/<description>` — new features
 - `docs/<description>` — documentation
+- `refactor/<description>` — refactoring
 
 ## Commits
 
