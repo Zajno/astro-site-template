@@ -17,11 +17,6 @@ Before touching any file, the agent MUST check the current branch with `git bran
    - List existing non-protected branches as alternatives to switch to
    - Wait for explicit confirmation before proceeding
 
-Example prompt to user:
-> Зараз ти на гілці `main`. Щоб почати роботу, потрібна окрема гілка.
-> Пропоную створити: `feat/...` — або перемкнутись на існуючу: `[список гілок]`.
-> Яку обрати?
-
 Only after the user confirms the branch — create or switch to it, then begin work.
 
 **If already on a feature branch** (anything other than `main` / `staging`): proceed normally.
@@ -32,23 +27,24 @@ Only after the user confirms the branch — create or switch to it, then begin w
 - **NEVER** run `git push origin main` or `git push origin staging` unless the user explicitly says to push
 - **NEVER** merge into `main` or `staging` unless the user explicitly says to merge
 
-## Ask before merging or pushing
+## Verify build before pushing
 
-After finishing work on a branch, always stop and ask:
-> Хочеш змерджити в main і запушити?
+Before running `git push`, check if a build verification was done in this session (`yarn build` or `yarn build:ts`).
 
-Only proceed after explicit confirmation.
+If no build check was done — warn the user and suggest running it first:
 
-## Branch naming conventions
+> ⚠️ Build was not verified in this session. Recommend running `yarn build` before pushing. Run it now?
 
-- `deps/<package>` — dependency upgrades
-- `fix/<description>` — bug fixes
-- `feat/<description>` — new features
-- `docs/<description>` — documentation
-- `refactor/<description>` — refactoring
+Only skip this warning if the user explicitly says to push without checking.
 
-## Commits
+## NEVER commit without an explicit request
 
-- Commit only when the user explicitly asks
-- Use concise commit messages in English
+After making file changes — STOP. Do not run `git add` or `git commit`.
+
+Just report what was changed and wait. The user will say "commit" when ready.
+
+**Finishing a task ≠ committing.** These are two separate steps.
+
+When the user does ask to commit:
+- Use a concise commit message in English
 - Never amend pushed commits
