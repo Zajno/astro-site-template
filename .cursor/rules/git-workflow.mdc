@@ -5,18 +5,29 @@ alwaysApply: true
 
 # Git Workflow
 
-## Never commit directly to `main` without explicit user request
+## Step 0 — ALWAYS create a branch before any work
 
-- **NEVER** run `git push origin main` unless the user explicitly asks to push to main
-- **NEVER** run `git merge ... main` or `git checkout main && git merge` unless the user asks to merge into main
-- **NEVER** commit on `main` directly — always work on a feature/fix branch
+Before touching any file, creating any file, or running any command that produces changes:
 
-## Correct flow
+```bash
+git checkout -b <branch-name>
+```
 
-1. Create a branch: `git checkout -b <branch-name>`
-2. Make changes and commit on the branch
-3. **Ask the user** before merging into `main` or pushing to remote
-4. Only merge/push after explicit confirmation: _"merge into main"_, _"push"_, _"deploy"_
+**No exceptions.** Even for "small" fixes, rule files, or documentation.
+
+## Never commit or push to `main` without explicit user request
+
+- **NEVER** commit directly on `main`
+- **NEVER** run `git push origin main` unless the user explicitly says to push
+- **NEVER** merge into `main` unless the user explicitly says to merge
+
+## Ask before merging or pushing
+
+After finishing work on a branch, always stop and ask:
+- _"Хочеш змерджити в main?"_
+- _"Хочеш запушити?"_
+
+Only proceed after explicit confirmation.
 
 ## Branch naming
 
@@ -28,5 +39,5 @@ alwaysApply: true
 ## Commits
 
 - Commit only when the user explicitly asks
-- Use concise, meaningful commit messages in English
+- Use concise commit messages in English
 - Never amend pushed commits
