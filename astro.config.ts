@@ -73,6 +73,9 @@ export default defineConfig({
             },
         },
     },
+    devToolbar: {
+        enabled: false,
+    },
     server: {
         port: 8080,
         host: true,
@@ -92,7 +95,7 @@ export default defineConfig({
         webmanifest({
             name: BaseMeta.Title,
             description: BaseMeta.Description,
-            icon: 'src/assets/favicon.png',
+            icon: 'src/assets/favicon/fav-light.svg',
             theme_color: '#FFFFFF',
             config: {
                 insertAppleTouchLinks: true,
