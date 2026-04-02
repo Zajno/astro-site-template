@@ -159,7 +159,7 @@ yarn add gsap
 
 The template supports locale-prefixed routes via Astro's file-based routing under `src/pages/[lang]/`. Locale definitions live in `data/copyright/` and are consumed by the sitemap integration in `astro.config.ts`.
 
-Default locale: `en` (served at `/`).  
+Default locale: `en` (served at `/`).
 Example additional locale: `ja` (served at `/ja/`).
 
 Add new locales by extending `data/copyright/index.ts` and creating corresponding `src/pages/[lang]/` page files.
