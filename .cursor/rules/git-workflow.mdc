@@ -37,6 +37,31 @@ If no build check was done — warn the user and suggest running it first:
 
 Only skip this warning if the user explicitly says to push without checking.
 
+## Keep long-lived branches synchronized
+
+Never perform branch sync automatically.
+
+Before branch sync, ask whether the user wants to sync now.
+
+Run sync only after explicit confirmation.
+
+Use a non-destructive sync flow (e.g., merge `main` into branch) unless the user explicitly requests rebase.
+
+## Merge strategy
+
+When merging feature branches into `main` or `staging`, prefer `--no-ff` to preserve merge context unless the user explicitly requests another strategy.
+
+## Branch cleanup after merge
+
+Never perform branch cleanup automatically.
+
+Before cleanup, ask whether the user wants local cleanup, remote cleanup, or both.
+
+Run cleanup only after explicit confirmation.
+
+- Delete local branch with `git branch -d <branch>`.
+- Delete remote branch if it exists and the user requested remote cleanup.
+
 ## NEVER commit without an explicit request
 
 After making file changes — STOP. Do not run `git add` or `git commit`.

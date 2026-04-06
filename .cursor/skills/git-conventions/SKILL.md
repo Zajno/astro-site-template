@@ -44,6 +44,16 @@ fix minimatch ReDoS via yarn resolutions
 - No "WIP", "fix", "update" without context
 - Describe the *what* and *why*, not the *how*
 
+### Optional Conventional Commits mode
+
+Use this mode only if the project enables conventional commits automation:
+
+- Format: `<type>(<scope>): <description>`
+- Example: `feat(build): add rollup output tuning for client bundles`
+- Breaking changes: use `!` and/or a `BREAKING CHANGE:` footer in multi-line commits.
+
+Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`.
+
 ## Pull Request format
 
 Use this PR body template:
@@ -67,6 +77,17 @@ Use this PR body template:
 ## ClickUp *(optional)*
 
 - <ClickUp task URL>
+- Example: `https://app.clickup.com/t/abc123`
+
+## Breaking changes *(optional)*
+
+- <What changed and who is affected>
+- <Migration notes, if any>
+
+## Risk & rollback *(optional)*
+
+- Risk: <low|medium|high> and main concern
+- Rollback: <how to revert safely>
 ```
 
 Rules:
@@ -75,3 +96,4 @@ Rules:
 - Start each bullet with an action verb; keep capitalization consistent within one PR.
 - Include **Test plan** only when it adds value for this PR.
 - If a ClickUp task exists for this work, include it in **ClickUp**.
+- Before finalizing PR text, ask the user whether there is a ClickUp task and request the URL if it was not provided.
