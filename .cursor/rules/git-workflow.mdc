@@ -27,13 +27,16 @@ Only after the user confirms the branch — create or switch to it, then begin w
 - **NEVER** run `git push origin main` or `git push origin staging` unless the user explicitly says to push
 - **NEVER** merge into `main` or `staging` unless the user explicitly says to merge
 
-## Verify build before pushing
+## Verify checks before pushing
 
-Before running `git push`, check if a build verification was done in this session (`yarn build` or `yarn build:ts`).
+Before running `git push`, check whether verification was done in this session:
 
-If no build check was done — warn the user and suggest running it first:
+- lint: `yarn lint`
+- build/type: `yarn build` or `yarn build:ts`
 
-> ⚠️ Build was not verified in this session. Recommend running `yarn build` before pushing. Run it now?
+If checks were not done — warn the user and suggest running them first:
+
+> ⚠️ Lint/build checks were not verified in this session. Recommend running `yarn lint` and `yarn build:ts` before pushing. Run them now?
 
 Only skip this warning if the user explicitly says to push without checking.
 

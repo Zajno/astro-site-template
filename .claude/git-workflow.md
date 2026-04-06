@@ -25,13 +25,16 @@ If already on a feature branch (anything other than `main` or `staging`), procee
 - Never run `git push origin main` or `git push origin staging` unless explicitly requested.
 - Never merge into `main` or `staging` unless explicitly requested.
 
-## Verify build before pushing
+## Verify checks before pushing
 
-Before `git push`, check whether a build verification was done in this session (`yarn build` or `yarn build:ts`).
+Before `git push`, check whether verification was done in this session:
 
-If no build check was done, warn and ask:
+- lint: `yarn lint`
+- build/type: `yarn build` or `yarn build:ts`
 
-`Build was not verified in this session. Recommend running yarn build before pushing. Run it now?`
+If checks were not done, warn and ask:
+
+`Lint/build checks were not verified in this session. Recommend running yarn lint and yarn build:ts before pushing. Run them now?`
 
 Skip this warning only if user explicitly asks to push without build verification.
 
