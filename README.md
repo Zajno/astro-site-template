@@ -85,6 +85,7 @@ All commands are run from the project root:
 |---------|-------------|
 | `yarn dev` | Start dev server at `http://localhost:8080` |
 | `yarn dev:ts` | Run TypeScript type checking in watch mode |
+| `yarn verify` | Run lint + type-check + production build checks |
 | `yarn build` | Type-check + build for the current `APP_ENV` |
 | `yarn build:prod` | Build with `NODE_ENV=production` |
 | `yarn build:release:staging` | Install deps and build for staging |
@@ -92,6 +93,35 @@ All commands are run from the project root:
 | `yarn preview` | Preview the production build locally |
 | `yarn lint` | Run ESLint on `src/**` |
 | `yarn emulate` | Run Firebase Hosting emulator at port `8010` |
+
+---
+
+## CI Baseline Checks
+
+This template includes `.github/workflows/quality-checks.yml` for baseline repository checks on every pull request and on pushes to `main` and `staging`.
+
+The workflow runs:
+
+- `yarn lint`
+- `yarn build:ts`
+- `yarn build`
+
+For forks created from this template, these checks are transferred automatically with the repository.
+
+---
+
+## Local Git Hooks (Husky)
+
+This template uses Husky to enforce local checks before push.
+
+- Hook: `.husky/pre-push`
+- Command: `yarn lint && yarn build:ts`
+
+If needed, install/update hooks with:
+
+```bash
+yarn prepare
+```
 
 ---
 

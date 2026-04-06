@@ -70,6 +70,7 @@ Use this PR body template:
 
 ## Test plan *(optional — include only when validation is needed)*
 
+- [ ] `yarn lint`
 - [ ] `yarn build:ts`
 - [ ] `yarn build`
 - [ ] <Manual check if relevant>
