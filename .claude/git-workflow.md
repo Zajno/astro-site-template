@@ -1,5 +1,7 @@
 # Git Workflow
 
+Mirror note: keep Cursor and Claude git-workflow files synchronized in the same commit.
+
 ## Check branch before starting any work
 
 Before touching any file, check the current branch with:
@@ -43,3 +45,5 @@ When user asks to commit:
 
 - Use a concise commit message in English.
 - Do not amend pushed commits.
+
+PR formatting conventions are defined in `.claude/git-conventions.md`.

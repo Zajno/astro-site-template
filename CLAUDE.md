@@ -25,6 +25,13 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Git branching, commit, and push policy is defined in `.claude/git-workflow.md`.
 - Git branch naming and commit naming conventions are defined in `.claude/git-conventions.md`.
 
+## Do Not
+
+- Mix UI markup, data access, and imperative browser logic in one file; keep responsibilities separated by layer.
+- Use `require()`; use ES module `import`/`export` only.
+- Put heavy business logic in page entry files (`src/pages/*`); keep entry points thin and move logic to modules/components.
+- Hardcode secrets or environment-specific URLs; use `.env` and typed config helpers.
+
 ## Rules for Derived Projects
 
 - If this template is used as a base for a new project, review this file first.

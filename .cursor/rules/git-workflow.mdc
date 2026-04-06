@@ -48,3 +48,5 @@ Just report what was changed and wait. The user will say "commit" when ready.
 When the user does ask to commit:
 - Use a concise commit message in English
 - Never amend pushed commits
+
+PR formatting conventions are defined in `.cursor/skills/git-conventions/SKILL.md`.
