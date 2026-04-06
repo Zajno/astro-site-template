@@ -1,11 +1,6 @@
----
-name: git-conventions
-description: Project git conventions for branch naming, commit messages, and PR formatting. Use when creating a branch, writing a commit message, or preparing a pull request.
----
+# Git Conventions
 
 Mirror note: keep Cursor and Claude git-convention files synchronized in the same commit.
-
-# Git Conventions
 
 ## Branch naming
 
@@ -16,7 +11,7 @@ Mirror note: keep Cursor and Claude git-convention files synchronized in the sam
 | `update/<description>` | update existing feature | `update/hero-section-layout` |
 | `refactor/<description>` | refactoring | `refactor/data-layer-structure` |
 | `docs/<description>` | documentation | `docs/update-readme` |
-| `style/<description>` | styles / CSS | `style/button-hover-states` |
+| `style/<description>` | styles or CSS | `style/button-hover-states` |
 | `test/<description>` | tests | `test/add-unit-tests-for-utils` |
 | `deps/<package>` | dependency upgrades | `deps/astro-6` |
 
@@ -31,18 +26,20 @@ Mirror note: keep Cursor and Claude git-convention files synchronized in the sam
 
 ## Commit messages
 
-Single line, imperative mood:
+Use single-line messages in imperative mood.
 
-```
-upgrade TypeScript to 6.0.2 and fix all type errors
-add git workflow cursor rule
-fix minimatch ReDoS via yarn resolutions
-```
+Examples:
+
+- `upgrade TypeScript to 6.0.2 and fix all type errors`
+- `add git workflow cursor rule`
+- `fix minimatch ReDoS via yarn resolutions`
+
+Rules:
 
 - No capital first letter
 - No period at the end
-- No "WIP", "fix", "update" without context
-- Describe the *what* and *why*, not the *how*
+- No generic "WIP", "fix", or "update" without context
+- Describe what and why, not how
 
 ### Optional Conventional Commits mode
 
