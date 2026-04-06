@@ -20,7 +20,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "emulate": "firebase emulators:start --only hosting",
-    "lint": "eslint \"src/**/*.{js,ts,jsx,tsx,astro}\""
+    "lint": "eslint \"src/**/*.{js,ts,jsx,tsx,astro}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/react": "^5",
@@ -60,6 +61,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "git-rev-sync": "^3.0.2",
+    "husky": "^9.1.7",
     "sass": "^1.89.2",
     "tsx": "^4.20.3",
     "typescript": "^6"

@@ -1,0 +1,1 @@
+echo "pre-commit checks are intentionally minimal; quality gates run on pre-push"

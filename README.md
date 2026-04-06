@@ -110,6 +110,21 @@ For forks created from this template, these checks are transferred automatically
 
 ---
 
+## Local Git Hooks (Husky)
+
+This template uses Husky to enforce local checks before push.
+
+- Hook: `.husky/pre-push`
+- Command: `yarn lint && yarn build:ts`
+
+If needed, install/update hooks with:
+
+```bash
+yarn prepare
+```
+
+---
+
 ## Environment Variables
 
 ### Build-time (set via `APP_ENV` or `.env`)
