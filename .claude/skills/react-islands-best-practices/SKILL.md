@@ -33,7 +33,7 @@ For snippets, see [examples.md](examples.md).
 - Compose focused components over monolithic wrappers
 - Push state down to the closest consumer
 - Lift content up when wrapper component only passes children through
-- Prefer `children` and composition over deep prop drilling
+- Prefer `children` and composition over deep prop drilling in island trees (avoid pass-through wrappers)
 
 ## Derive, Do Not Sync (CRITICAL)
 
@@ -53,7 +53,6 @@ For snippets, see [examples.md](examples.md).
 
 - Keep state where it is used; avoid lifting state higher than needed
 - Split container and presentational responsibilities when component grows
-- Prefer composition (`children`) over deep prop drilling in island trees
 
 ## Islands Scope (HIGH)
 

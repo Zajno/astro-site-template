@@ -1,6 +1,6 @@
 # Astro Site Template
 
-**v2.3** — A production-ready static website template by [Zajno](https://zajno.com), built on Astro 5 with GSAP, Lenis, Lottie, i18n, and Firebase Hosting support.
+**v3.0** — A production-ready static website template by [Zajno](https://zajno.com), built on Astro 6 with GSAP, Lenis, Lottie, i18n, and Firebase Hosting support.
 
 ---
 
@@ -8,8 +8,8 @@
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | [Astro 5](https://astro.build) |
-| Language | TypeScript 5 |
+| Framework | [Astro 6](https://astro.build) |
+| Language | TypeScript 6 |
 | Styling | SASS/SCSS |
 | Animation | [GSAP (Shockingly Green)](https://greensock.com/gsap/) + [Lenis](https://lenis.darkroom.engineering/) (smooth scroll) |
 | Lottie | [lottie-web](https://github.com/airbnb/lottie-web) |
@@ -17,7 +17,7 @@
 | Utilities | [split-type](https://github.com/lukePeavey/SplitType), [detect-browser](https://github.com/DamonOehlman/detect-browser) |
 | Deployment | Firebase Hosting (staging + production targets) |
 | Package manager | Yarn |
-| Node | `^20` |
+| Node | `>=22.12.0` (see `package.json` `engines`) |
 
 ---
 
@@ -65,6 +65,8 @@
 
 Project and git rules are maintained in parallel for Cursor (`.cursor/`) and Claude Code (`.claude/`, `CLAUDE.md`). See [docs/ai-governance-map.md](docs/ai-governance-map.md) for the full file mapping.
 
+Stack and security skills (e.g. `security-best-practices`) live under `.cursor/skills/` and `.claude/skills/` with the same folder names.
+
 ---
 
 ## Pages
@@ -96,7 +98,14 @@ All commands are run from the project root:
 | `yarn build:release:production` | Install deps and build for production |
 | `yarn preview` | Preview the production build locally |
 | `yarn lint` | Run ESLint on `src/**` |
+| `yarn audit:deps` | Run `yarn audit` on the lockfile (dependency vulnerabilities) |
 | `yarn emulate` | Run Firebase Hosting emulator at port `8010` |
+
+### Security hygiene
+
+- Run `yarn audit:deps` before releases and address high/critical findings (or document accepted risk with upgrades/`resolutions`).
+- For structured manual or agent-assisted reviews, use [docs/security-review-report-template.md](docs/security-review-report-template.md).
+- Detailed guidance lives in `.cursor/skills/security-best-practices/` (mirrored under `.claude/skills/`).
 
 ---
 
@@ -109,6 +118,7 @@ The workflow runs:
 - `yarn lint`
 - `yarn build:ts`
 - `yarn build`
+- `yarn audit:deps` (non-blocking while the baseline may have known advisories; tighten or fix findings in derived projects)
 
 For forks created from this template, these checks are transferred automatically with the repository.
 

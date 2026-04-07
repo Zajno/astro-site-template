@@ -1,6 +1,6 @@
 ---
 name: stack-best-practices
-description: "Entry point skill for this template stack. Routes tasks to focused skills: Astro, React islands, TypeScript, and SCSS."
+description: "Entry point skill for this template stack. Routes tasks to focused skills: Astro, React islands, TypeScript, SCSS, and security baseline."
 ---
 
 Mirror note: keep Cursor and Claude stack-best-practices files synchronized in the same commit.
@@ -30,6 +30,8 @@ When the task involves framework/library APIs or configuration:
   - use `../typescript-best-practices/SKILL.md`
 - For SCSS structure, selector scope, and style maintainability:
   - use `../scss-best-practices/SKILL.md`
+- For security baseline, secrets, XSS, CSP, dependency audit, and review reports:
+  - use `../security-best-practices/SKILL.md`
 
 ## Usage Pattern
 

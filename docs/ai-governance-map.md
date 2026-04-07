@@ -26,6 +26,7 @@ Skills live under the same folder names in both trees. Prefer editing **both** c
 | `.cursor/skills/react-islands-best-practices/` | `.claude/skills/react-islands-best-practices/` |
 | `.cursor/skills/typescript-best-practices/` | `.claude/skills/typescript-best-practices/` |
 | `.cursor/skills/scss-best-practices/` | `.claude/skills/scss-best-practices/` |
+| `.cursor/skills/security-best-practices/` | `.claude/skills/security-best-practices/` |
 
 Each skill folder typically contains `SKILL.md` and `examples.md`.
 
