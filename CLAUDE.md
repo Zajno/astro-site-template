@@ -2,6 +2,8 @@
 
 This file defines project-wide instructions for Claude Code in this repository.
 
+**Cursor equivalent:** `.cursor/rules/project.mdc` — keep both in sync. Full mapping: [docs/ai-governance-map.md](docs/ai-governance-map.md).
+
 ## Purpose
 
 This repository is a starter template. Keep decisions generic, reusable, and safe for future projects built from this base.

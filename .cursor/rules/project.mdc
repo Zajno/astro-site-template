@@ -5,6 +5,8 @@ alwaysApply: true
 
 # Astro Site Template - Project Rules
 
+**Claude Code equivalent:** `CLAUDE.md` (repository root) — keep both in sync. Full mapping: [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
+
 ## Purpose
 
 This repository is a starter template. Keep decisions generic, reusable, and safe for future projects built from this base.

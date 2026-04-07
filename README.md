@@ -61,6 +61,10 @@
 └── eslint.config.js          # ESLint flat config (@zajno/eslint-config)
 ```
 
+### AI assistant rules (Cursor & Claude Code)
+
+Project and git rules are maintained in parallel for Cursor (`.cursor/`) and Claude Code (`.claude/`, `CLAUDE.md`). See [docs/ai-governance-map.md](docs/ai-governance-map.md) for the full file mapping.
+
 ---
 
 ## Pages

@@ -5,6 +5,8 @@ description: Project git conventions for branch naming, commit messages, and PR 
 
 Mirror note: keep Cursor and Claude git-convention files synchronized in the same commit.
 
+**Claude equivalent:** `.claude/git-conventions.md` — full mapping: [docs/ai-governance-map.md](../../../docs/ai-governance-map.md).
+
 # Git Conventions
 
 ## Branch naming

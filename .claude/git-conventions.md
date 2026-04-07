@@ -1,5 +1,7 @@
 # Git Conventions
 
+**Cursor equivalent:** `.cursor/skills/git-conventions/SKILL.md` — full mapping: [docs/ai-governance-map.md](../docs/ai-governance-map.md).
+
 Mirror note: keep Cursor and Claude git-convention files synchronized in the same commit.
 
 ## Branch naming

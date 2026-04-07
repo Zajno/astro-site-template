@@ -37,7 +37,11 @@ When the task involves framework/library APIs or configuration:
 - Activate multiple focused skills for cross-cutting refactors.
 - Keep this file as the shared entry point to preserve discoverability.
 
+## Governance paths (Cursor ↔ Claude)
+
+Repo rules are mirrored for Cursor and Claude Code. See [docs/ai-governance-map.md](../../../docs/ai-governance-map.md). Skills may mention `.cursor/rules/*`; equivalent files are listed in that map (e.g. `CLAUDE.md`, `.claude/git-workflow.md`).
+
 ## What Not To Put Here
 
 - Do not duplicate detailed framework rules from focused skills.
-- Do not duplicate repo governance from `.cursor/rules/*`.
+- Do not duplicate repo governance from `.cursor/rules/*` (see governance map for Claude equivalents).

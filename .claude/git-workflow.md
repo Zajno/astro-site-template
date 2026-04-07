@@ -1,5 +1,7 @@
 # Git Workflow
 
+**Cursor equivalent:** `.cursor/rules/git-workflow.mdc` — keep both in sync. Full mapping: [docs/ai-governance-map.md](../docs/ai-governance-map.md).
+
 Mirror note: keep Cursor and Claude git-workflow files synchronized in the same commit.
 
 ## Check branch before starting any work

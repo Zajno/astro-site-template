@@ -5,6 +5,8 @@ alwaysApply: true
 
 # Git Workflow
 
+**Claude Code equivalent:** `.claude/git-workflow.md` — keep both in sync. Full mapping: [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
+
 ## Check branch before starting ANY work
 
 Before touching any file, the agent MUST check the current branch with `git branch --show-current`.
