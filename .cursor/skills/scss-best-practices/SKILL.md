@@ -38,10 +38,12 @@ For snippets, see [examples.md](examples.md).
 - Keep design tokens in `src/styles/common/variables.*.sass` (`:root` CSS variables)
 - Use semantic variables (`var(--color-*)`, `var(--font-size-*)`, `var(--container-width)`) instead of raw literals
 - Add new tokens in variable files first, then consume them in components/sections
-- Prefer prepared design variables/components from Figma as source-of-truth when available
-- For token/component sync and design-to-code mapping, use Figma MCP workflow instead of manual value copying
+- When the team uses Figma, prefer prepared variables/components from the design file as source-of-truth
+- When Figma MCP is available and the project relies on it, use it for token/component sync and design-to-code mapping instead of copying values by hand
 
 ## Figma MCP Flow (HIGH)
+
+Apply this section **only when** the repo uses a Figma workflow and the Figma MCP is enabled. If there is no Figma integration or MCP, **skip** these bullets; implement styles from existing tokens, `variables.*.sass`, typography classes, and written specs—do not invoke Figma tools.
 
 - Get design context from Figma node/file before implementing styles
 - Map design tokens to existing project variables first (`variables.*.sass`, typography classes)

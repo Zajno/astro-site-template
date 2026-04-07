@@ -35,6 +35,7 @@ For snippets, see [examples.md](examples.md).
 - Keep route metadata in `data/pages.ts`; do not duplicate per component
 - Avoid ad hoc data fetching logic spread across page entry files
 - Keep i18n text in `data/copyright/*`; avoid inline locale strings in page/component markup
+- **Template paths:** `data/pages.ts` and `data/copyright/*` are *this template’s* locations. A derived project may use different files or folders; keep the same *ideas* (central route metadata, locale copy outside inline markup) and **update this skill and project rules** when those paths change so guidance stays accurate.
 
 ## Config Boundaries (MEDIUM)
 
