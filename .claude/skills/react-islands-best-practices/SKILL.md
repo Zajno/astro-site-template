@@ -7,7 +7,9 @@ description: "React 19 patterns for Astro islands. Use for component purity, sta
 
 For snippets, see [examples.md](examples.md).
 
-## Severity Levels
+## Priority levels (this skill)
+
+These labels apply **only within this document** (not a global OWASP-style severity scale).
 
 - **CRITICAL** - bugs from impure render or unstable component identity
 - **HIGH** - re-render/perf issues and brittle effects

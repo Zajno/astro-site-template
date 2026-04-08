@@ -7,7 +7,9 @@ description: "SCSS patterns for this template. Enforces rem-only sizing, variabl
 
 For snippets, see [examples.md](examples.md).
 
-## Severity Levels
+## Priority levels (this skill)
+
+These labels apply **only within this document** (not a global OWASP-style severity scale).
 
 - **CRITICAL** - selector leakage causing regressions across pages
 - **HIGH** - hard-to-maintain style coupling

@@ -25,6 +25,10 @@ For this template, "implementation" means editing application code, adding depen
 
 Small tasks (a utility, a config tweak, a one-off script) still go through this flow. **Simple** changes are where unexamined assumptions waste the most time. Keep the written design minimal when appropriate, but do not skip agreement.
 
+## Alignment with implementation plans
+
+The gate above requires an **agreed** design before coding — that can be a few sentences in chat or a short `*-design.md`; it does not mandate a long specification. A separate `*-plan.md` ([writing-plans](../writing-plans/SKILL.md)) is **recommended** for multi-file or non-trivial work and **optional** for a one-file tweak once the user approves the design.
+
 ## Scope and decomposition
 
 Before detailed questions, assess scope. If the request bundles many independent systems (e.g. "add chat, billing, and analytics in one go"), stop and help decompose: what are the pieces, in what order should they ship, and which piece is first? Then run this skill on **one** appropriately scoped slice at a time.
@@ -48,7 +52,8 @@ Complete these in order before implementation:
 5. **Write the design doc** — `docs/plans/YYYY-MM-DD-<name>-design.md` (create `docs/plans/` if missing). User may override path for their repo.
 6. **Spec self-review** — run the checklist in [examples.md](examples.md) inline; fix issues in the doc.
 7. **User reviews the written spec** — pause until the user approves or requests edits; if edits, update the doc and repeat step 6 as needed.
-8. **Implementation** — use `stack-best-practices` and focused skills (Astro, React islands, TypeScript, SCSS, security) as appropriate. Do not treat brainstorming as permission to skip lint, types, or security baseline.
+8. **Implementation plan (recommended for multi-file or non-trivial work)** — use [../writing-plans/SKILL.md](../writing-plans/SKILL.md) to write `docs/plans/YYYY-MM-DD-<topic>-plan.md` from the approved `-design.md`. For a one-file tweak, the user may skip a separate plan and go straight to code.
+9. **Implementation** — follow the plan (if any) using `stack-best-practices` and focused skills (Astro, React islands, TypeScript, SCSS, security). Do not skip lint, types, or security baseline.
 
 ## Workflow detail
 
@@ -117,6 +122,7 @@ After sections are validated, write to `docs/plans/YYYY-MM-DD-<name>-design.md`:
 
 - **Self-review:** placeholders (TBD/TODO), internal contradictions, scope too large for one implementation pass, ambiguous requirements — fix in the file before asking the user.
 - **User gate:** ask the user to read the saved file and confirm before coding.
+- **Optional next:** for non-trivial scope, produce an implementation plan (`writing-plans` skill → `*-plan.md`) before editing code.
 - **Then** implement; optional visual mockups or diagrams only if the tool environment supports them and the topic is inherently visual — default to text.
 
 ## Anti-patterns

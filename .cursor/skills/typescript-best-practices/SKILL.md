@@ -7,7 +7,9 @@ description: "TypeScript 6 patterns for this template. Use for contracts, import
 
 For snippets, see [examples.md](examples.md).
 
-## Severity Levels
+## Priority levels (this skill)
+
+These labels apply **only within this document** (not a global OWASP-style severity scale).
 
 - **CRITICAL** - type holes that hide runtime defects
 - **HIGH** - weak contracts and drift between modules

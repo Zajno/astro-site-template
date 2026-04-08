@@ -13,7 +13,7 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 
 ## Tech Stack (Template Baseline)
 
-- Astro 6 + TypeScript
+- Astro 6 + TypeScript 6
 - Vite build pipeline
 - React islands via `@astrojs/react`
 - SCSS/SASS styling
@@ -28,6 +28,7 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Avoid project-specific hardcoding (customer names, environment assumptions, deploy-specific literals); prefer config modules and environment-driven values instead of one-off literals in source.
 - Document meaningful template-level decisions in `README.md` when behavior changes.
 - Git branching, commit, and push policy is defined in `.cursor/rules/git-workflow.mdc`.
+- Git branch naming and commit message conventions are in `.cursor/skills/git-conventions/SKILL.md`.
 
 ## Do Not
 
@@ -37,6 +38,8 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Hardcode secrets or environment-specific URLs; use `.env` and typed config helpers.
 
 ## Security baseline (template)
+
+Non-negotiable summary for always-on context; expanded checklists, CSP detail, and review prompts live in skill `security-best-practices` and [docs/security-review-report-template.md](../../docs/security-review-report-template.md).
 
 - Avoid XSS: do not treat untrusted strings as HTML without sanitization; be deliberate with `dangerouslySetInnerHTML`, Astro `set:html`, and rich text from CMS or users.
 - Client exposure: only `PUBLIC_*` env values are intentionally visible in the browser; keep private tokens server-side and follow **Do Not** plus typed config (details in skill `security-best-practices`).

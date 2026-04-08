@@ -25,9 +25,11 @@ Lead with why **A** is recommended, then ask which direction to take.
 
 Per the skill, save agreed designs as:
 
-`docs/plans/YYYY-MM-DD-<short-name>-design.md`
+`docs/plans/YYYY-MM-DD-<topic>-design.md`
 
-Example: `docs/plans/2026-04-06-hero-animation-design.md`
+Use one **topic** slug (kebab-case) for both this file and the optional paired `-plan.md` so names line up.
+
+Example: `docs/plans/2026-04-06-hero-animation-design.md` pairs with `docs/plans/2026-04-06-hero-animation-plan.md` when you write a plan.
 
 ## Spec self-review (before asking the user to approve)
 
@@ -41,3 +43,8 @@ Example: `docs/plans/2026-04-06-hero-animation-design.md`
 After self-review passes:
 
 > Spec written at `docs/plans/…-design.md`. Please read it and say if you want changes before we implement.
+
+## After approval (optional plan)
+
+For multi-file or non-trivial work, open [../writing-plans/SKILL.md](../writing-plans/SKILL.md) and write `docs/plans/YYYY-MM-DD-<topic>-plan.md` using the **same** `<topic>` as in `-design.md`. For a trivial one-file change, a separate plan file is optional — see that skill.
+

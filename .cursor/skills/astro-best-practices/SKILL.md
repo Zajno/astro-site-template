@@ -7,7 +7,9 @@ description: "Astro-first implementation patterns for this template. Use for pag
 
 For snippets, see [examples.md](examples.md).
 
-## Severity Levels
+## Priority levels (this skill)
+
+These labels apply **only within this document** (not a global OWASP-style severity scale).
 
 - **CRITICAL** - likely runtime bug or hydration mismatch
 - **HIGH** - unnecessary client JS or fragile architecture

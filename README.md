@@ -30,7 +30,7 @@
 │   ├── utils.ts              #   Injects PUBLIC_* env vars at build time
 │   └── version.ts            #   Full version string helper
 │
-├── docs/                     # Governance map, security report template; `plans/` for feature design notes (optional)
+├── docs/                     # Governance map, security report template; `plans/` for `*-design.md` / `*-plan.md` (optional)
 │
 ├── public/                   # Static assets served as-is
 │   ├── desktop/
@@ -67,7 +67,9 @@
 
 Project and git rules are maintained in parallel for Cursor (`.cursor/`) and Claude Code (`.claude/`, `CLAUDE.md`). See [docs/ai-governance-map.md](docs/ai-governance-map.md) for the full file mapping.
 
-Stack, security, and workflow skills (e.g. `security-best-practices`, `brainstorming`) live under `.cursor/skills/` and `.claude/skills/` with the same folder names. Design notes from brainstorming land in `docs/plans/` by convention.
+Stack, security, and workflow skills (e.g. `security-best-practices`, `brainstorming`, `writing-plans`) live under `.cursor/skills/` and `.claude/skills/` with the same folder names. Design docs (`*-design.md`) and implementation plans (`*-plan.md`) from those workflows live in `docs/plans/` by convention.
+
+When you bump dependencies or `engines` in `package.json`, update the **Tech Stack** section (and any related commands) in the same change so this file stays aligned — see [docs/ai-governance-map.md](docs/ai-governance-map.md#readme-and-stack-versions).
 
 ---
 

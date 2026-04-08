@@ -1,6 +1,6 @@
 ---
 name: stack-best-practices
-description: "Entry point skill for this template stack. Routes tasks to focused skills: Astro, React islands, TypeScript, SCSS, security baseline, and brainstorming before major work."
+description: "Entry point skill for this template stack. Routes tasks to focused skills: Astro, React islands, TypeScript, SCSS, security, brainstorming, and writing implementation plans."
 ---
 
 Mirror note: keep Cursor and Claude stack-best-practices files synchronized in the same commit.
@@ -11,12 +11,13 @@ Template baseline: Astro 6, TypeScript 6, React 19 via `@astrojs/react`, SCSS, V
 
 This skill is intentionally thin. It delegates to focused stack skills to avoid rule duplication.
 
-## Context7-First Rule (CRITICAL)
+## Docs-first rule (CRITICAL)
 
 When the task involves framework/library APIs or configuration:
 
-- Always resolve docs with Context7 first (`resolve-library-id` -> `query-docs`)
-- Prefer official docs IDs (Astro, React, TypeScript, ESLint, Vite, Husky)
+- If **Context7** (or another library-docs MCP) is available in the session, use it first (`resolve-library-id` → `query-docs`) for official, version-aware API references
+- If no docs MCP is available, consult official documentation (project docs sites or maintainers’ references) — do not guess version-sensitive behavior
+- Prefer official docs IDs (Astro, React, TypeScript, ESLint, Vite, Husky) when using Context7
 - Use version-aware docs when available (for this template: Astro 6, TS 6, React 19)
 - Do not rely on memory for version-sensitive behavior
 
@@ -34,6 +35,8 @@ When the task involves framework/library APIs or configuration:
   - use `../security-best-practices/SKILL.md`
 - For new features or architectural changes before writing code (structured questions, options, design doc):
   - use `../brainstorming/SKILL.md`
+- For step-by-step implementation tasks from an approved design (`docs/plans/*-plan.md`):
+  - use `../writing-plans/SKILL.md`
 
 ## Usage Pattern
 

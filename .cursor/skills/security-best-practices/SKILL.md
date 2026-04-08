@@ -9,7 +9,9 @@ Mirror note: keep Cursor and Claude security-best-practices files synchronized i
 
 For a copy-paste report skeleton, see [docs/security-review-report-template.md](../../../docs/security-review-report-template.md). For short examples, see [examples.md](examples.md).
 
-## Severity Levels
+## Priority levels (this skill)
+
+These labels apply **only within this document** (not a global OWASP-style severity scale). They describe security impact for this template’s baseline review.
 
 - **CRITICAL** - direct credential leak, trivial RCE/injection, or secret committed to git
 - **HIGH** - XSS, broken authz on sensitive actions, unsafe deserialization of untrusted data

@@ -28,6 +28,7 @@ Skills live under the same folder names in both trees. Prefer editing **both** c
 | `.cursor/skills/scss-best-practices/` | `.claude/skills/scss-best-practices/` |
 | `.cursor/skills/security-best-practices/` | `.claude/skills/security-best-practices/` |
 | `.cursor/skills/brainstorming/` | `.claude/skills/brainstorming/` |
+| `.cursor/skills/writing-plans/` | `.claude/skills/writing-plans/` |
 
 Each skill folder typically contains `SKILL.md` and `examples.md`.
 
@@ -39,3 +40,8 @@ Each skill folder typically contains `SKILL.md` and `examples.md`.
 
 1. Edit the canonical intent once, then mirror the wording to the paired file(s).
 2. If you add a new skill or rule file, add a row to this document in the same PR.
+3. Update `README.md` when user-visible behavior, documented stack versions, CI commands, or repo layout changes — and keep version claims aligned with `package.json` (do not edit README for governance-only wording tweaks).
+
+## README and stack versions
+
+Documented framework and tooling versions in `README.md` should match `package.json` (and typical lockfile resolution). After changing dependencies or `engines`, update the Tech Stack and related tables in the same change.

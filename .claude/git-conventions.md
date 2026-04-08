@@ -17,14 +17,12 @@ Mirror note: keep Cursor and Claude git-convention files synchronized in the sam
 | `test/<description>` | tests | `test/add-unit-tests-for-utils` |
 | `deps/<package>` | dependency upgrades | `deps/astro-6` |
 
+Use **kebab-case** and a short description for the `<description>` segment of branch names.
+
 ## Message conventions
 
 - Use English consistently.
 - No ticket format is required.
-
-### Branch names
-
-- Use kebab-case and a short description.
 
 ## Commit messages
 
