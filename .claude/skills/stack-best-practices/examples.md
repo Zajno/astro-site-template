@@ -14,3 +14,5 @@ This file shows which focused skill to use for each task type.
   `../scss-best-practices/SKILL.md`
 - "Review env handling, XSS risk, or dependency audit before release" ->
   `../security-best-practices/SKILL.md`
+- "New feature or refactor — clarify requirements and options before coding" ->
+  `../brainstorming/SKILL.md`
