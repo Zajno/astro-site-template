@@ -1,5 +1,6 @@
 import config from '@zajno/eslint-config';
 import astroPlugin from 'eslint-plugin-astro';
+import reactHooks from 'eslint-plugin-react-hooks';
 
 const zajnoConfig = Array.isArray(config) ? config : [config];
 
@@ -47,6 +48,14 @@ export default [
             indent: ['warn', 4, { SwitchCase: 1 }],
         },
     },
+    {
+        files: ['**/*.{jsx,tsx}'],
+        ...reactHooks.configs.flat.recommended,
+    },
     ...astroPlugin.configs['flat/recommended'],
-    // TypeScript rules are not applied by astro-eslint-parser
+    // Hooks in frontmatter, JSX-like template expressions, and virtual `<script>` blocks (*.astro/*.js|*.ts from the processor).
+    {
+        files: ['**/*.astro', '**/*.astro/*.js', '**/*.astro/*.ts'],
+        ...reactHooks.configs.flat.recommended,
+    },
 ];

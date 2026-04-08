@@ -62,7 +62,7 @@
     "eslint": "^10",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "git-rev-sync": "^3.0.2",
     "husky": "^9.1.7",
     "sass": "^1.89.2",
