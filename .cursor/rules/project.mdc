@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Astro Site Template - Project Rules
 
-**Claude Code equivalent:** `CLAUDE.md` (repository root) — keep both in sync. Full mapping: [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
+**Claude Code equivalent:** `CLAUDE.md` (repository root) — keep both in sync for project-level rules. Skills and agents are Claude-canonical and exposed in Cursor via symlinks (`.cursor/skills` -> `../.claude/skills`, `.cursor/agents` -> `../.claude/agents`). Full mapping: [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
 
 ## Purpose
 
@@ -29,6 +29,12 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Document meaningful template-level decisions in `README.md` when behavior changes.
 - Git branching, commit, and push policy is defined in `.cursor/rules/git-workflow.mdc`.
 - Git branch naming and commit message conventions are in `.cursor/skills/git-conventions/SKILL.md`.
+- Implementation agent profile: `.cursor/agents/implementor.md`.
+- Plan verification agent profile: `.cursor/agents/plan-verifier.md`.
+- Requirements planning agent profile: `.cursor/agents/requirements-planner.md`.
+- Security review agent profile: `.cursor/agents/security-reviewer.md`.
+- Refactoring planning agent profile: `.cursor/agents/refactoring-planner.md`.
+- Setup verification agent profile: `.cursor/agents/verify-setup.md`.
 
 ## Do Not
 

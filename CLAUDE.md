@@ -2,7 +2,7 @@
 
 This file defines project-wide instructions for Claude Code in this repository.
 
-**Cursor equivalent:** `.cursor/rules/project.mdc` — keep both in sync. Full mapping: [docs/ai-governance-map.md](docs/ai-governance-map.md).
+**Cursor equivalent:** `.cursor/rules/project.mdc` — keep both in sync for project-level rules. Skills and agents are canonical in `.claude/` and exposed in Cursor via symlinks (`.cursor/skills` -> `../.claude/skills`, `.cursor/agents` -> `../.claude/agents`). Full mapping: [docs/ai-governance-map.md](docs/ai-governance-map.md).
 
 ## Purpose
 
@@ -25,7 +25,13 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Avoid project-specific hardcoding (customer names, environment assumptions, deploy-specific literals); prefer config modules and environment-driven values instead of one-off literals in source.
 - Document meaningful template-level decisions in `README.md` when behavior changes.
 - Git branching, commit, and push policy is defined in `.claude/git-workflow.md`.
-- Git branch naming and commit naming conventions are defined in `.claude/git-conventions.md`.
+- Git branch naming and commit naming conventions are defined in `.claude/skills/git-conventions/SKILL.md`.
+- Implementation agent profile: `.claude/agents/implementor.md`.
+- Plan verification agent profile: `.claude/agents/plan-verifier.md`.
+- Requirements planning agent profile: `.claude/agents/requirements-planner.md`.
+- Security review agent profile: `.claude/agents/security-reviewer.md`.
+- Refactoring planning agent profile: `.claude/agents/refactoring-planner.md`.
+- Setup verification agent profile: `.claude/agents/verify-setup.md`.
 
 ## Do Not
 

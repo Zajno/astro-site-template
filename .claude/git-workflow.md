@@ -77,4 +77,4 @@ When the user does ask to commit:
 - Use a concise commit message in English
 - Never amend pushed commits
 
-PR formatting conventions are defined in `.claude/git-conventions.md`.
+PR formatting conventions are defined in `.claude/skills/git-conventions/SKILL.md`.

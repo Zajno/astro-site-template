@@ -65,9 +65,25 @@
 
 ### AI assistant rules (Cursor & Claude Code)
 
-Project and git rules are maintained in parallel for Cursor (`.cursor/`) and Claude Code (`.claude/`, `CLAUDE.md`). See [docs/ai-governance-map.md](docs/ai-governance-map.md) for the full file mapping.
+Agent/skill governance is Claude-first: canonical files live in `.claude/agents/` and `.claude/skills/`; Cursor uses symlinks at `.cursor/agents` and `.cursor/skills`. Project rule counterparts remain `.cursor/rules/project.mdc` and `CLAUDE.md`. See [docs/ai-governance-map.md](docs/ai-governance-map.md) for full mapping.
 
-Stack, security, and workflow skills (e.g. `security-best-practices`, `brainstorming`, `writing-plans`) live under `.cursor/skills/` and `.claude/skills/` with the same folder names. Design docs (`*-design.md`) and implementation plans (`*-plan.md`) from those workflows live in `docs/plans/` by convention.
+Maintenance checklist for governance sync: [docs/ai-governance-map.md#sync-maintenance-playbook](docs/ai-governance-map.md#sync-maintenance-playbook).
+
+Implementation agent profile: `.claude/agents/implementor.md` (Cursor path: `.cursor/agents/implementor.md`).
+Plan verification agent profile: `.claude/agents/plan-verifier.md` (Cursor path: `.cursor/agents/plan-verifier.md`).
+Requirements planning agent profile: `.claude/agents/requirements-planner.md` (Cursor path: `.cursor/agents/requirements-planner.md`).
+Security review agent profile: `.claude/agents/security-reviewer.md` (Cursor path: `.cursor/agents/security-reviewer.md`).
+Refactoring planning agent profile: `.claude/agents/refactoring-planner.md` (Cursor path: `.cursor/agents/refactoring-planner.md`).
+Setup verification agent profile: `.claude/agents/verify-setup.md` (Cursor path: `.cursor/agents/verify-setup.md`).
+
+Implementor usage (example): `Work as implementor using .cursor/agents/implementor.md. Task: <your task>. Files: <paths>. Follow docs/plans if present; load required skills before coding; run self-review and checks after changes.`
+Plan verifier usage (example): `Work as plan-verifier using .cursor/agents/plan-verifier.md. Plan: <paste plan>. Optional PRD: <paste PRD>. Verify PRD->Plan coverage (if PRD provided), then Plan->Code completion; return coverage/completion tables, gaps, and verdict.`
+Requirements planner usage (example): `Work as requirements-planner using .cursor/agents/requirements-planner.md. We are starting a new feature. Ask questions category by category first (data, layout, interactions, states, feedback, edge cases), summarize, confirm, then write the final requirements doc.`
+Security reviewer usage (example): `Work as security-reviewer using .cursor/agents/security-reviewer.md. Review changed files for exploitable security issues only; trace attacker-controlled input to sensitive sinks; report findings by severity with evidence, remediation, and confidence.`
+Refactoring planner usage (example): `Work as refactoring-planner using .cursor/agents/refactoring-planner.md. Analyze current behavior and dependencies first, ask scope/safety/testing/parallelism questions category by category, build a risk matrix, confirm understanding, then write docs/plans/YYYY-MM-DD-refactor-<name>.md with baby-step tasks and rollback plan.`
+Verify setup usage (example): `Work as verify-setup using .cursor/agents/verify-setup.md. Validate parity and references across .cursor/.claude agents and skills, governance map entries, and README/rules mentions; report PASS/FAIL with concrete file paths.`
+
+Stack, security, and workflow skills (e.g. `security-best-practices`, `brainstorming`, `writing-plans`) are canonical under `.claude/skills/` and available in Cursor via `.cursor/skills/` symlink paths. Design docs (`*-design.md`) and implementation plans (`*-plan.md`) from those workflows live in `docs/plans/` by convention.
 
 When you bump dependencies or `engines` in `package.json`, update the **Tech Stack** section (and any related commands) in the same change so this file stays aligned — see [docs/ai-governance-map.md](docs/ai-governance-map.md#readme-and-stack-versions).
 
