@@ -27,6 +27,7 @@ Project-level rule files remain explicit counterparts: `.cursor/rules/project.md
 | Topic | Cursor | Claude Code |
 |-------|--------|-------------|
 | Implementation agent profile | `.cursor/agents/implementor.md` (symlink path) | `.claude/agents/implementor.md` (canonical) |
+| Implementation planning agent profile | `.cursor/agents/implementation-planner.md` (symlink path) | `.claude/agents/implementation-planner.md` (canonical) |
 | Plan verification agent profile | `.cursor/agents/plan-verifier.md` (symlink path) | `.claude/agents/plan-verifier.md` (canonical) |
 | Requirements planning agent profile | `.cursor/agents/requirements-planner.md` (symlink path) | `.claude/agents/requirements-planner.md` (canonical) |
 | Security review agent profile | `.cursor/agents/security-reviewer.md` (symlink path) | `.claude/agents/security-reviewer.md` (canonical) |
@@ -47,6 +48,7 @@ Skills are canonical in `.claude/skills/`. Cursor uses the same files through sy
 | `.cursor/skills/security-best-practices/` | `.claude/skills/security-best-practices/` |
 | `.cursor/skills/brainstorming/` | `.claude/skills/brainstorming/` |
 | `.cursor/skills/writing-plans/` | `.claude/skills/writing-plans/` |
+| `.cursor/skills/section-delivery/` | `.claude/skills/section-delivery/` |
 
 Each skill folder typically contains `SKILL.md` and `examples.md`.
 
@@ -61,6 +63,20 @@ Each skill folder typically contains `SKILL.md` and `examples.md`.
 3. For project-level rule counterparts (`.cursor/rules/project.mdc` and `CLAUDE.md`), update both when intent changes.
 4. If you add a new skill/agent/rule file, add a row to this document in the same PR.
 5. Update `README.md` when user-visible behavior, documented stack versions, CI commands, or repo layout changes — and keep version claims aligned with `package.json` (do not edit README for governance-only wording tweaks).
+
+## Behavioral hard-gates (section/Figma delivery)
+
+These are cross-file invariants for implementation safety. If any required value is `no`, status must be `partial` (not done).
+
+1. **SCSS token contract**
+   - Typography centralized in `src/styles/common/typography.sass`
+   - Colors tokenized in `src/styles/common/variables.colors.sass`
+2. **Script wiring decision contract**
+   - Explicit `required/optional + reason` is mandatory in final report
+3. **Existing section script contract**
+   - If target section has `script.ts` (or had one before edits), activation must be preserved in `view.astro` via `<script src="./script.ts"></script>`, or replaced only with explicit migration evidence.
+4. **Validation contract**
+   - Run `yarn lint` and `yarn build:ts` or report explicit blocker
 
 ## Sync maintenance playbook
 

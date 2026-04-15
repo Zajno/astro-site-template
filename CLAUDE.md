@@ -33,6 +33,12 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Refactoring planning agent profile: `.claude/agents/refactoring-planner.md`.
 - Setup verification agent profile: `.claude/agents/verify-setup.md`.
 
+## Section/Figma hard-gates
+
+- Script contract: record `Script wiring: required/optional + reason`; if section has `script.ts` (or had one), preserve activation in `view.astro` or document explicit migration evidence.
+- Style contract: for section/Figma work, keep typography centralized in `src/styles/common/typography.sass` and colors tokenized in `src/styles/common/variables.colors.sass`.
+- Completion contract: if any required section/Figma gate fails, status is `partial` (not done). Detailed checks live in `.claude/agents/implementor.md` and `.claude/skills/section-delivery/SKILL.md`.
+
 ## Do Not
 
 - Mix UI markup, data access, and imperative browser logic in one file; keep responsibilities separated by layer.

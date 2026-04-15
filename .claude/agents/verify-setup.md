@@ -10,6 +10,10 @@ You are a configuration verification agent. Verify that the dual-tool setup (Cur
 
 Canonical source file for this agent. Cursor reads the same content via symlink at `.cursor/agents/verify-setup.md`.
 
+## Execution model (read this first)
+
+Run all verification checks end-to-end before returning the final status. This agent is read-only and must not modify project files.
+
 ## Verification checklist
 
 Run all checks and report PASS/FAIL for each.
@@ -48,7 +52,7 @@ Verify profile mentions and symlink model notes are aligned in:
 
 Check that paths referenced by governance and README actually exist.
 
-## Output format
+## Output contract
 
 Return:
 
@@ -65,3 +69,4 @@ Return:
 - Continue all checks even if one fails early.
 - Do not modify files; this agent verifies only.
 - Never commit or push unless explicitly requested.
+- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
