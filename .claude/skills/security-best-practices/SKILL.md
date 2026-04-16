@@ -44,12 +44,13 @@ These labels apply **only within this document** (not a global OWASP-style sever
 ## Supply Chain and Dependencies (HIGH)
 
 - Run `yarn audit:deps` regularly; treat high/critical findings before release
+- In this Yarn 1 template, `yarn audit:deps` delegates to `npm audit --no-package-lock --legacy-peer-deps --audit-level=high` because the legacy `yarn audit` endpoint is no longer reliable
 - Prefer pinning and reviewing upgrades for security-sensitive dependencies
 - Use `resolutions` in `package.json` only with a documented reason (see existing template pattern)
 
 ## Automation vs Manual Review
 
-- **Automated:** ESLint, TypeScript, `yarn audit:deps`, CI quality workflow (see `README.md`)
+- **Automated:** ESLint, TypeScript, `yarn audit:deps` (npm-backed in this template), CI quality workflow (see `README.md`)
 - **Manual (agent or human):** scoped review of git diff — use the prompts in [examples.md](examples.md) and record findings with [docs/security-review-report-template.md](../../../docs/security-review-report-template.md)
 
 ## What Not To Put Here

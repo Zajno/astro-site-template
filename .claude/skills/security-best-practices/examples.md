@@ -6,7 +6,7 @@
 yarn audit:deps
 ```
 
-Address high/critical items before release; use upstream upgrades or documented `resolutions` when appropriate.
+In this Yarn 1 template, the command runs an npm-backed audit fallback. Address high/critical items before release; use upstream upgrades or documented `resolutions` when appropriate.
 
 ## Manual diff review (agent prompt)
 

@@ -21,7 +21,7 @@
     "astro": "astro",
     "emulate": "firebase emulators:start --only hosting",
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx,astro}\"",
-    "audit:deps": "yarn audit",
+    "audit:deps": "npm audit --no-package-lock --legacy-peer-deps --audit-level=high",
     "prepare": "husky"
   },
   "dependencies": {

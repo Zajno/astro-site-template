@@ -26,6 +26,7 @@ For each item:
 ## Dependency and supply chain
 
 - `yarn audit:deps` result: (pass / N issues)
+- Audit backend note: for this Yarn 1 template, `yarn audit:deps` uses an npm-backed fallback rather than legacy `yarn audit`
 - Notable upgrades or `resolutions`: (none / see below)
 
 ## Checklist (quick)

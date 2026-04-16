@@ -115,10 +115,12 @@ All commands are run from the project root:
 | `yarn build:release:production` | Install deps and build for production |
 | `yarn preview` | Preview the production build locally |
 | `yarn lint` | Run ESLint on `src/**` |
-| `yarn audit:deps` | Run `yarn audit` on the lockfile (dependency vulnerabilities) |
+| `yarn audit:deps` | Run `npm audit --no-package-lock --legacy-peer-deps --audit-level=high` for dependency vulnerabilities in this Yarn 1 template |
 | `yarn emulate` | Run Firebase Hosting emulator at port `8010` |
 
 ### Security hygiene
+
+This template uses Yarn 1 for dependency management, but `yarn audit` is no longer reliable because the legacy audit endpoint returns `410 Gone`. `yarn audit:deps` therefore delegates to `npm audit --no-package-lock --legacy-peer-deps --audit-level=high` as a best-effort vulnerability check without changing the package manager workflow.
 
 - Run `yarn audit:deps` before releases and address high/critical findings (or document accepted risk with upgrades/`resolutions`).
 - For structured manual or agent-assisted reviews, use [docs/security-review-report-template.md](docs/security-review-report-template.md).
