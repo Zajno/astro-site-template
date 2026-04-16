@@ -59,7 +59,8 @@ Do not create parallel token/styleguide systems outside shared style paths.
 
 1. **Markup:** integrate using existing section patterns under `src/components/sections/**`.
 2. **Styles / styleguide:** follow project styleguide conventions (tokens, typography, spacing, responsive rules) via shared primitives; avoid one-off token systems in section-local SCSS.
-   - Typography for new section text styles must be centralized through `src/styles/common/typography.sass` (reuse existing semantic mixins/classes or add new semantic mixins + required `variables.typography.sass` entries).
+   - Typography for new section text styles must be centralized through `src/styles/common/typography.sass` (reuse existing semantic classes/mixins or add new semantic entries + required `variables.typography.sass` entries).
+   - Follow the project-level typography application rule from `CLAUDE.md` / `.cursor/rules/project.mdc`.
    - Colors must be tokenized via `src/styles/common/variables.colors.sass` and consumed as `var(--color-*)`; do not keep final raw color literals in section SCSS (transparent keywords are the only acceptable exception when semantically appropriate).
    - "Visual match" is insufficient if typography/token architecture is not compliant.
    - Canonical source for section hard-gates is this skill; `implementor` should mirror these rules without changing meaning.
@@ -68,6 +69,8 @@ Do not create parallel token/styleguide systems outside shared style paths.
    - Treat script wiring as **required** when design/request/pattern implies behavior (interactive controls/states, requested activation/animation, or existing page section pattern depends on script activation flow).
    - If script wiring is required, section is not done until `script.ts` and any required registration/integration are in place.
    - Existing section script contract gate: if target section has `script.ts` (or had one before changes), preserve activation wiring in `view.astro` via `<script src="./script.ts"></script>` unless there is an explicit documented migration path.
+   - Do not delete `script.ts`, remove `<script src="./script.ts"></script>`, or replace activation with CSS-only visibility hacks unless the user explicitly approves removing/migrating the contract.
+   - If old script behavior is obsolete after redesign, keep the contract and reduce it to the smallest lifecycle-preserving implementation instead of deleting it by default.
 4. **Data/copy:** move content and metadata to `data/**` patterns where appropriate.
 5. **Thin view:** keep Astro view focused on composition and wiring.
 6. **Validation:** run lint/type checks and report outcomes.
@@ -98,4 +101,5 @@ A section task is complete only when:
 - Declaring done without explicit `Script wiring` decision (`required/optional + reason`).
 - Declaring done when script wiring is required but section `script.ts`/integration is missing.
 - Declaring done after removing/ignoring an existing section `script.ts` contract without migration evidence.
+- Removing an existing section `script.ts` contract without explicit user approval.
 

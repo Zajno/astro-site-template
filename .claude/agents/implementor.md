@@ -33,6 +33,7 @@ For section implementation requests (especially Figma URL + short prompt), use *
    - **After** implementation is claimed done **against a plan**, run `.claude/agents/plan-verifier.md` with the same plan text to audit coverage.
 3. List files you expect to touch (or discover via search) and infer task type: Astro markup, SCSS, TS utilities, client modules, forms, React islands, etc.
 4. If scope is ambiguous or large but you already have *some* spec, stop and ask **one** focused question, or read `brainstorming` (Step 3b) before coding.
+5. Follow the project-level reference-first and ask-if-unsure rules from `CLAUDE.md` / `.cursor/rules/project.mdc` before inventing a new implementation detail.
 
 #### Step 0b — Scope policy (canonical)
 
@@ -112,8 +113,8 @@ When Step 0b selects the section/Figma branch, these are mandatory:
 
 1. **Typography centralization is required**
    - For any new section text style, do not keep final typography as one-off literals in section `style.scss`.
-   - Reuse existing semantic typography mixins/classes from `src/styles/common/typography.sass`.
-   - If no suitable style exists, add a semantic mixin in `src/styles/common/typography.sass` (and required variables in `variables.typography.sass`), then consume it from section styles.
+   - Follow the project-level typography application rule from `CLAUDE.md` / `.cursor/rules/project.mdc`.
+   - If no suitable style exists, add a semantic typography entry in `src/styles/common/typography.sass` (and required variables in `variables.typography.sass`), then apply it using the project's dominant reference pattern.
 2. **Color tokenization is required**
    - Do not ship final section styles with raw hex/rgba/rgb/hsl literals for colors (except transparent keywords when appropriate).
    - Add missing semantic color tokens in `src/styles/common/variables.colors.sass`, then consume via `var(--color-*)`.
@@ -145,10 +146,19 @@ For section/Figma tasks, preserve or explicitly migrate existing section activat
 1. Before editing, inventory the section folder and record whether `script.ts` exists.
 2. If `script.ts` exists (or existed before your change), treat activation wiring as required by default:
    - `view.astro` must include `<script src="./script.ts"></script>`, unless the script contract is intentionally removed.
-3. Script contract removal is allowed only with explicit migration evidence:
+3. You MUST NOT remove the section script contract by default:
+   - do not delete `script.ts`
+   - do not remove `<script src="./script.ts"></script>` from `view.astro`
+   - do not replace activation behavior with CSS-only visibility hacks
+4. Script contract removal is allowed only when the user explicitly approves removal or migration, and you provide explicit migration evidence:
    - where activation behavior moved, and
    - why removal is safe for this section.
-4. If no migration evidence is provided while `script.ts` exists/existed, status is **partial** (not done).
+5. If redesign makes prior script logic obsolete, keep the contract and reduce `script.ts` to the smallest lifecycle-preserving implementation that still participates in section activation/setup/teardown.
+6. Before deleting or migrating any section script, explicitly check:
+   - whether global CSS/layout hides sections until activation
+   - whether `Section.setup()` or sibling sections imply a shared activation lifecycle
+   - whether the user explicitly asked to remove the script contract
+7. If no migration evidence or explicit user approval is provided while `script.ts` exists/existed, status is **partial** (not done).
 
 ### Parallel work and subagents
 
@@ -220,6 +230,7 @@ For section/Figma tasks, additionally run a hard self-check before Step 6:
 - Confirm existing section script contract is preserved:
   - if section has `script.ts` (or had it before edits), verify `view.astro` contains `<script src="./script.ts"></script>`, or verify documented migration path.
   - if this check fails, task remains **partial**.
+  - if the diff deleted `script.ts` or removed activation wiring without explicit user approval, stop and ask instead of continuing.
 
 ### Step 6 — Validate and report
 
@@ -241,7 +252,6 @@ If any required compliance value is `no`, task status must be `partial` (not don
 - Keep template behavior generic and reusable.
 - Enforce Step 0b scope policy: section/Figma branch defaults to full scope; fast path is only for non-section/non-Figma tasks.
 - Never commit or push unless explicitly requested.
-- If requirements are unclear, ask focused clarifying questions.
 - When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
 
 ## Anti-patterns

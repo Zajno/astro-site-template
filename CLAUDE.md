@@ -20,6 +20,9 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 ## Working Rules
 
 - Prefer extending existing template patterns over introducing one-off architecture.
+- If project rules/skills do not fully specify an implementation detail, inspect nearby project references first (same page, sibling section, same layer/file type) and follow the dominant local pattern instead of inventing a new one.
+- If you are still not confident after checking rules and nearby references, stop and ask the user instead of guessing.
+- When the project uses class-based typography in markup, preserve that pattern and do not default to applying typography through local SCSS includes.
 - Keep folder aliases and import style consistent with current config.
 - Preserve build and type-check health after each substantive change.
 - Avoid project-specific hardcoding (customer names, environment assumptions, deploy-specific literals); prefer config modules and environment-driven values instead of one-off literals in source.

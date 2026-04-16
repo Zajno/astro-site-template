@@ -57,6 +57,7 @@ Apply this section **only when** the repo uses a Figma workflow and the Figma MC
 - Use typography mixins from `src/styles/common/typography.sass` for text styles
 - Reuse existing semantic classes/mixins (`title-h1`, `desc-1`, `label-3`, etc.) before introducing new text styles
 - Keep font family/weight/size/line-height/letter-spacing driven by typography variables, not one-off declarations
+- Follow the project-level typography application rule from `CLAUDE.md` / `.cursor/rules/project.mdc`
 
 ## Responsive Rules (HIGH)
 
