@@ -1,1 +1,32 @@
-yarn lint && yarn build:ts
+#!/bin/sh
+
+# GUI Git clients (SourceTree, GitHub Desktop) run hooks with a minimal PATH, so
+# Homebrew / nvm / fnm shims are often missing unless we restore them here.
+
+export PATH="/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env 2>/dev/null)" || true
+fi
+
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # shellcheck disable=SC1091
+  . "$NVM_DIR/nvm.sh"
+  if command -v nvm >/dev/null 2>&1; then
+    nvm use default >/dev/null 2>&1 || nvm use node >/dev/null 2>&1 || true
+  fi
+fi
+
+run_yarn() {
+  if command -v yarn >/dev/null 2>&1; then
+    yarn "$@"
+  elif command -v corepack >/dev/null 2>&1; then
+    corepack yarn "$@"
+  else
+    echo "husky pre-push: yarn not found. Install Yarn, or enable Corepack (Node 16+), or push from a terminal where \`yarn\` is on PATH." >&2
+    exit 127
+  fi
+}
+
+run_yarn lint && run_yarn build:ts

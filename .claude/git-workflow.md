@@ -1,42 +1,41 @@
 # Git Workflow
 
-Mirror note: keep Cursor and Claude git-workflow files synchronized in the same commit.
+**Cursor equivalent:** `.cursor/rules/git-workflow.mdc` — keep both in sync. This file pair is an intentionally mirrored always-on git policy surface for Claude/Cursor. Ownership details live in [docs/ai-governance-map.md](../docs/ai-governance-map.md).
 
-## Check branch before starting any work
+## Check branch before starting ANY work
 
-Before touching any file, check the current branch with:
+Before touching any file, the agent MUST check the current branch with `git branch --show-current`.
 
-`git branch --show-current`
+**If the current branch is `main` or `staging`:**
 
-If the current branch is `main` or `staging`:
+1. STOP immediately — do not make any changes yet
+2. Ask the user:
+   - Propose a new branch name based on the task (e.g. `feat/add-auth`, `fix/header-scroll`, `docs/update-readme`)
+   - List existing non-protected branches as alternatives to switch to
+   - Wait for explicit confirmation before proceeding
 
-1. Stop immediately and do not make any changes yet.
-2. Propose a new branch name based on the task (for example `feat/add-auth`, `fix/header-scroll`, `docs/update-readme`).
-3. List existing non-protected branches as alternatives.
-4. Wait for explicit user confirmation before proceeding.
+Only after the user confirms the branch — create or switch to it, then begin work.
 
-Only after branch confirmation, create or switch branch and begin work.
+**If already on a feature branch** (anything other than `main` / `staging`): proceed normally.
 
-If already on a feature branch (anything other than `main` or `staging`), proceed normally.
+## Never commit or push to `main` / `staging` without explicit user request
 
-## Never commit or push to main/staging without explicit request
-
-- Never commit directly on `main` or `staging`.
-- Never run `git push origin main` or `git push origin staging` unless explicitly requested.
-- Never merge into `main` or `staging` unless explicitly requested.
+- **NEVER** commit directly on `main` or `staging`
+- **NEVER** run `git push origin main` or `git push origin staging` unless the user explicitly says to push
+- **NEVER** merge into `main` or `staging` unless the user explicitly says to merge
 
 ## Verify checks before pushing
 
-Before `git push`, check whether verification was done in this session:
+Before running `git push`, check whether verification was done in this session:
 
 - lint: `yarn lint`
 - build/type: `yarn build` or `yarn build:ts`
 
-If checks were not done, warn and ask:
+If checks were not done — warn the user and suggest running them first:
 
-`Lint/build checks were not verified in this session. Recommend running yarn lint and yarn build:ts before pushing. Run them now?`
+> ⚠️ Lint/build checks were not verified in this session. Recommend running `yarn lint` and `yarn build:ts` before pushing. Run them now?
 
-Skip this warning only if user explicitly asks to push without build verification.
+Only skip this warning if the user explicitly says to push without checking.
 
 ## Keep long-lived branches synchronized
 
@@ -46,7 +45,7 @@ Before branch sync, ask whether the user wants to sync now.
 
 Run sync only after explicit confirmation.
 
-Use a non-destructive sync flow (for example, merge `main` into branch) unless the user explicitly requests rebase.
+Use a non-destructive sync flow (e.g., merge `main` into branch) unless the user explicitly requests rebase.
 
 ## Merge strategy
 
@@ -63,15 +62,17 @@ Run cleanup only after explicit confirmation.
 - Delete local branch with `git branch -d <branch>`.
 - Delete remote branch if it exists and the user requested remote cleanup.
 
-## Never commit without explicit request
+## NEVER commit without an explicit request
 
-After making file changes, stop. Do not run `git add` or `git commit` until user explicitly asks.
+After making file changes — STOP. Do not run `git add` or `git commit`.
 
-Finishing a task is not the same as committing.
+Just report what was changed and wait. The user will say "commit" when ready.
 
-When user asks to commit:
+**Finishing a task ≠ committing.** These are two separate steps.
 
-- Use a concise commit message in English.
-- Do not amend pushed commits.
+When the user does ask to commit:
 
-PR formatting conventions are defined in `.claude/git-conventions.md`.
+- Use a concise commit message in English
+- Never amend pushed commits
+
+PR formatting conventions are defined in `.claude/skills/git-conventions/SKILL.md`.

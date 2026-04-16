@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      # Non-blocking: dependency advisories are visible in CI without failing the template baseline.
+      # Remove continue-on-error (or fix upstream advisories) when the project wants a strict gate.
+      - name: Dependency audit
+        run: yarn audit:deps
+        continue-on-error: true
+
       - name: Lint
         run: yarn lint
 

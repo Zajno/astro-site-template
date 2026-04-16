@@ -5,6 +5,8 @@ alwaysApply: true
 
 # Git Workflow
 
+**Claude Code equivalent:** `.claude/git-workflow.md` — keep both in sync. This file pair is an intentionally mirrored always-on git policy surface for Cursor/Claude. Ownership details live in [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
+
 ## Check branch before starting ANY work
 
 Before touching any file, the agent MUST check the current branch with `git branch --show-current`.
