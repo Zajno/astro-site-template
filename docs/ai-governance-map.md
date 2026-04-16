@@ -9,6 +9,20 @@ This repository uses **Claude-first canonical governance** for skills and agents
 
 Project-level rule files remain explicit counterparts: `.cursor/rules/project.mdc` and `CLAUDE.md`.
 
+## Policy ownership model
+
+Use one primary owner per policy area. Other files may summarize or mirror a policy, but they should not redefine it.
+
+| Policy area | Primary owner | Secondary surfaces | Notes |
+|-------------|---------------|--------------------|-------|
+| Cross-tool mapping, sync rules, canonical-vs-symlink model | `docs/ai-governance-map.md` | `README.md`, agent/skill headers | This document is the governance hub. |
+| Project-wide template rules and guardrails | `CLAUDE.md` <-> `.cursor/rules/project.mdc` | `README.md`, skill references | These are an intentionally paired mirror set because both tools need native always-on rule surfaces. Keep semantics aligned. |
+| Git workflow policy | `.claude/git-workflow.md` <-> `.cursor/rules/git-workflow.mdc` | `README.md`, agent references | Also an intentionally paired mirror set. Keep semantics aligned. |
+| Section/Figma delivery hard-gates | `.claude/skills/section-delivery/SKILL.md` | `implementor.md`, `plan-verifier.md`, project rule summaries | This skill owns the detailed delivery contract. Other files should only summarize or enforce it. |
+| Security baseline and review heuristics | `.claude/skills/security-best-practices/SKILL.md` | `security-reviewer.md`, project rules, `README.md` | Keep deep security guidance in the skill; other surfaces stay brief. |
+| Implementation planning workflow | `.claude/agents/implementation-planner.md` | `.claude/skills/writing-plans/SKILL.md` | Agent owns planning workflow and orchestration; skill owns reusable plan-writing conventions and document structure. |
+| Human-facing onboarding summary | `README.md` | none | README should explain the model briefly and link here instead of duplicating the full governance playbook. |
+
 ## Project-wide rules
 
 | Topic | Cursor | Claude Code |
@@ -62,11 +76,13 @@ Each skill folder typically contains `SKILL.md` and `examples.md`.
 2. Keep `.cursor/skills` and `.cursor/agents` as symlinks to `.claude`.
 3. For project-level rule counterparts (`.cursor/rules/project.mdc` and `CLAUDE.md`), update both when intent changes.
 4. If you add a new skill/agent/rule file, add a row to this document in the same PR.
-5. Update `README.md` when user-visible behavior, documented stack versions, CI commands, or repo layout changes — and keep version claims aligned with `package.json` (do not edit README for governance-only wording tweaks).
+5. Update `README.md` when user-visible behavior, documented stack versions, CI commands, repo layout, or top-level governance navigation changes — and keep version claims aligned with `package.json`.
 
 ## Behavioral hard-gates (section/Figma delivery)
 
-These are cross-file invariants for implementation safety. If any required value is `no`, status must be `partial` (not done).
+Detailed section/Figma delivery rules are owned by `.claude/skills/section-delivery/SKILL.md`.
+
+When other files summarize this contract, keep the summary limited to these invariants. If any required value is `no`, status must be `partial` (not done).
 
 1. **SCSS token contract**
    - Typography centralized in `src/styles/common/typography.sass`
@@ -101,7 +117,8 @@ Always update both sides when intent changes:
 
 1. Run `verify-setup` agent using `.cursor/agents/verify-setup.md`.
 2. Confirm no broken paths to agents/skills in README or rule files.
-3. Confirm changed governance docs reflect the same intent across Cursor and Claude surfaces.
+3. Confirm intentionally paired mirrors reflect the same intent across Cursor and Claude surfaces.
+4. Confirm summaries still point to the documented owner for each policy area.
 
 ## README and stack versions
 

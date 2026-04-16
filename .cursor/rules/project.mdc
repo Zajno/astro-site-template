@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Astro Site Template - Project Rules
 
-**Claude Code equivalent:** `CLAUDE.md` (repository root) — keep both in sync for project-level rules. Skills and agents are Claude-canonical and exposed in Cursor via symlinks (`.cursor/skills` -> `../.claude/skills`, `.cursor/agents` -> `../.claude/agents`). Full mapping: [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
+**Claude Code equivalent:** `CLAUDE.md` (repository root) — keep both in sync for project-level rules. This file pair is an intentionally mirrored always-on rule surface for Cursor/Claude, while skills and agents are Claude-canonical and exposed in Cursor via symlinks (`.cursor/skills` -> `../.claude/skills`, `.cursor/agents` -> `../.claude/agents`). Ownership details live in [docs/ai-governance-map.md](../../docs/ai-governance-map.md).
 
 ## Purpose
 
@@ -33,6 +33,7 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 - Git branching, commit, and push policy is defined in `.cursor/rules/git-workflow.mdc`.
 - Git branch naming and commit message conventions are in `.cursor/skills/git-conventions/SKILL.md`.
 - Implementation agent profile: `.cursor/agents/implementor.md`.
+- Implementation planning agent profile: `.cursor/agents/implementation-planner.md`.
 - Plan verification agent profile: `.cursor/agents/plan-verifier.md`.
 - Requirements planning agent profile: `.cursor/agents/requirements-planner.md`.
 - Security review agent profile: `.cursor/agents/security-reviewer.md`.
@@ -41,9 +42,10 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 
 ## Section/Figma hard-gates
 
-- Script contract: record `Script wiring: required/optional + reason`; if section has `script.ts` (or had one), preserve activation in `view.astro` or document explicit migration evidence.
-- Style contract: for section/Figma work, keep typography centralized in `src/styles/common/typography.sass` and colors tokenized in `src/styles/common/variables.colors.sass`.
-- Completion contract: if any required section/Figma gate fails, status is `partial` (not done). Detailed checks live in `.cursor/agents/implementor.md` and `.cursor/skills/section-delivery/SKILL.md`.
+- Detailed owner: `.cursor/skills/section-delivery/SKILL.md`.
+- Summary only: record `Script wiring: required/optional + reason`; if section has `script.ts` (or had one), preserve activation in `view.astro` or document explicit migration evidence.
+- Summary only: for section/Figma work, keep typography centralized in `src/styles/common/typography.sass` and colors tokenized in `src/styles/common/variables.colors.sass`.
+- Summary only: if any required section/Figma gate fails, status is `partial` (not done).
 
 ## Do Not
 
@@ -54,7 +56,7 @@ This repository is a starter template. Keep decisions generic, reusable, and saf
 
 ## Security baseline (template)
 
-Non-negotiable summary for always-on context; expanded checklists, CSP detail, and review prompts live in skill `security-best-practices` and [docs/security-review-report-template.md](../../docs/security-review-report-template.md).
+Non-negotiable summary for always-on context; the detailed owner is `.cursor/skills/security-best-practices/SKILL.md`, with structured review output in [docs/security-review-report-template.md](../../docs/security-review-report-template.md).
 
 - Avoid XSS: do not treat untrusted strings as HTML without sanitization; be deliberate with `dangerouslySetInnerHTML`, Astro `set:html`, and rich text from CMS or users.
 - Client exposure: only `PUBLIC_*` env values are intentionally visible in the browser; keep private tokens server-side and follow **Do Not** plus typed config (details in skill `security-best-practices`).

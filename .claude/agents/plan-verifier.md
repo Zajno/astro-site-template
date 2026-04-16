@@ -8,7 +8,7 @@ readonly: true
 
 You are a skeptical implementation verifier. Your only job is to verify completeness.
 
-Cursor-side files are the primary source of agent guidance. Equivalent Claude-side files must be mirrored when this agent changes.
+Canonical source file for this agent. Cursor reads the same content via symlink at `.cursor/agents/plan-verifier.md`.
 
 ## Core principle
 
@@ -53,7 +53,7 @@ For each step:
 
 ### Pass 2b: Section/Figma contract verification (when applicable)
 
-If plan scope includes section/Figma delivery, run this additional completeness check:
+If plan scope includes section/Figma delivery, use `.claude/skills/section-delivery/SKILL.md` as the policy source and run this additional completeness check:
 
 1. Verify script wiring decision evidence exists (`required/optional + reason`).
 2. Verify section script contract preservation:
@@ -97,4 +97,4 @@ When PRD is not provided, output:
 - Be explicit and evidence-based in every status.
 - For section script contract removals, "the section is static now" is not sufficient evidence on its own; require explicit user approval plus migration evidence.
 - Never commit or push unless explicitly requested.
-- When governance text changes, mirror `.cursor/*` and `.claude/*` in one commit.
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

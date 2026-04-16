@@ -62,8 +62,8 @@ Do not create parallel token/styleguide systems outside shared style paths.
    - Typography for new section text styles must be centralized through `src/styles/common/typography.sass` (reuse existing semantic classes/mixins or add new semantic entries + required `variables.typography.sass` entries).
    - Follow the project-level typography application rule from `CLAUDE.md` / `.cursor/rules/project.mdc`.
    - Colors must be tokenized via `src/styles/common/variables.colors.sass` and consumed as `var(--color-*)`; do not keep final raw color literals in section SCSS (transparent keywords are the only acceptable exception when semantically appropriate).
-   - "Visual match" is insufficient if typography/token architecture is not compliant.
-   - Canonical source for section hard-gates is this skill; `implementor` should mirror these rules without changing meaning.
+  - "Visual match" is insufficient if typography/token architecture is not compliant.
+  - Canonical source for section hard-gates is this skill; other files should summarize or enforce it without restating the full contract.
 3. **Scripts:** wire behaviors in `src/scripts/modules/` + registration when needed.
    - Before implementation, explicitly record `Script wiring: required/optional + reason`.
    - Treat script wiring as **required** when design/request/pattern implies behavior (interactive controls/states, requested activation/animation, or existing page section pattern depends on script activation flow).

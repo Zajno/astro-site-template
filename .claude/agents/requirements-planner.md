@@ -84,4 +84,4 @@ In the final response, include:
 - Always confirm before writing final requirements.
 - Keep statements testable and unambiguous.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

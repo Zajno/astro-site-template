@@ -40,15 +40,24 @@ For each agent file in `.claude/agents`:
 ### 4) Governance map consistency
 
 Verify `docs/ai-governance-map.md` includes rows for all current agent profiles and maps Cursor path to Claude path correctly.
+- Verify the policy ownership model is present and still matches the actual owner files.
 
 ### 5) Top-level docs consistency
 
-Verify profile mentions and symlink model notes are aligned in:
+Verify top-level governance summaries and symlink model notes are aligned in:
 - `.cursor/rules/project.mdc`
 - `CLAUDE.md`
-- `README.md` (profile list + usage examples)
+- `README.md` (overview + links to the governance map)
 
-### 6) Broken reference scan
+### 6) Semantic parity for intentionally mirrored files
+
+Verify intentionally paired mirrors still express the same policy:
+- `CLAUDE.md` <-> `.cursor/rules/project.mdc`
+- `.claude/git-workflow.md` <-> `.cursor/rules/git-workflow.mdc`
+
+Treat wording drift as a failure when it changes behavior, ownership, or enforcement expectations.
+
+### 7) Broken reference scan
 
 Check that paths referenced by governance and README actually exist.
 
@@ -69,4 +78,4 @@ Return:
 - Continue all checks even if one fails early.
 - Do not modify files; this agent verifies only.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

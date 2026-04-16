@@ -98,4 +98,4 @@ Return:
 - Prefer deterministic, low-risk sequencing.
 - For short section/Figma prompts, do not produce markup-only plans unless user explicitly narrows scope.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

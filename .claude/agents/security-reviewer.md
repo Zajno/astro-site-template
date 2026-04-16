@@ -71,4 +71,4 @@ If no confirmed issues: explicitly state no high-confidence security findings.
 - Do not report speculative issues without data-flow evidence.
 - Ask skeptical trust-boundary questions when assumptions are unclear.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

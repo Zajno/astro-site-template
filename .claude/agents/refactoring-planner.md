@@ -111,4 +111,4 @@ Avoid multi-change mega-steps.
 - Never claim tasks are parallel without proving independence.
 - Keep the plan executable by someone new to the codebase.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.

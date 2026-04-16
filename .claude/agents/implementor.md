@@ -107,58 +107,23 @@ General build order:
 
 Section/Figma-specific checklist and definition of done live in `.claude/skills/section-delivery/SKILL.md`. When Step 0b selects the section/Figma branch, follow that skill as mandatory.
 
-#### Step 4a — SCSS hard-gates for section/Figma tasks (blocking)
+#### Step 4a — Section-delivery contract enforcement (blocking)
 
-When Step 0b selects the section/Figma branch, these are mandatory:
+When Step 0b selects the section/Figma branch, `.claude/skills/section-delivery/SKILL.md` is the source of truth for delivery hard-gates.
 
-1. **Typography centralization is required**
-   - For any new section text style, do not keep final typography as one-off literals in section `style.scss`.
-   - Follow the project-level typography application rule from `CLAUDE.md` / `.cursor/rules/project.mdc`.
-   - If no suitable style exists, add a semantic typography entry in `src/styles/common/typography.sass` (and required variables in `variables.typography.sass`), then apply it using the project's dominant reference pattern.
-2. **Color tokenization is required**
-   - Do not ship final section styles with raw hex/rgba/rgb/hsl literals for colors (except transparent keywords when appropriate).
-   - Add missing semantic color tokens in `src/styles/common/variables.colors.sass`, then consume via `var(--color-*)`.
-3. **No "visual-correct but token-incorrect" acceptance**
-   - Pixel-match alone is insufficient; style architecture must satisfy skills before task completion.
+Apply and enforce these invariants without redefining the full contract here:
 
-Canonical ownership note: this hard-gate policy is mirrored in `.claude/skills/section-delivery/SKILL.md` and must stay semantically equivalent.
-
-#### Step 4b — Section script-wiring gate for section/Figma tasks (blocking)
-
-For every new or substantially updated section, explicitly decide and document:
-
-- `Script wiring: required` or `Script wiring: optional`
-- `Reason:` one sentence tied to observed behavior requirements.
-
-Decision policy:
-
-1. Mark **required** when any of these apply:
-   - Figma/design shows interactive controls, animated states, or behavior-dependent transitions.
-   - User explicitly requests interactions/activation/animation.
-   - Existing sibling sections on the same page follow script-module activation and this section participates in that behavior model.
-2. Mark **optional** only when section is truly static and no behavior contract is implied by design/request/pattern.
-3. If `required`, implement section script wiring (section `script.ts` and any needed registration path integration) before reporting done.
-
-#### Step 4c — Existing section script contract gate (blocking)
-
-For section/Figma tasks, preserve or explicitly migrate existing section activation contracts.
-
-1. Before editing, inventory the section folder and record whether `script.ts` exists.
-2. If `script.ts` exists (or existed before your change), treat activation wiring as required by default:
-   - `view.astro` must include `<script src="./script.ts"></script>`, unless the script contract is intentionally removed.
-3. You MUST NOT remove the section script contract by default:
-   - do not delete `script.ts`
-   - do not remove `<script src="./script.ts"></script>` from `view.astro`
-   - do not replace activation behavior with CSS-only visibility hacks
-4. Script contract removal is allowed only when the user explicitly approves removal or migration, and you provide explicit migration evidence:
-   - where activation behavior moved, and
-   - why removal is safe for this section.
-5. If redesign makes prior script logic obsolete, keep the contract and reduce `script.ts` to the smallest lifecycle-preserving implementation that still participates in section activation/setup/teardown.
-6. Before deleting or migrating any section script, explicitly check:
-   - whether global CSS/layout hides sections until activation
-   - whether `Section.setup()` or sibling sections imply a shared activation lifecycle
-   - whether the user explicitly asked to remove the script contract
-7. If no migration evidence or explicit user approval is provided while `script.ts` exists/existed, status is **partial** (not done).
+1. **SCSS token contract**
+   - Typography must be centralized in `src/styles/common/typography.sass`.
+   - Colors must be tokenized in `src/styles/common/variables.colors.sass`.
+   - Visual parity alone is insufficient if token/typography architecture is non-compliant.
+2. **Script wiring decision contract**
+   - Record `Script wiring: required/optional + reason`.
+   - If wiring is required by design/request/pattern, implement it before reporting done.
+3. **Existing section script contract**
+   - If the section has `script.ts` (or had one before edits), preserve `<script src="./script.ts"></script>` in `view.astro` unless the user explicitly approves removal/migration and you provide migration evidence.
+4. **Completion status**
+   - If any required section-delivery value is `no`, task status is `partial`.
 
 ### Parallel work and subagents
 
@@ -252,7 +217,7 @@ If any required compliance value is `no`, task status must be `partial` (not don
 - Keep template behavior generic and reusable.
 - Enforce Step 0b scope policy: section/Figma branch defaults to full scope; fast path is only for non-section/non-Figma tasks.
 - Never commit or push unless explicitly requested.
-- When governance text changes, keep Cursor/Claude paired files in sync per `docs/ai-governance-map.md` (skills/agents are Claude-canonical; `.cursor/skills` and `.cursor/agents` are symlinks).
+- For governance edits, follow the ownership and sync rules in `docs/ai-governance-map.md`.
 
 ## Anti-patterns
 
