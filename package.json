@@ -1,6 +1,6 @@
 {
   "name": "@zajno/static-astro-site-template",
-  "version": "3.0",
+  "version": "3.1.0",
   "description": "Astro website template by Zajno",
   "private": true,
   "author": "Zajno <hello@zajno.com> (https://zajno.com)",
